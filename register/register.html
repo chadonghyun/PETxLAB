@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/register.css">
+
+  <!-- 다음 주소 api -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="./script/addressapi.js"></script>
+
+</head>
+<body>
+  <header>
+    <h1>
+      <a href="" title="">
+        <img src="./images/Logo.svg" alt="">
+      </a>
+    </h1>
+  </header>
+
+  <main>
+
+    <div class="container">
+      <form action="" method="post">
+        <div class="con">
+          <label for="name">이름</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="con">
+          <label for="id">아이디</label>
+          <input type="text" id="id" name="id" required>
+        </div>
+        <div class="con">
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="con">
+          <label for="confirm_password">비밀번호 확인</label>
+          <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="con birth" >
+          <label for="birthday">생년월일</label>
+          <input type="number" name="birthyear" id="birthyear" placeholder="년(4자)" min="1900" maxlength="4" required>
+          <input type="number" name="birthmonth" id="birthmonth" placeholder="월" min="1" maxlength="2" required>
+          <input type="number" name="birthdate" id="birthdate" placeholder="일" min="1" maxlength="2" required>
+        </div>
+        <div class="con phone">
+          <label for="phone">연락처</label>
+          <input type="text" name="phone_first" id="phone1" placeholder="010" maxlength="3" required>
+          -
+          <input type="number" name="phone_mid" id="phone2" placeholder="0000" maxlength="4" required>
+          -
+          <input type="number" name="phone_last" id="phone3" placeholder="0000" maxlength="4" required>
+        </div>
+        <div class="con tell">
+          <label for="telephone">전화번호</label>
+          <select name="telephone">
+            <option value="지역번호">지역번호</option>
+            <option value="서울">02</option>
+            <option value="경기도">031</option>
+            <option value="인천광역시, 부천시">032</option>
+            <option value="강원도">033</option>
+            <option value="충청남도">041</option>
+            <option value="대전광역시">042</option>
+            <option value="충청북도">043</option>
+            <option value="세종특별자치시">044</option>
+            <option value="부산광역시">051</option>
+            <option value="울산광역시">052</option>
+            <option value="대구광역시">053</option>
+            <option value="경상북도">054</option>
+            <option value="경상남도">055</option>
+            <option value="전라남도">061</option>
+            <option value="광주광역시">062</option>
+            <option value="전라북도">063</option>
+            <option value="제주특별자치도">064</option>
+          </select>
+          -
+          <input type="number" name="telephone_mid" placeholder="0000" min="0" maxlength="4" required>
+          -
+          <input type="number" name="telephone_last" placeholder="0000" min="0" maxlength="4" required>
+        </div>
+        <div class="con email">
+          <label for="email">이메일</label>
+          <input type="text" name="email_id" placeholder="아이디" required>
+          <span>@</span>
+          <select name="email_domain">
+            <option value="선택">선택</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="naver.com">naver.com</option>
+            <option value="nate.com">nate.com</option>
+            <option value="hanmail.net">hanmail.net</option>
+          </select>
+        </div>
+        <div class="con addr">
+          <label for="address">주소</label>
+          <input type="text" id="addr1" name="addrs1" placeholder="우편번호" readonly>
+          <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+          <input type="text" id="addr2" name="addrs2" placeholder="주소" readonly>
+          <input type="text" id="addr3" name="addrs3" placeholder="상세주소">
+        </div>
+        <div class="con">
+          <label for="job">직업</label>
+          <input type="text" id="job" name="job" placeholder="직업을 입력해주세요">
+        </div>
+        <div class="con">
+          <label for="interest">관심분야</label>
+          <select name="interest" id="interest">
+            <option value="전문과과정">전문가과정</option>
+            <option value="일반/취미과정">일반/취미과정</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+  </main>  
+
+  <footer>
+    Copyright(c) 2023.PETxLAB.All right reserved.
+  </footer>
+</body>
+</html>
