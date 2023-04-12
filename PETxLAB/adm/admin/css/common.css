@@ -5,7 +5,7 @@ header #header-left{
   width:260px;
   height:100vh;
   min-height: 800px;
-  background-color: var(--sub-colorbl);
+  background-color: var(--f-colorlb);
   position: fixed;
 }
 
@@ -32,7 +32,7 @@ box-sizing: border-box;
 display:block;
 }
 header #header-left .header-menu li:first-child a{
-  background-color:#9DADC7 ;
+  background-color:rgba(255, 255, 255, 0.2); ;
 }
 header #header-left .header-menu li a{
   padding:15px 0px 15px 40px;
@@ -59,7 +59,7 @@ header #header-left .header-footer ul li{
 }
 
 header #header-left .header-footer > a{
-  background-color:#9DADC7;
+  background-color:rgba(255, 255, 255, 0.2);
   display:flex;
   padding:15px 0px 15px 30px;
   box-sizing: border-box;
@@ -105,7 +105,9 @@ header #header-right{
   height:150px;
   position:fixed;
   left:260px;
-  background-color: rgb(245, 245, 240);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 10;
 }
 header #header-right .header-user{
   display:flex;
