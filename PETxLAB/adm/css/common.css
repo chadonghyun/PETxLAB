@@ -106,6 +106,7 @@ header #header-right{
   position:fixed;
   left:260px;
   background-color: var(--bg-colorwh);
+  z-index: 10;
 }
 header #header-right .header-user{
   display:flex;
