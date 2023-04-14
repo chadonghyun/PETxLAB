@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+/* 폰트적용 */
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+/* @font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+} */
+
+:root{
+  --main-color: #627593;
+  --sub-colorbl: #8599b9;
+  --sub-colorbr: #715647;
+
+  --f-colorwh: #fff;
+  --f-colorbb: #000;
+  --f-colorlb: #333;
+  --f-colorbr: #715647;
+
+  --f-size12: 0.75rem; /*12px*/
+  --f-size16: 1rem; /*16px*/
+  --f-size20: 1.25rem; /*20px*/
+  --f-size24: 1.5rem; /*24px*/
+  --f-size32: 2rem; /*32px*/
+  --f-size48: 3rem; /*48px*/
+  --f-size64: 4rem; /*64px*/
+
+  --bg-colorlms: #f5f9ff;
+  --bg-colorwh: #fff;
+  
+  --fm-title: 'yg-jalnan';
+  --fm-main: 'Pretendard-Regular'
+}
+
+
+body{
+  font-family: 'Pretendard-Regular','Malgun Gothic','apple sd gothic neo',sans-serif ;
+  font-size: var(--f-size16);
+  color:var(--f-colorlb);
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'yg-jalnan';
+}
