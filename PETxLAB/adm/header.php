@@ -1,6 +1,5 @@
 <?php
-// $conn = mysqli_connect('localhost','root','','petxlab')or die("connect failde");
-// session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,21 +18,40 @@
     <!--제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <!--리셋파일-->
-    <link rel="stylesheet" href="/PETxLAB/adm/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="./css/reset.css" type="text/css">
     <!-- base.css(공통서식) -->
-    <link rel="stylesheet" href="/PETxLAB/adm/css/base.css" type="text/css">
+    <link rel="stylesheet" href="./css/base.css" type="text/css">
     <!-- common.css(헤더&푸터) -->
-    <link rel="stylesheet" href="/PETxLAB/adm/css/common.css" type="text/css">
+    <link rel="stylesheet" href="./css/common.css" type="text/css">
+
+    <link rel="stylesheet" href="./css/index.css">
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- fullcalendar 언어 CDN -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src="./script/callender.js"></script>
 
 
 </head>
 <body>
   <!-- 헤더영역 -->
   <header>
-    <div id="header-left">
+    <?php if ($userlevel == 3){
+      echo'
+      <div id="header-left" class="ad_cl">
+      ';
+      }
+      else if($userlevel == 2){
+        echo'
+        <div id="header-left" class="tc_cl">
+        ';
+      }
+      ?>
+            <!-- <div id="header-left" class="ad_cl"> -->
       <h1>
         <a href="#" title="home">
-          <img src= "<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/images/logo.png" alt="mainlogo">
+          <img src= "<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/images/logo.png" alt="mainlogo">
         </a>
       </h1>
       <ul class="header-menu">
@@ -98,9 +116,16 @@
     <div id="header-right">
       <div class="header-user">
         <p>홈</p>
-        <p><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/images/minilogo.png" alt="logo"></p>
-        <p><span>이름자리</span> 님</p>
-        <a href="#" title="로그아웃">
+        <p><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/images/minilogo.png" alt="logo"></p>
+        <p>
+          <span>
+          <?php
+          $logged = $username."(".$userid.") 님 "; 
+          echo $logged; 
+          ?>
+          </span> 
+        </p>
+        <a href="./logout.php" title="로그아웃">
           <span>로그아웃</span>
         </a>
       </div>
