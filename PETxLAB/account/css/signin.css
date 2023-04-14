@@ -1,0 +1,125 @@
+@charset "utf-8";
+
+body{
+  background: var(--bg-colorlms);
+}
+header{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header h1{
+  width: 580px; height: 100px;
+  text-align: center;
+}
+footer{
+  padding: 50px 0px;
+  text-align: center;
+}
+label{
+  width: 100%;
+  display: block;
+  font-family: var(--fm-title);
+  padding-bottom: 10px;
+  color: var(--f-colorlb);
+}
+select{
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid var(--main-color);
+  padding: 0px 10px;
+  text-align: center;
+}
+input{
+  text-align: center;
+}
+input::placeholder{
+  text-align: center;
+}
+.container{
+  width: 580px;
+  margin: 0px auto;
+  border: 1px solid#ccc;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--bg-colorwh);
+}
+.con{
+  width: 100%;
+  margin: 40px 0px;
+}
+.con input, select{
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--main-color);
+  border-radius: 20px;
+  padding: 0px 10px;
+}
+.birth, .phone, .email, .tell, .addr{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.birth > input{
+  width: 30%;
+}
+.phone > input{
+  width: 30%;
+}
+.tell > input{
+  width: 30%;
+}
+.tell > select{
+  width: 30%;
+}
+.email > input{
+  width: 45%;
+}
+.email > select{
+  width: 45%;
+}
+.addr > input:first-of-type{
+  width: 45%;
+  margin-bottom: 10px;
+}
+.addr > input:nth-of-type(2){
+  width: 45%;
+  margin-bottom: 10px;
+}
+.addr > input:nth-of-type(3){
+  margin-bottom: 10px;
+}
+.submit{
+  width: 60%;
+  margin: 0px auto;
+  text-align: center;
+}
+#save_frm{
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: var(--f-size16);
+  background: var(--sub-colorbl);
+  color: var(--f-colorwh);
+  font-family: var(--fm-title);
+}
+#reset{
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: var(--f-size16);
+  border: 1px solid#FF4E4E;
+  color: #FF4E4E;
+  background: var(--bg-colorwh);
+  font-family: var(--fm-title);
+}
+#id_check_msg{
+  line-height: 30px;
+}
