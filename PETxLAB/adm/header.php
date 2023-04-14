@@ -1,6 +1,6 @@
 <?php
-$conn = mysqli_connect('localhost','root','','petxlab')or die("connect failde");
-session_start();
+// $conn = mysqli_connect('localhost','root','','petxlab')or die("connect failde");
+// session_start();
 ?>
 
 <!DOCTYPE html>

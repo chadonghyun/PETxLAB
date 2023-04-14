@@ -1,0 +1,180 @@
+@charset "utf-8";
+
+
+main{
+  padding-top: 150px;
+  padding-left: 260px;
+  background-color: #F5F9FF;
+  height: 1100px;
+}
+#main_h{
+  margin-bottom: 40px;
+}
+#main_h, #main_b{
+  width: 1420px;
+}
+
+#tab_mnu{
+  margin-top: 87px;
+  margin-left: 120px;
+  width: 350px;
+  display: flex;
+  justify-content:space-between;
+}
+#tab_mnu > li{
+  font-size: var(--f-size24);
+  font-family: var(--fm-title);
+  color: var(--f-colorbr);
+  border-bottom: 2px solid var(--f-colorbr);
+  padding-bottom: 3px;
+}
+select{
+  -webkit-appearance:none; /*for chrome*/
+  -moz-appearance:none; /*for firefox*/
+  appearance: none;
+  outline: none;
+}
+select::-ms-expand{
+  display:none;
+}
+#search_box,#lecture_box{
+  box-sizing: border-box;
+  position: absolute;
+  width: 128px;
+  height: 36px;
+  border: 1px solid #476088;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.05));
+  border-radius: 20px;
+  background: #F5F9FF;
+  color: #476088;
+  font-size: 14px;
+  background: url(../images/chevron-down.png) no-repeat 95% 50%;
+  background-size: 13px;
+  top: 229px;
+  height: 36px;
+}
+#lecture_box{
+  left: 520px;
+  text-indent: 20px !important;
+}
+#search_box{
+  right: 405px;
+  text-align: center;
+}
+#text_box{
+  box-sizing: border-box;
+  position: absolute;
+  width: 280px;
+  height: 36px;
+  right: 111px;
+  top: 229px;
+  border: 1px solid #476088;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.05));
+  border-radius: 20px;
+  background: #F5F9FF;
+  text-indent: 10px;
+  font-size: 14px;
+  outline: none;
+}
+.bi-search{
+  color: #476088;
+  position: absolute;
+  right: 126px;
+  top: 239px;
+  cursor: pointer;
+}
+
+#main_b{
+  padding: 44px;
+  margin: 0px auto;
+  height: 727px;
+  background: #fff;
+  border: 1px solid #E1E1E1;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+}
+#c_list{
+  width: 1340px;
+  margin-bottom: 30px;
+}
+#c_list  tr{
+  border-bottom: 1px solid #E1E1E1;
+  line-height: 50px;
+  color: #666;
+  font-size: 14px;
+}
+#c_list > tbody >  tr:hover{
+  background: #F5F9FF;
+}
+#c_list  > thead > tr{
+  border-bottom: 2px solid #333;
+  font-weight: 700;
+}
+#c_list  > tbody > tr > td{
+  font-weight: 500;
+  cursor: pointer;
+}
+#c_list  > tbody > tr > td > .bi-envelope{
+  color: #8599B9;
+}
+#page_nv{
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin: 0px auto;
+}
+#page_nv > li{
+  cursor: pointer;
+  font-weight: 500;
+  color: #aaa;
+}
+#page_nv > li:first-child, #page_nv > li:nth-child(2), #page_nv > li:last-child{
+  color:#333;
+}
+button{
+  position: absolute;
+  bottom: 60px;
+  background: none;
+  border: none;
+  width: 128px;
+  height: 40px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+}
+button:first-of-type{
+  right: 170px;
+  background: #8599B9;
+  color: #fff;
+}
+button:last-of-type{
+  right: 30px;
+  border: 1px solid #8599B9;
+  color: #8599B9;
+}
+input[type="checkbox"]{
+  display: none;
+}
+input[type="checkbox"] + label{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border:1px solid #e1e1e1;
+  position: relative;
+  transform: translateY(4px);
+}
+input[type="checkbox"]:checked + label{
+  background-color: #8599B9;
+}
+input[type="checkbox"]:checked + label::after{
+  content:'✔';
+  font-size: 4px;
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  left: 0px;
+  bottom: 16px;
+}
