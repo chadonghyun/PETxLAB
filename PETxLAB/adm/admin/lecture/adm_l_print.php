@@ -37,8 +37,7 @@ $rows =mysqli_fetch_assoc($result);
             <!-- 삭제 버튼 -->
 
             <input type="hidden" name="course_id" value="<?=$no?>">
-            
-            <button type="submit" formaction="adm_l_edit.php">강의수정</button>
+            <button type="submit" formaction="adm_l_update.php">강의수정</button>
             <button type="submit" formaction="adm_l_delete.php">강의삭제</button>
 
 
@@ -54,24 +53,15 @@ $rows =mysqli_fetch_assoc($result);
               <div class="col-md-6 lecreg-leftbox">
                 <div>
                   <label for="course_type">과정분류</label>
-                  <select name="course_type" id="course_type" class="course_type form-control" onchange="course(this)" required>
-                    <option>선택하세요</option>
-                    <option value="professional">전문교육과정</option>
-                    <option value="general">일반교육과정</option>
-                  </select>                  
-
-
-
-                  <label for="course_type">과정분류</label>
                   <input type="text" id="course_type" name="course_type" class="form-control"
                       value="<?php
                       if($rows['course_type']=='professional'){echo"전문교육과정";}
-                      else {echo "일반교육과정";} ?>">              
+                      else {echo "일반교육과정";} ?>" readonly>              
                 </div>
                 <div>
-                  <label for="course_category">카테고리</label>
-                  <input type="text" name="course_caregory" id="course_caregory" class="form-control" 
-                      value="<?=$rows['course_category']?>">                  
+                <label for="course_category">카테고리</label>
+                      <input type="text" name="course_caregory" id="course_caregory" class="form-control" 
+                      value="<?=$rows['course_category']?>" readonly>                  
                 </div>
                 <div class="titlebox">
                   <label for="course_title">강좌제목</label>
@@ -110,12 +100,12 @@ $rows =mysqli_fetch_assoc($result);
                 </div>
                 <div>
                   <label for="course_shortdesc">짧은설명</label>
-                  <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" value="<?=$rows['course_shortdesc']?>" >                  
+                  <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" value="<?=$rows['course_shortdesc']?>" readonly>                  
                 </div>
               </div>
               <div class="col-md-12 lecreg-desc card">
                   <label for="course_longdesc">상세설명</label>
-                  <textarea name="course_longdesc" id="course_longdesc" class="course_longdesc" rows="10"><?=$rows['course_longdesc']?></textarea>
+                  <textarea name="course_longdesc" id="course_longdesc" class="course_longdesc" rows="10" readonly><?=$rows['course_longdesc']?></textarea>
                 </div>
             </div>
           </div>
