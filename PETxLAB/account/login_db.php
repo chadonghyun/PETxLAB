@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once './db/db_con.php';
+include_once '../db/db_con.php';
 
 // login.php에서 post방식으로 전달받은 id, pw를 변수에 각각 담는다
 $id = $_POST['user_id'] ?? '';
@@ -53,7 +53,7 @@ if (!$num_match) {
       
     mysqli_close($con);
 
-    header('Location: index.php');
+    header('Location: ../adm/admin/index.php');
     exit;
   }
 }

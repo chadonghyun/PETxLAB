@@ -1,6 +1,6 @@
 <?php
 
-include_once './db/db_con.php'; //db연결하기
+include_once '../db/db_con.php'; //db연결하기
 
 
 //전달받은 데이터값을 각각 변수에 담기

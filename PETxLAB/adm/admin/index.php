@@ -1,8 +1,8 @@
 <?php
 
-include_once './db/db_con.php';
-include_once './config.php';
-include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/account/header.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/db/db_con.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
+include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
 // userregistration 테이블에서 전체 회원 수를 가져옴
 $sql = "SELECT COUNT(*) as total FROM userregistration";
@@ -27,13 +27,16 @@ $sql = "SELECT * FROM coursereg ORDER BY course_id DESC LIMIT 5";
 $result = mysqli_query($con, $sql);
 
 ?>
-<!-- <link rel="stylesheet" href="./css/index.css">
+<!-- <link rel="stylesheet" href="./css/index.css"> -->
+<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="../css/index.css">
+<link rel="stylesheet" href="./css/common.css">
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- fullcalendar 언어 CDN -->
-<!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-<script src="./script/callender.js"></script> -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src="./script/callender.js"></script>
 
 <main>
 

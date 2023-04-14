@@ -1,7 +1,7 @@
 <?php
 
-include_once './db/db_con.php';
-include_once './config.php';
+include_once '../db/db_con.php';
+include_once '../config.php';
 
 ?>
 
@@ -20,11 +20,11 @@ include_once './config.php';
   <!--부트스트랩 자바스크립트 연결-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <!--리셋파일-->
-  <link rel="stylesheet" href="./css/reset.css" type="text/css">
+  <link rel="stylesheet" href="../adm/css/reset.css" type="text/css">
   <!-- base.css(공통서식) -->
-  <link rel="stylesheet" href="./css/base.css" type="text/css">
+  <link rel="stylesheet" href="../adm/css/base.css" type="text/css">
   <!-- common.css(헤더&푸터) -->
-  <link rel="stylesheet" href="./css/common.css" type="text/css">
+  <link rel="stylesheet" href="../adm/css/common.css" type="text/css">
   <link rel="stylesheet" href="./css/login.css" type="text/css">
 </head>
 <body>

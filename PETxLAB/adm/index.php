@@ -1,7 +1,7 @@
 <?php
 
-include_once './db/db_con.php';
-include_once './config.php';
+// include_once './db/db_con.php';
+// include_once './config.php';
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/account/header.php";
 
 // userregistration 테이블에서 전체 회원 수를 가져옴

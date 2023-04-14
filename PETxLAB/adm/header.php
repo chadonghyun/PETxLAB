@@ -1,5 +1,6 @@
 <?php
-
+  include_once '../db/db_con.php';
+  include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +25,13 @@
     <!-- common.css(헤더&푸터) -->
     <link rel="stylesheet" href="./css/common.css" type="text/css">
 
-    <link rel="stylesheet" href="./css/index.css">
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+    <!-- <link rel="stylesheet" href="./css/index.css"> -->
+<!-- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <!-- fullcalendar 언어 CDN -->
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-<script src="./script/callender.js"></script>
+<!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<script src="./script/callender.js"></script> -->
 
 
 </head>
@@ -38,15 +39,11 @@
   <!-- 헤더영역 -->
   <header>
     <?php if ($userlevel == 3){
-      echo'
-      <div id="header-left" class="ad_cl">
-      ';
-      }
-      else if($userlevel == 2){
-        echo'
-        <div id="header-left" class="tc_cl">
-        ';
-      }
+      echo '<div id="header-left" class="ad_cl">';
+    }
+    else if($userlevel == 2){
+      echo '<div id="header-left" class="tc_cl">';
+    }
       ?>
             <!-- <div id="header-left" class="ad_cl"> -->
       <h1>
@@ -125,7 +122,7 @@
           ?>
           </span> 
         </p>
-        <a href="./logout.php" title="로그아웃">
+        <a href="../../account/logout.php" title="로그아웃">
           <span>로그아웃</span>
         </a>
       </div>
