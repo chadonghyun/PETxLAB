@@ -1,5 +1,5 @@
 <?php
-  include_once '../db/db_con.php';
+  include_once $_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php';
   include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 ?>
 
@@ -19,11 +19,11 @@
     <!--제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <!--리셋파일-->
-    <link rel="stylesheet" href="./css/reset.css" type="text/css">
+    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/css/reset.css" type="text/css">
     <!-- base.css(공통서식) -->
-    <link rel="stylesheet" href="./css/base.css" type="text/css">
+    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/css/base.css" type="text/css">
     <!-- common.css(헤더&푸터) -->
-    <link rel="stylesheet" href="./css/common.css" type="text/css">
+    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/css/common.css" type="text/css">
 
     <!-- <link rel="stylesheet" href="./css/index.css"> -->
 <!-- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
@@ -48,7 +48,7 @@
             <!-- <div id="header-left" class="ad_cl"> -->
       <h1>
         <a href="#" title="home">
-          <img src= "<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/images/logo.png" alt="mainlogo">
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/images/logo.png" alt="mainlogo">
         </a>
       </h1>
       <ul class="header-menu">
@@ -59,7 +59,7 @@
           </a>
         </li>
         <li>
-          <a href="#" title="회원관리">
+          <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/member/adm_m_list.php?no=3" title="회원관리">
             <i class="bi bi-person-circle"></i>
             <span>회원관리</span>
           </a>
@@ -122,7 +122,7 @@
           ?>
           </span> 
         </p>
-        <a href="../../account/logout.php" title="로그아웃">
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/logout.php" title="로그아웃">
           <span>로그아웃</span>
         </a>
       </div>

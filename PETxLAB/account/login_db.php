@@ -36,7 +36,7 @@ if (!$num_match) {
     $_SESSION['user_name'] = $row['user_name'];
     $_SESSION['user_level'] = $row['user_level'];
 
-    // Loginlog 테이블에 로그인 정보 저장
+    // l 테이블에 로그인 정보 저장
     $user_id = $_SESSION['user_id'];
     $login_time = date("Y-m-d H:i:s");
     $login_status = 1;
@@ -48,7 +48,7 @@ if (!$num_match) {
     $row_user = mysqli_fetch_assoc($result_user);
     $number = $row_user['number'];
 
-    $query = "INSERT INTO Loginlog (user_num, user_id, login_time, login_status, login_IP) VALUES ('$number', '$user_id', '$login_time', '$login_status', '$login_IP')";
+    $query = "INSERT INTO loginlog (user_num, user_id, login_time, login_status, login_IP) VALUES ('$number', '$user_id', '$login_time', '$login_status', '$login_IP')";
     mysqli_query($con, $query) or die(mysqli_error($con));
       
     mysqli_close($con);

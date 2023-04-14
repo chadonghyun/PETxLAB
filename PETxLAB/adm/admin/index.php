@@ -36,7 +36,7 @@ $result = mysqli_query($con, $sql);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- fullcalendar 언어 CDN -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-<script src="./script/callender.js"></script>
+<script src="../js/callender.js"></script>
 
 <main>
 

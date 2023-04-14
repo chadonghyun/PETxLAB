@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/adm/db/db_con.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/adm/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
 ?>
