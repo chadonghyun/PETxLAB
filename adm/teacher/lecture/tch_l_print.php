@@ -13,12 +13,12 @@ $rows =mysqli_fetch_assoc($result);
 
 <main>
   <!-- adm_l_update.css -->
-  <link rel="stylesheet" href="./css/adm_l_print.css">
+  <link rel="stylesheet" href="./css/tch_l_print.css" type="text/css">
   <!-- 스크립트 -->
   <script src="./js/adm_l_print.js" defer></script>
 
   <section id="lecreg">
-    <form method="post" action="adm_l_update.php?course_id=<?=$no?>">
+    <form method="post" action="tch_l_update.php?course_id=<?=$no?>">
       <div class="container wrap d-flex justify-content-between">
         <!-- 좌측박스 -->
         <div class="profile">
@@ -35,7 +35,7 @@ $rows =mysqli_fetch_assoc($result);
 
             <input type="hidden" name="course_id" value="<?=$no?>">
             <button type="submit" class="edit">강의수정</button>
-            <button type="submit" formaction="adm_l_delete.php" class="delete">강의삭제</button>
+            <button type="submit" formaction="tch_l_delete.php" class="delete">강의삭제</button>
           </div>
         </div>
         <!-- 우측박스 -->
@@ -84,7 +84,7 @@ $rows =mysqli_fetch_assoc($result);
                 <div class="form-group">
                   <label for="course-image">대표이미지</label>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="course-image" name="course-image">
+                    <input type="text" class="custom-file-input" id="course-image" name="course-image" value="파일명: <?=$rows['course_image']?>" readonly>
                     <div class="imagebox">
                       <img src="./uploads/<?=$rows['course_image']?>" alt="upload_image">
                     </div>

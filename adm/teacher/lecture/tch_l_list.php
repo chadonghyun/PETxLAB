@@ -12,9 +12,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
   <article id="main_h">
     <ul id="tab_mnu">
-      <li><a href="tch_l_list.php?no=3">전체강의관리</a></li>
-      <li><a href="tch_l_list.php?no=2">전문교육과정</a></li>
-      <li><a href="tch_l_list.php?no=1">일반취미과정</a></li>
+      <li>전체강의관리</li>
+      <li>전문교육과정</li>
+      <li>일반취미과정</li>
     </ul>
 
     <div id="search_wrap">
@@ -38,17 +38,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-        $no=$_GET['no'];
-
-        if($no == 1){
-          $sql = "select * from coursereg where course_type = 'general' order by course_id desc";
-        }else if($no == 2){
-          $sql = "select * from coursereg where course_type = 'professional' order by course_id desc";
-        }else if($no == 3){
-          $sql = "select * from coursereg order by course_id desc";
-        }
-
+        $sql = "select * from coursereg order by course_id desc";
         $result = mysqli_query($con, $sql);
+
         $num = mysqli_num_rows($result);
 
         $list_num = 10;
@@ -64,17 +56,15 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-          if($no == 1){
-            $sql2 = "select * from userregistration where user_level = 1 order by number desc limit $start, $list_num;";
-          }else if($no == 2){
-            $sql2 = "select * from userregistration where user_level = 2 order by number desc limit $start, $list_num;";
-          }else if($no == 3){
-            $sql2 = "select * from userregistration order by number desc limit $start, $list_num;";
-          }
-        $result3 = mysqli_query($con, $sql2);
+        $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
+        $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
 
-        $i = 1;
+        $query = "SELECT userregistration.user_name
+          FROM userregistration
+          JOIN coursereg ON userregistration.user_id = coursereg.user_id
+          WHERE userregistration.user_level = 2";
+        $result3 = mysqli_query($con, $query);
       ?>
 
       <tbody>
@@ -82,18 +72,11 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
           ?>
           <tr>
-            <td><?php
-                if($page == 1){
-                  echo $i;
-                } else{
-                  echo(($page-1)*10) + $i;
-                }
-                $i++;
-              ?></td>
+            <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_type'] ?></td>
             <td><?= $row['course_category'] ?></td>
-            <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
+            <td><a href="tch_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
             <td><?= $row2['user_name']; ?></td>
             <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
             <td><?= $row['course_id'] ?></td>
@@ -135,52 +118,10 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         ?>
     </ul>
 
-    <button>강의생성</button>
+    <button onclick="location.href='tch_l_write.php'"; >강의생성</button>
     <button>전체삭제</button>
     <button>선택삭제</button>
   </article>
   </main>
-
-  <script>
-    $(function(){
-      let page_num = <?=$page?>;
-      let no = <?=$no?>;
-
-      let tab_menu = document.querySelectorAll('#tab_mnu li');
-
-      //사용자가 선택한 탭메뉴의 n번째에 해당서식이 변경되게 한다.
-        if( no == 3 ){
-          tab_menu[0].classList.add('act01');
-        }else if( no == 2){
-          tab_menu[1].classList.add('act01');
-        }else if( no == 1){
-          tab_menu[2].classList.add('act01');
-        }
-
-
-      // 현재 페이지 번호
-      let currentPage = <?php echo $page; ?>;
-
-      // 페이지 번호를 감싸는 ul 태그
-      let pageNav = document.querySelector('#page_nv');
-
-      // 페이지 번호를 감싸는 li 태그들
-      let pageLinks = pageNav.querySelectorAll('li');
-
-      // 페이지 번호를 감싸는 a 태그들
-      let pageAnchors = pageNav.querySelectorAll('li a');
-
-      // 페이지 번호를 출력하는 for 문
-      for (let i = 0; i < pageLinks.length; i++) {
-        let link = pageLinks[i];
-        let anchor = pageAnchors[i];
-
-        // 현재 페이지인 경우
-        if (parseInt(anchor.innerText) === currentPage) {
-          anchor.style.color = '#333';
-        }
-      }
-    });
-  </script>
 </body>
 </html>

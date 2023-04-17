@@ -22,22 +22,22 @@ document.getElementById("course_endday").addEventListener("change", function() {
 function updateDuration() {
   const startDate = new Date(document.getElementById("course_startday").value);
   const endDate = new Date(document.getElementById("course_endday").value);
-  const duration = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-  document.getElementById("course_duration").value = duration + "일";
+
+  // check if start date and end date are valid
+  if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+    document.getElementById("course_duration").value = "";
+    return;
+  }
+
+  let duration = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+  if (duration < 0) {
+    duration = 0;
+  }
+
+  document.getElementById("course_duration").value = "0"+ duration + "일";
 }
 
-// 강의금액 입력하기
-// const priceInput = document.getElementById('course_price');
-// priceInput.addEventListener('input', function(event) {
-//   // 입력된 값에서 숫자만 추출
-//   const price = event.target.value.replace(/[^0-9]/g, '');
-  
-//   // 숫자를 3자리씩 콤마로 구분하여 문자열로 변환함
-//   const formattedPrice = Number(price).toLocaleString();
-  
-//   // 변환된 문자열 뒤에 '원'이라는 글자를 추가하여 입력란에 출력한다 ,... 
-//   event.target.value = formattedPrice + '원';
-// });
+
 
 // 이미지 업데이트
 // 이미지 업로드 버튼 클릭 시 파일 선택 창 띄우기

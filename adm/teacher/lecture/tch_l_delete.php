@@ -15,7 +15,7 @@ if($result_d){
     ?>  
     <script>
         alert('게시글이 삭제되었습니다.');
-        location.replace('./adm_l_write.php');
+        location.replace('./tch_l_list.php');
     </script>
     <?php
     } else {

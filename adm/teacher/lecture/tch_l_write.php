@@ -10,7 +10,7 @@ $num = sprintf("%04d", $user['number']);
 ?>
     <main>
     <!-- adm_l_update.css -->
-    <link rel="stylesheet" href="./css/adm_l_write.css">
+    <link rel="stylesheet" href="./css/tch_l_write.css" type="text/css">
       <!-- flatpicker 라이브러리 추가 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
@@ -18,7 +18,7 @@ $num = sprintf("%04d", $user['number']);
     <script src="./js/adm_l_write.js" defer></script>
     
     <section id="lecreg">
-    <form action="adm_l_insert.php" method="post" enctype="multipart/form-data">
+    <form action="tch_l_insert.php" method="post" enctype="multipart/form-data">
       <div class="container wrap d-flex justify-content-between">
         <!-- 좌측 박스-->
         <div class="profile">

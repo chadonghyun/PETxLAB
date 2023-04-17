@@ -1,27 +1,25 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
 $no = $_GET['course_id'];
 $query = "SELECT * FROM CourseReg where course_id ='$no'";
 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($con, $query);
 $rows =mysqli_fetch_assoc($result);
 ?>
 
 <main>
   <!-- adm_l_update.css -->
   <link rel="stylesheet" href="./css/adm_l_print.css">
+        <!-- flatpicker 라이브러리 추가 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
   <!-- 스크립트 -->
-  <script src="./js/adm_l_print.js" defer></script>
+  <script src="./js/adm_l_update.js" defer></script>
 
   <section id="lecreg">
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
       <div class="container wrap d-flex justify-content-between">
         <!-- 좌측박스 -->
         <div class="profile">
@@ -30,16 +28,16 @@ $rows =mysqli_fetch_assoc($result);
               <img src= "<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/images/logo.png" alt="mainlogo">
             </div>
             <h4 class="title">작성자</h4>
-            <p>작성자명</p>
+            <input type="text" value="<?php echo "$username"?>" name="user_name" class="writer" readonly>
             <h4 class="title">아이디</h4>
-            <p>작성자아이디</p>
+            <input type="text" value="<?php echo "$userid"?>" name="user_id" class="id" readonly>
 
             <!-- 삭제 버튼 -->
 
             <input type="hidden" name="course_id" value="<?=$no?>">
             
-            <button type="submit" formaction="adm_l_edit.php">강의수정</button>
-            <button type="submit" formaction="adm_l_delete.php">강의삭제</button>
+            <button type="submit" formaction="adm_l_edit.php" class="edit">수정완료</button>
+
 
 
 
@@ -55,28 +53,25 @@ $rows =mysqli_fetch_assoc($result);
                 <div>
                   <label for="course_type">과정분류</label>
                   <select name="course_type" id="course_type" class="course_type form-control" onchange="course(this)" required>
-                    <option>선택하세요</option>
+                    <option value="<?php
+                      if($rows['course_type']=='professional'){echo"전문교육과정";}
+                      else {echo "일반교육과정";} ?>">선택하세요</option>
                     <option value="professional">전문교육과정</option>
                     <option value="general">일반교육과정</option>
                   </select>                  
-
-
-
-                  <label for="course_type">과정분류</label>
-                  <input type="text" id="course_type" name="course_type" class="form-control"
-                      value="<?php
-                      if($rows['course_type']=='professional'){echo"전문교육과정";}
-                      else {echo "일반교육과정";} ?>">              
+            
                 </div>
                 <div>
-                  <label for="course_category">카테고리</label>
-                  <input type="text" name="course_caregory" id="course_caregory" class="form-control" 
-                      value="<?=$rows['course_category']?>">                  
+                <label for="course_category">카테고리</label>
+                      <select name="course_category" id="course_category" class="form-control">
+                        <option value="<?=$rows['course_category']?>">선택하세요</option>
+                      </select>
+                
                 </div>
                 <div class="titlebox">
                   <label for="course_title">강좌제목</label>
-                  <input type="text" name="course_title" id="course_title" class="form-control" value="<?=$rows['course_title']?>" readonly>
-                  <a href="#" title="바로가기">강의바로가기</a>                        
+                  <input type="text" name="course_title" id="course_title" class="form-control" value="<?=$rows['course_title']?>" >
+                                      
                 </div>
                 <div class="flex">
                   <div>
@@ -97,15 +92,14 @@ $rows =mysqli_fetch_assoc($result);
               <div class="col-md-6 lecreg-rightbox">
                 <div>
                   <label for="course_price">강의금액</label>
-                  <input type="text" name="course_price" id="course_price" class="form-control" value="<?=$rows['course_price']?>" readonly>                  
+                  <input type="number" name="course_price" id="course_price" class="form-control" value="<?=$rows['course_price']?>" >                  
                 </div>
                 <div class="form-group">
                   <label for="course-image">대표이미지</label>
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" id="course-image" name="course-image">
-                    <div class="imagebox">
-                      <img src="./uploads/<?=$rows['course_image']?>" alt="upload_image">
-                    </div>
+                    <!-- <div class="imagebox"><img src="./uploads/<?=$rows['course_image']?>" alt="upload_image"></div> -->
+                    <div id="image-preview"></div> 
                   </div>                 
                 </div>
                 <div>

@@ -7,18 +7,19 @@ $query = "SELECT * FROM CourseReg where course_id ='$no'";
 
 $result = mysqli_query($con, $query);
 $rows =mysqli_fetch_assoc($result);
-
-
 ?>
 
 <main>
   <!-- adm_l_update.css -->
-  <link rel="stylesheet" href="./css/adm_l_print.css">
+  <link rel="stylesheet" href="./css/tch_l_print.css" type="text/css">
+        <!-- flatpicker 라이브러리 추가 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
   <!-- 스크립트 -->
-  <script src="./js/adm_l_print.js" defer></script>
+  <script src="./js/adm_l_update.js" defer></script>
 
   <section id="lecreg">
-    <form method="post" action="adm_l_update.php?course_id=<?=$no?>">
+    <form method="post" action="" enctype="multipart/form-data">
       <div class="container wrap d-flex justify-content-between">
         <!-- 좌측박스 -->
         <div class="profile">
@@ -34,8 +35,14 @@ $rows =mysqli_fetch_assoc($result);
             <!-- 삭제 버튼 -->
 
             <input type="hidden" name="course_id" value="<?=$no?>">
-            <button type="submit" class="edit">강의수정</button>
-            <button type="submit" formaction="adm_l_delete.php" class="delete">강의삭제</button>
+            
+            <button type="submit" formaction="tch_l_edit.php" class="edit">수정완료</button>
+
+
+
+
+
+            <!-- <input type="reset" class="delete_all" value="강의삭제"></input> -->
           </div>
         </div>
         <!-- 우측박스 -->
@@ -45,20 +52,26 @@ $rows =mysqli_fetch_assoc($result);
               <div class="col-md-6 lecreg-leftbox">
                 <div>
                   <label for="course_type">과정분류</label>
-                  <input type="text" id="course_type" name="course_type" class="form-control"
-                      value="<?php
+                  <select name="course_type" id="course_type" class="course_type form-control" onchange="course(this)" required>
+                    <option value="<?php
                       if($rows['course_type']=='professional'){echo"전문교육과정";}
-                      else {echo "일반교육과정";} ?>" readonly>              
+                      else {echo "일반교육과정";} ?>">선택하세요</option>
+                    <option value="professional">전문교육과정</option>
+                    <option value="general">일반교육과정</option>
+                  </select>                  
+            
                 </div>
                 <div>
                 <label for="course_category">카테고리</label>
-                      <input type="text" name="course_caregory" id="course_caregory" class="form-control" 
-                      value="<?=$rows['course_category']?>" readonly>                  
+                      <select name="course_category" id="course_category" class="form-control">
+                        <option value="<?=$rows['course_category']?>">선택하세요</option>
+                      </select>
+                
                 </div>
                 <div class="titlebox">
                   <label for="course_title">강좌제목</label>
-                  <input type="text" name="course_title" id="course_title" class="form-control" value="<?=$rows['course_title']?>" readonly>
-                  <a href="#" title="바로가기">강의바로가기</a>                        
+                  <input type="text" name="course_title" id="course_title" class="form-control" value="<?=$rows['course_title']?>" >
+                                      
                 </div>
                 <div class="flex">
                   <div>
@@ -79,25 +92,24 @@ $rows =mysqli_fetch_assoc($result);
               <div class="col-md-6 lecreg-rightbox">
                 <div>
                   <label for="course_price">강의금액</label>
-                  <input type="text" name="course_price" id="course_price" class="form-control" value="<?=$rows['course_price']?>" readonly>                  
+                  <input type="number" name="course_price" id="course_price" class="form-control" value="<?=$rows['course_price']?>" >                  
                 </div>
                 <div class="form-group">
                   <label for="course-image">대표이미지</label>
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" id="course-image" name="course-image">
-                    <div class="imagebox">
-                      <img src="./uploads/<?=$rows['course_image']?>" alt="upload_image">
-                    </div>
+                    <!-- <div class="imagebox"><img src="./uploads/<?=$rows['course_image']?>" alt="upload_image"></div> -->
+                    <div id="image-preview"></div> 
                   </div>                 
                 </div>
                 <div>
                   <label for="course_shortdesc">짧은설명</label>
-                  <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" value="<?=$rows['course_shortdesc']?>" readonly>                  
+                  <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" value="<?=$rows['course_shortdesc']?>" >                  
                 </div>
               </div>
               <div class="col-md-12 lecreg-desc card">
                   <label for="course_longdesc">상세설명</label>
-                  <textarea name="course_longdesc" id="course_longdesc" class="course_longdesc" rows="10" readonly><?=$rows['course_longdesc']?></textarea>
+                  <textarea name="course_longdesc" id="course_longdesc" class="course_longdesc" rows="10"><?=$rows['course_longdesc']?></textarea>
                 </div>
             </div>
           </div>

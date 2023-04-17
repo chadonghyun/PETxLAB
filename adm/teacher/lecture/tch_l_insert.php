@@ -6,7 +6,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 
 $uploaded_file_name_tmp = $_FILES['course-image']['tmp_name'];
 $uploaded_file_name = $_FILES['course-image']['name'];
-$upload_folder =$_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/admin/lecture/uploads/";
+$upload_folder =$_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/teacher/lecture/uploads/";
 move_uploaded_file($uploaded_file_name_tmp,$upload_folder.$uploaded_file_name);
 
 
@@ -37,7 +37,7 @@ $result2 = mysqli_query($con, $sql);
 if($result2){
     ?>  <script>
             alert('강의가 등록되었습니다.');
-            location.replace('./adm_l_list.php');
+            location.replace('./tch_l_list.php');
         </script>
     <?php
     } else {
