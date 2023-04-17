@@ -4,7 +4,7 @@
 $db_domain = "localhost";
 $db_id = "root";
 $db_pw = "";
-$db_name = "petxlab";
+$db_name = "petxlab1";
 
 //$db_domain = "localhost";
 //$db_id = "academy2023";

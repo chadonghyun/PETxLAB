@@ -16,10 +16,41 @@ main{
   padding-right: 20px;
 }
 .a_container2{
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 580px);
+  grid-template-rows: repeat(4, 175px);
   gap: 20px;
 }
+.a_container2_1{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 580px);
+  grid-template-rows: repeat(4, 200px);
+  gap: 20px;
+}
+.item{
+  padding: 40px;
+}
+.item1{
+  padding: 30px;
+}
+.item:nth-child(1){
+  grid-row: span 2
+}
+.item:nth-child(2){
+  grid-row: span 2
+}
+.item:nth-child(3){
+  grid-row: span 3
+}
+.item1:nth-child(1){
+  grid-row: span 2
+}
+.item1:nth-child(4){
+  grid-row: span 3
+}
+
 .a_profile{
   width: 220px; height:500px;
   background: var(--bg-colorwh);
@@ -52,10 +83,9 @@ main{
 .a_status, .a_board, .a_callender{
   background: var(--bg-colorwh);
   border-radius: 20px;
-  padding: 40px;
 }
 .a_status{
-  width: 580px; height: 350px;
+  /* width: 580px; height: 350px; */
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -85,12 +115,12 @@ main{
   font-family: var(--fm-title);
 }
 .a_board{
-  width: 580px; height: 350px;
+  /* width: 580px; height: 350px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-  gap: 20px;
+  gap: 10px;
 }
 .a_board > h3{
   color: #666;
@@ -103,11 +133,14 @@ main{
 .a_board > table > tbody > tr > td{
   vertical-align: middle;
   border-bottom: 1px solid #ccc;
+  padding: 10px 0px;
 }
 .a_board > table >tbody  > tr > td:last-child{
   text-align: center;
 }
-
+.b_title{
+  width: 45%;
+}
 
 .a_callender{
   width: 1180px;
@@ -162,6 +195,7 @@ main{
   border: 3px solid #000;
   border-width: 3px 3px 0 0;
   transition: border 0.1s;
+  box-sizing: border-box;
 }
 
 .sec_cal .cal_nav .go-prev:hover::before,

@@ -74,7 +74,7 @@ $result = mysqli_query($con, $sql);
       </form>
     </div>
     <div class="a_container2">
-      <div class="a_status">
+      <div class="item a_status">
         <h3>사이트 현황</h3>
         <div>
           <p>신규회원</p>
@@ -111,7 +111,7 @@ $result = mysqli_query($con, $sql);
           </p>
         </div>
       </div>
-      <div class="a_board">
+      <div class="item a_board">
         <h3>종합 게시판</h3>
         <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/board/adm_b_list.php" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
         <table>
@@ -121,8 +121,8 @@ $result = mysqli_query($con, $sql);
                 $num = sprintf("%03d", $row['number']);
                 $type = $row['Board_content'];
                 $title = $row['Board_title'];
-                $date = $row['Board_date'];
-                echo "<tr><td>$num</td><td>$type</td><td>$title</td><td>$date</td></tr>";
+                $date = substr($row['Board_date'],0,10);
+                echo "<tr><td>$num</td><td>$type</td><td class='b_title'>$title</td><td>$date</td></tr>";
               }
             ?>
           </tbody>
@@ -133,7 +133,7 @@ $result = mysqli_query($con, $sql);
       $sql = "SELECT course_startday, course_endday FROM coursereg";
       $result = $con->query($sql);
 
-      echo '<div class="a_callender">';
+      echo '<div class="item a_callender">';
       echo '<div class="sec_cal">';
       echo '<div class="cal_nav">';
       echo '<a href="javascript:;" class="nav-btn go-prev">prev</a>';

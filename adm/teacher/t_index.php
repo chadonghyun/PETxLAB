@@ -12,12 +12,12 @@ $total_members = $row['total'];
 
 // QNA 미응답
 $sql = "SELECT COUNT(*) as count_response
-FROM boardqnareg
-WHERE qna_response = 0
-AND course_id IN (
-    SELECT course_id FROM coursereg WHERE user_id = '{$user_id}'
-)
-";
+        FROM boardqnareg
+        WHERE qna_response = 0
+        AND course_id IN (
+            SELECT course_id FROM coursereg WHERE user_id = '{$user_id}'
+        )
+        ";
 
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -44,10 +44,23 @@ $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 $total_count = $row[0];
 
-//게시판 정보
-$sql = "SELECT * FROM coursereg WHERE user_id = '$userid' ORDER BY course_id DESC LIMIT 5";
+
+//공지사항
+//게시판 정보를 가져옴
+$sql1 = "SELECT * FROM boardnoticereg ORDER BY Board_date DESC LIMIT 3";
+$result1 = mysqli_query($con, $sql1);
+
+
+//QnA게시판
+$sql = "SELECT course_id FROM coursereg WHERE user_id = '$userid'";
 $result = mysqli_query($con, $sql);
 
+// 코스 아이디를 이용하여 질문 가져오기
+while ($row = mysqli_fetch_assoc($result)) {
+  $course_id = $row['course_id'];
+  $sql = "SELECT qna_title, qna_date, qna_category, number FROM boardqnareg WHERE course_id = $course_id ORDER BY qna_date DESC LIMIT 3";
+  $result2 = mysqli_query($con, $sql); // 결과를 따로 저장
+  
 ?>
 <link rel="stylesheet" href="../css/index.css">
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
@@ -84,8 +97,8 @@ $result = mysqli_query($con, $sql);
         </div>
       </form>
     </div>
-    <div class="a_container2">
-      <div class="a_status">
+    <div class="a_container2 a_container2_1">
+      <div class="item1 a_status">
         <h3>사이트 현황</h3>
         <div>
           <p>신규수강생</p>
@@ -126,20 +139,37 @@ $result = mysqli_query($con, $sql);
           </p>
         </div>
       </div>
-      <div class="a_board">
-        <h3>종합 게시판</h3>
+      <div class="item1 a_board">
+        <h3>공지사항</h3>
         <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
         <table>
           <tbody>
             <?php
-
-              while($row = mysqli_fetch_assoc($result)) {
-                $num = sprintf("%03d", $row['course_id']);
-                $type = $row['course_type'];
-                $title = $row['course_title'];
-                $startday = $row['course_startday'];
-                echo "<tr><td>$num</td><td>$type</td><td>$title</td><td>$startday</td></tr>";
+              while($row = mysqli_fetch_assoc($result1)) {
+                $num = sprintf("%03d", $row['number']);
+                $type = $row['Board_content'];
+                $title = $row['Board_title'];
+                $date = substr($row['Board_date'],0,10);
+                echo "<tr><td>$num</td><td>$type</td><td class='b_title'>$title</td><td>$date</td></tr>";
               }
+            ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="item1 a_board">
+        <h3>QnA 게시판</h3>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php" title="종합 게시판 바로가기">QnA 게시판 바로가기</a>
+        <table>
+          <tbody>
+            <?php
+              while ($row2 = mysqli_fetch_assoc($result2)) {
+                $number = $row2['number'];
+                $qna_title = $row2['qna_title'];
+                $qna_date = $row2['Board_date'];
+                $qna_category = $row2['qna_category'];
+                echo "<tr><td>$qna_title</td><td>$qna_date</td><td>$qna_category</td><td>$number</td></tr>";
+                }
+                }
             ?>
           </tbody>
         </table>
@@ -149,7 +179,7 @@ $result = mysqli_query($con, $sql);
       $sql = "SELECT course_startday, course_endday FROM coursereg";
       $result = $con->query($sql);
 
-      echo '<div class="a_callender">';
+      echo '<div class="item1 a_callender">';
       echo '<div class="sec_cal">';
       echo '<div class="cal_nav">';
       echo '<a href="javascript:;" class="nav-btn go-prev">prev</a>';
