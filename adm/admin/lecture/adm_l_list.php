@@ -38,17 +38,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-        $no=$_GET['no'];
-
-        if($no == 1){
-          $sql = "select * from coursereg where course_type = 'general' order by course_id desc";
-        }else if($no == 2){
-          $sql = "select * from coursereg where course_type = 'professional' order by course_id desc";
-        }else if($no == 3){
-          $sql = "select * from coursereg order by course_id desc";
-        }
-
+        $sql = "select * from coursereg order by course_id desc";
         $result = mysqli_query($con, $sql);
+
         $num = mysqli_num_rows($result);
 
         $list_num = 10;
@@ -64,15 +56,15 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-          if($no == 1){
-            $sql2 = "select * from userregistration where user_level = 1 order by number desc limit $start, $list_num;";
-          }else if($no == 2){
-            $sql2 = "select * from userregistration where user_level = 2 order by number desc limit $start, $list_num;";
-          }else if($no == 3){
-            $sql2 = "select * from userregistration order by number desc limit $start, $list_num;";
-          }
-        $result3 = mysqli_query($con, $sql2);
+        $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
+        $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
+
+        $query = "SELECT userregistration.user_name
+          FROM userregistration
+          JOIN coursereg ON userregistration.user_id = coursereg.user_id
+          WHERE userregistration.user_level = 2";
+        $result3 = mysqli_query($con, $query);
 
         $i = 1;
       ?>
@@ -110,10 +102,10 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         /* paging : 이전 페이지 */ 
 
         if($page <= 1){ ?> 
-        <li><a href="adm_m_list.php?page=1">&#x003C;</a></li>
+        <li><a href="adm_l_list.php?page=1">&#x003C;</a></li>
         <?php } 
         else{ ?> 
-        <li><a href="adm_m_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
+        <li><a href="adm_l_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
         <?php };
         ?> 
       
@@ -121,16 +113,16 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
         for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
         <li>
-          <a href="adm_m_list.php?page=<?php echo $print_page; ?>">
+          <a href="adm_l_list.php?page=<?php echo $print_page; ?>">
             <?php echo $print_page; ?>
           </a> 
         </li>
         <?php };?> 
         <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
 
-        <li><a href="adm_m_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
+        <li><a href="adm_l_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
         <?php } else{ ?>
-        <li><a href="adm_m_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
+        <li><a href="adm_l_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
         <?php };
         ?>
     </ul>

@@ -65,6 +65,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           JOIN coursereg ON userregistration.user_id = coursereg.user_id
           WHERE userregistration.user_level = 2";
         $result3 = mysqli_query($con, $query);
+
+        $i = 1;
       ?>
 
       <tbody>
@@ -93,10 +95,10 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         /* paging : 이전 페이지 */ 
 
         if($page <= 1){ ?> 
-        <li><a href="adm_m_list.php?page=1">&#x003C;</a></li>
+        <li><a href="tch_l_list.php?page=1">&#x003C;</a></li>
         <?php } 
         else{ ?> 
-        <li><a href="adm_m_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
+        <li><a href="tch_l_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
         <?php };
         ?> 
       
@@ -104,16 +106,16 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
         for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
         <li>
-          <a href="adm_m_list.php?page=<?php echo $print_page; ?>">
+          <a href="tch_l_list.php?page=<?php echo $print_page; ?>">
             <?php echo $print_page; ?>
           </a> 
         </li>
         <?php };?> 
         <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
 
-        <li><a href="adm_m_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
+        <li><a href="tch_l_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
         <?php } else{ ?>
-        <li><a href="adm_m_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
+        <li><a href="tch_l_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
         <?php };
         ?>
     </ul>
