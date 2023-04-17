@@ -1,28 +1,26 @@
 <?php
-
 include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/db/db_con.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
-// 전체 회원 수
+//전체 회원 수
 $sql = "SELECT COUNT(*) as total FROM userregistration";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
 $total_members = $row['total'];
 
-// QNA 미응답
-$sql = "SELECT COUNT(*) as count_response
-FROM boardqnareg
-WHERE qna_response = 0
-AND course_id IN (
-    SELECT course_id FROM coursereg WHERE user_id = '{$user_id}'
-)
-";
-
+// 접속자
+$sql = "SELECT COUNT(DISTINCT user_num) AS count FROM loginlog WHERE login_time BETWEEN DATE_SUB(NOW(), INTERVAL 1 DAY) AND NOW()";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
-$count_unanswered = $row["count_response"];
+$count = $row['count'];
 
+//신규회원수
+$three_days_ago = date('Y-m-d H:i:s', strtotime('-3 days'));
+$sql = "SELECT COUNT(*) as total FROM userregistration WHERE regist_time >= '$three_days_ago'";
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_assoc($result);
+$total_new_members = $row['total'];
 
 // 회원번호
 $sql = "SELECT * FROM userregistration WHERE user_id = '$userid'";
@@ -30,24 +28,15 @@ $result = mysqli_query($con, $sql);
 $user = mysqli_fetch_assoc($result);
 $num = sprintf("%04d", $user['number']);
 
-//전체 강의
-$sql = "SELECT COUNT(*) FROM coursereg WHERE user_id='$userid'";
+//전체 강의 개수
+$sql = "SELECT COUNT(*) as count FROM coursereg";
 $result = mysqli_query($con, $sql);
-$lecture_count = mysqli_fetch_array($result)[0];
+$row = mysqli_fetch_assoc($result);
+$count_course = $row['count'];
 
-//전체 수강생
-$sql = "SELECT COUNT(ur.course_id) 
-        FROM userregistration ur 
-        INNER JOIN coursereg cr ON ur.course_id = cr.course_id 
-        WHERE cr.user_id = '$userid'";
+//게시판 정보를 가져옴
+$sql = "SELECT * FROM boardnoticereg ORDER BY Board_date DESC LIMIT 5";
 $result = mysqli_query($con, $sql);
-$row = mysqli_fetch_array($result);
-$total_count = $row[0];
-
-//게시판 정보
-$sql = "SELECT * FROM coursereg WHERE user_id = '$userid' ORDER BY course_id DESC LIMIT 5";
-$result = mysqli_query($con, $sql);
-
 ?>
 <link rel="stylesheet" href="../css/index.css">
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
@@ -64,7 +53,7 @@ $result = mysqli_query($con, $sql);
       <form action="" method="post">
         <div class="a_profile">
           <div class="p_img">
-            <img src="../images/logo.png" alt="">
+            <img src="./images/logo.png" alt="">
           </div>
           <div class="p_num">
             <h6>회원번호</h6>
@@ -88,57 +77,52 @@ $result = mysqli_query($con, $sql);
       <div class="a_status">
         <h3>사이트 현황</h3>
         <div>
-          <p>신규수강생</p>
+          <p>신규회원</p>
           <p>
-            <span>아직모름</span>
+            <span>
+              <?php echo "$total_new_members"?>
+            </span>
             명
           </p>
         </div>
         <div>
-          <p>전체수강생</p>
+          <p>전체회원</p>
           <p>
             <span>
-              <?php 
-                echo "$total_count"
-              ?>
+              <?php echo "$total_members"?>
             </span>
             명
           </p>
         </div>        
         <div>
-          <p>QnA 미응답</p>
+          <p>접속자</p>
           <p>
             <span>
-              <?php 
-                echo "$count_unanswered";
-              ?>
+              <?php echo "$count"?>
             </span>
-            개
+            명
           </p>
         </div>       
         <div>
           <p>전체강의</p>
           <p>
-            <span>
-              <?php echo "$lecture_count"?>
-            </span>
+            <span><?php echo "$count_course"?></span>
             개
           </p>
         </div>
       </div>
       <div class="a_board">
         <h3>종합 게시판</h3>
-        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/board/adm_b_list.php" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
         <table>
           <tbody>
             <?php
-
               while($row = mysqli_fetch_assoc($result)) {
-                $num = sprintf("%03d", $row['course_id']);
-                $type = $row['course_type'];
-                $title = $row['course_title'];
-                $startday = $row['course_startday'];
-                echo "<tr><td>$num</td><td>$type</td><td>$title</td><td>$startday</td></tr>";
+                $num = sprintf("%03d", $row['number']);
+                $type = $row['Board_content'];
+                $title = $row['Board_title'];
+                $date = $row['Board_date'];
+                echo "<tr><td>$num</td><td>$type</td><td>$title</td><td>$date</td></tr>";
               }
             ?>
           </tbody>

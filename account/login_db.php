@@ -48,13 +48,21 @@ if (!$num_match) {
     $row_user = mysqli_fetch_assoc($result_user);
     $number = $row_user['number'];
 
+    $userlevel = $_SESSION['user_level'];
+
     $query = "INSERT INTO loginlog (user_num, user_id, login_time, login_status, login_IP) VALUES ('$number', '$user_id', '$login_time', '$login_status', '$login_IP')";
     mysqli_query($con, $query) or die(mysqli_error($con));
       
     mysqli_close($con);
 
-    header('Location: ../adm/admin/index.php');
-    exit;
+    if ($userlevel == 2) {
+        header('Location: ../adm/teacher/t_index.php');
+    } else if ($userlevel == 3) {
+      header('Location: ../adm/admin/a_index.php');
+    } else{
+      header ('Location: ../adm/admin/.php');
+    }
+      exit;
   }
 }
 ?>

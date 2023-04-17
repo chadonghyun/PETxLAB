@@ -17,22 +17,15 @@
     <!--부트스트랩 자바스크립트 연결-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!--제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- commonjs -->
+    <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/js/common.js"></script>
     <!--리셋파일-->
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/css/reset.css" type="text/css">
     <!-- base.css(공통서식) -->
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/css/base.css" type="text/css">
     <!-- common.css(헤더&푸터) -->
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/css/common.css" type="text/css">
-
-    <!-- <link rel="stylesheet" href="./css/index.css"> -->
-<!-- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<!-- fullcalendar 언어 CDN -->
-<!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-<script src="./script/callender.js"></script> -->
-
 
 </head>
 <body>
@@ -47,39 +40,63 @@
     ?>
 
       <h1>
-        <a href="#" title="home">
+        <a href="
+          <?php if($userlevel == 3){
+            echo '/PETxLAB/adm/admin/a_index.php';
+          }else if($userlevel == 2){
+            echo '/PETxLAB/adm/teacher/t_index.php';
+          }
+          ?>" title="home">
           <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/images/logo.png" alt="mainlogo">
         </a>
       </h1>
       <ul class="header-menu">
         <li>
-          <a href="#" title="홈">
+          <a href="
+          <?php if($userlevel == 3){
+            echo '/PETxLAB/adm/admin/a_index.php';
+          }else if($userlevel == 2){
+            echo '/PETxLAB/adm/teacher/t_index.php';
+          }
+          ?>" title="홈" class="aaaa">
             <i class="bi bi-house-door"></i>
             <span>홈</span>
           </a>
         </li>
         <li>
-          <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/member/adm_m_list.php?no=3" title="회원관리">
+        <a href="
+          <?php if($userlevel == 3){
+            echo '/PETxLAB/adm/admin/member/adm_m_list.php';
+          }else if($userlevel == 2){
+            echo '/PETxLAB/adm/teacher/member/tch_m_list.php';
+          }
+          ?>" title="회원관리" class="aaaa">
             <i class="bi bi-person-circle"></i>
             <span>회원관리</span>
           </a>
         </li>
         <li>
-          <a href="#" title="강의관리">
+          <a href="          
+          <?php if($userlevel == 3){
+              echo '/PETxLAB/adm/admin/lecture/adm_l_list.php';
+            }else if($userlevel == 2){
+              echo '/PETxLAB/adm/teacher/lecture/tch_l_list.php';
+            }
+          ?>" title="강의관리" class="aaaa">
           <i class="bi bi-person-video3"></i>
           <span>강의관리</span>
           </a>
         </li>
         <li>
-          <a href="#" title="게시판관리">
+          <a href="          
+          <?php if($userlevel == 3){
+              echo '/PETxLAB/adm/admin/board/adm_b_list.php';
+            }else if($userlevel == 2){
+              echo '/PETxLAB/adm/teacher/board/tch_b_list.php';
+            }
+          ?>" title="게시판관리" class="aaaa">
             <i class="bi bi-clipboard2"></i>
             <span>게시판관리</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" title="수강관리">
-            <i class="bi bi-pencil"></i>
-            <span>수강관리</span>
           </a>
         </li>
       </ul>
@@ -112,12 +129,12 @@
 
     <div id="header-right">
       <div class="header-user">
-        <p>홈</p>
+        <p id="title"></p>
         <p><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/images/minilogo.png" alt="logo"></p>
         <p>
-          <span>
+          <span class="name">
           <?php
-          $logged = $username."(".$userid.") 님 "; 
+          $logged = $username."님 "; 
           echo $logged; 
           ?>
           </span> 
@@ -128,6 +145,8 @@
       </div>
     </div>
   </header>
+
+
 
 
   <!-- php작업시 아래 태그 기재하여 작업하기~ -->

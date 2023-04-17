@@ -61,6 +61,9 @@ header #header-left .header-menu li a span{
   color:var(--f-colorwh);
   padding-left:20px;
 }
+.aaaa{
+  width: 100%;
+}
 header #header-left .header-footer{
   width:100%;
   position:absolute;
@@ -149,9 +152,12 @@ header #header-right .header-user p:nth-child(2) img{
   margin:12px 5px 12px 5px;
 
 }
-header #header-right .header-user p:nth-child(3){
+header #header-right .header-user #title{
   color: var(--f-colorbr);
   margin-left:20px;
+}
+.name{
+  padding: 0 20px;
 }
 header #header-right .header-user>a{
   margin:0px 120px 0px 40px;
