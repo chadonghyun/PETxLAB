@@ -87,7 +87,6 @@ select::-ms-expand{
 #main_b{
   padding: 44px;
   margin: 0px auto;
-  height: 727px;
   background: #fff;
   border: 1px solid #E1E1E1;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
@@ -138,7 +137,7 @@ select::-ms-expand{
 }
 button{
   position: absolute;
-  bottom: 60px;
+  bottom: 30px;
   background: none;
   border: none;
   width: 128px;

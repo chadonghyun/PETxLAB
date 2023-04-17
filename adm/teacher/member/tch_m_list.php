@@ -91,7 +91,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
             ?></td>
           <td><?=$row['number']?></td>
           <td><?= $row2['course_title']; ?></td>
-          <td><?=$row['user_name']?></td>
+          <td><a href="adm_m_view.php?no=<?= $row['number'] ?>"><?=$row['user_name']?></a></td>
           <td><?=$row['user_phone']?></td>
           <td><?=$row['user_email']?></td>
           <td>2</td>

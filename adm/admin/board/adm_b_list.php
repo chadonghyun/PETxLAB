@@ -87,7 +87,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
               }
               $i++;
             ?></td>
-          <td><?= $row['Board_title'] ?></td>
+          <td><a href="adm_b_view.php?idx=<?= $row['number'] ?>"><?= $row['Board_title'] ?></a></td>
           <td><?= $row['Board_content'] ?></td>
           <td><?= $row['user_name']; ?></td>
           <td><?= $row['Board_date'] ? date('Y-m-d', strtotime($row['Board_date'])) : ''?></td>
@@ -128,7 +128,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         ?>
     </ul>
 
-    <button>게시글작성</button>
+    <button><a href="adm_b_write.php">게시글작성</a></button>
     <button>전체삭제</button>
     <button>선택삭제</button>
   </article>

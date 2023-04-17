@@ -86,7 +86,7 @@ select::-ms-expand{
 #main_b{
   padding: 44px;
   margin: 0px auto;
-  height: 727px;
+  /* height: 727px; */
   background: #fff;
   border: 1px solid #E1E1E1;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
@@ -124,20 +124,20 @@ select::-ms-expand{
   width: 200px;
   margin: 0px auto;
 }
-#page_nv > li{
+#page_nv > li > a{
   cursor: pointer;
   font-weight: 500;
   color: #aaa;
 }
-#page_nv > li:first-child, #page_nv > li:last-child{
+#page_nv > li:first-child > a, #page_nv > li:last-child > a{
   color:#333;
 }
-#page_nv li:visited a {
+#page_nv > li:visited > a {
   color: #333;
 }
 button{
   position: absolute;
-  bottom: 60px;
+  bottom: 30px;
   background: none;
   border: none;
   width: 128px;
@@ -148,6 +148,8 @@ button{
 button:first-of-type{
   right: 310px;
   background: #8599B9;
+}
+button:first-of-type > a{
   color: #fff;
 }
 button:nth-of-type(2){

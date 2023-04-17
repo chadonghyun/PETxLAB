@@ -12,9 +12,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
   <article id="main_h">
     <ul id="tab_mnu">
-      <li>전체강의관리</li>
-      <li>전문교육과정</li>
-      <li>일반취미과정</li>
+      <li><a href="tch_l_list.php?no=3">전체강의관리</a></li>
+      <li><a href="tch_l_list.php?no=2">전문교육과정</a></li>
+      <li><a href="tch_l_list.php?no=1">일반취미과정</a></li>
     </ul>
 
     <div id="search_wrap">
@@ -38,6 +38,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
+        $no=$_GET['no'];
+
         $sql = "select * from coursereg order by course_id desc";
         $result = mysqli_query($con, $sql);
 
@@ -56,7 +58,14 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-        $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
+        if($no == 1){
+          $sql2 = "select * from coursereg where course_type = 'general' order by course_id desc limit $start, $list_num;";
+        }else if($no == 2){
+          $sql2 = "select * from coursereg where course_type = 'professional' order by course_id desc limit $start, $list_num;";
+        }else if($no == 3){
+          $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
+        }
+
         $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
 
@@ -74,7 +83,14 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
           ?>
           <tr>
-            <td><?= $row['course_id'] ?></td>
+          <td><?php
+              if($page == 1){
+                echo $i;
+              } else{
+                echo(($page-1)*10) + $i;
+              }
+              $i++;
+            ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_type'] ?></td>
             <td><?= $row['course_category'] ?></td>
@@ -95,10 +111,10 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         /* paging : 이전 페이지 */ 
 
         if($page <= 1){ ?> 
-        <li><a href="tch_l_list.php?page=1">&#x003C;</a></li>
+        <li><a href="tch_l_list.php?no=<?=$no?>&page=1">&#x003C;</a></li>
         <?php } 
         else{ ?> 
-        <li><a href="tch_l_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
+        <li><a href="tch_l_list.php?no=<?=$no?>&page=<?php echo ($page-1); ?>">&#x003C;</a></li>
         <?php };
         ?> 
       
@@ -106,16 +122,16 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
         for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
         <li>
-          <a href="tch_l_list.php?page=<?php echo $print_page; ?>">
+          <a href="tch_l_list.php?no=<?=$no?>&page=<?php echo $print_page; ?>">
             <?php echo $print_page; ?>
           </a> 
         </li>
         <?php };?> 
         <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
 
-        <li><a href="tch_l_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
+        <li><a href="tch_l_list.php?no=<?=$no?>&page=<?php echo $total_page; ?>">&#x003E;</a></li>
         <?php } else{ ?>
-        <li><a href="tch_l_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
+        <li><a href="tch_l_list.php?no=<?=$no?>&page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
         <?php };
         ?>
     </ul>
