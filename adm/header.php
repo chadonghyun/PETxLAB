@@ -78,7 +78,7 @@
         <li>
           <a href="          
           <?php if($userlevel == 3){
-              echo '/PETxLAB/adm/admin/lecture/adm_l_list.php';
+              echo '/PETxLAB/adm/admin/lecture/adm_l_list.php?no=3';
             }else if($userlevel == 2){
               echo '/PETxLAB/adm/teacher/lecture/tch_l_list.php';
             }
@@ -90,7 +90,7 @@
         <li>
           <a href="          
           <?php if($userlevel == 3){
-              echo '/PETxLAB/adm/admin/board/adm_b_list.php';
+              echo '/PETxLAB/adm/admin/board/adm_b_list.php?no=1';
             }else if($userlevel == 2){
               echo '/PETxLAB/adm/teacher/board/tch_b_list.php';
             }

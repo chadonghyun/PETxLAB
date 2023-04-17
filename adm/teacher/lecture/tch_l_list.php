@@ -123,5 +123,47 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
     <button>선택삭제</button>
   </article>
   </main>
+
+  <script>
+    $(function(){
+      let page_num = <?=$page?>;
+      let no = <?=$no?>;
+
+      let tab_menu = document.querySelectorAll('#tab_mnu li');
+
+      //사용자가 선택한 탭메뉴의 n번째에 해당서식이 변경되게 한다.
+        if( no == 3 ){
+          tab_menu[0].classList.add('act01');
+        }else if( no == 2){
+          tab_menu[1].classList.add('act01');
+        }else if( no == 1){
+          tab_menu[2].classList.add('act01');
+        }
+
+
+      // 현재 페이지 번호
+      let currentPage = <?php echo $page; ?>;
+
+      // 페이지 번호를 감싸는 ul 태그
+      let pageNav = document.querySelector('#page_nv');
+
+      // 페이지 번호를 감싸는 li 태그들
+      let pageLinks = pageNav.querySelectorAll('li');
+
+      // 페이지 번호를 감싸는 a 태그들
+      let pageAnchors = pageNav.querySelectorAll('li a');
+
+      // 페이지 번호를 출력하는 for 문
+      for (let i = 0; i < pageLinks.length; i++) {
+        let link = pageLinks[i];
+        let anchor = pageAnchors[i];
+
+        // 현재 페이지인 경우
+        if (parseInt(anchor.innerText) === currentPage) {
+          anchor.style.color = '#333';
+        }
+      }
+    });
+  </script>
 </body>
 </html>
