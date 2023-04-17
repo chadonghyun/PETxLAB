@@ -18,7 +18,7 @@ $result = mysqli_query($con, $sql);
 if($result){
     ?>  <script>
             alert('게시글이 수정되었습니다.');
-            location.replace('./adm_b_view.php?no=<?=$idx?>');
+            location.replace('./tch_b_view.php?no=<?=$idx?>');
         </script>
     <?php
     } else {

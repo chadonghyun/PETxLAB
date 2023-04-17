@@ -1,11 +1,18 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
-$no = $_GET['no'];
-$query = "SELECT * FROM boardnoticereg WHERE number = '$no'"; 
+$idx = $_GET['idx'];
+$query = "SELECT * FROM boardnoticereg WHERE number = '$idx'"; 
 
-$result = mysqli_query($conn, $query);
+$result = mysqli_query($con, $query);
 $rows = mysqli_fetch_assoc($result);
+
+
+$user_query = "SELECT userregistration.user_email FROM userregistration JOIN boardnoticereg ON userregistration.user_id = boardnoticereg.user_id WHERE boardnoticereg.number = '$idx'";
+
+$result2 = mysqli_query($con, $user_query);
+$rows2 = mysqli_fetch_assoc($result2);
+
 
 
 ?>
@@ -25,10 +32,10 @@ $rows = mysqli_fetch_assoc($result);
                         <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/images/logo.png" alt="프로필 사진">
                     </div>
                     <h4 class="title">작성자</h4>
-                    <p><?=$rows['user_name']?></p>
+                    <input type="text" name="user_name" value="<?=$rows['user_name']?>" readonly>
                     <h4 class="title">아이디</h4>
-                    <p><?=$rows['user_id']?></p>
-                    <a href="#" class="btn btn-100p btn-line" title="메일발송">
+                    <input type="text" name="user_id" value="<?=$rows['user_id']?>" readonly>
+                    <a href="mailto:<?=$rows2['user_email']?>" class="btn btn-100p btn-line" title="메일발송">
                         <i class="bi bi-envelope"></i>
                         메일발송
                     </a>
@@ -39,7 +46,7 @@ $rows = mysqli_fetch_assoc($result);
             </div>
             <div class="contents">
                 <div class="contents__card card">
-                  <input type="hidden" name="no" value="<?=$no?>">
+                  <input type="hidden" name="idx" value="<?=$idx?>">
                   <h4 class="title">게시판 카테고리</h4>
                   <select name="" id="">
                     <option value="1">게시판1</option>
@@ -54,9 +61,9 @@ $rows = mysqli_fetch_assoc($result);
                     <textarea name="board_contents" id="board_contents" rows="9"><?=$rows['Board_content']?></textarea>
                   </div>
                   <div class="board-btn d-flex justify-content-end">
-                    <a href="#" class="btn btn-fill btn-w-128">목록보기</a>
+                    <a href="./adm_b_list.php" class="btn btn-fill btn-w-128">목록보기</a>
                     <button type="submit" class="btn btn-fill btn-w-128">게시글 수정</button>
-                    <button type="reset" class="btn btn-line btn-w-128">게시글 삭제</button>
+                    <button type="reset" class="btn btn-line btn-w-128" formaction="delete.php">게시글 삭제</button>
                   </div>
                 </div>
             </div>
