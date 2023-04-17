@@ -66,7 +66,7 @@
         <li>
         <a href="
           <?php if($userlevel == 3){
-            echo '/PETxLAB/adm/admin/member/adm_m_list.php';
+            echo '/PETxLAB/adm/admin/member/adm_m_list.php?no=3';
           }else if($userlevel == 2){
             echo '/PETxLAB/adm/teacher/member/tch_m_list.php';
           }

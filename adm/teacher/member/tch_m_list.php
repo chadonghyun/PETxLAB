@@ -68,18 +68,27 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         $query = "SELECT coursereg.course_title
           FROM coursereg
           JOIN userregistration ON coursereg.user_id = userregistration.user_id
-          WHERE userregistration.user_level = 1";
-        $result3 = mysqli_query($con, $query);
+          WHERE userregistration.user_level = 2";
+        $result2 = mysqli_query($con, $query);
+
+        $i = 1;
       ?>
       
 
       <tbody>
         <?php while ($row = mysqli_fetch_array($result)){
-          $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
+          $row2 = mysqli_fetch_assoc($result2); // while문 안에서 한번씩만 실행되도록 변경
           ?>
           
         <tr>
-          <td><?=$row['number']?></td>
+        <td><?php
+              if($page == 1){
+                echo $i;
+              } else{
+                echo(($page-1)*10) + $i;
+              }
+              $i++;
+            ?></td>
           <td><?=$row['number']?></td>
           <td><?= $row2['course_title']; ?></td>
           <td><?=$row['user_name']?></td>
@@ -131,23 +140,30 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
   </main>
 
   <script>
-    let url = window.location.href;
-    url = url.split('=');
-    console.log(url[1]);
-    let page_num = url - 1;
+    $(function(){
+      // 현재 페이지 번호
+      let currentPage = <?php echo $page; ?>;
 
-    let pagination_item = document.querySelectorAll('#page_nv > li');
+      // 페이지 번호를 감싸는 ul 태그
+      let pageNav = document.querySelector('#page_nv');
 
-    console.log(pagination_item[4]);
+      // 페이지 번호를 감싸는 li 태그들
+      let pageLinks = pageNav.querySelectorAll('li');
 
+      // 페이지 번호를 감싸는 a 태그들
+      let pageAnchors = pageNav.querySelectorAll('li a');
 
+      // 페이지 번호를 출력하는 for 문
+      for (let i = 0; i < pageLinks.length; i++) {
+        let link = pageLinks[i];
+        let anchor = pageAnchors[i];
 
-    if(page_num == 0){
-      pagination_item[4].addClass('active');
-    }else{
-      pagination_item[page_num].addClass('active');
-    }
-
+        // 현재 페이지인 경우
+        if (parseInt(anchor.innerText) === currentPage) {
+          anchor.style.color = '#333';
+        }
+      }
+    });
   </script>
 </body>
 </html>

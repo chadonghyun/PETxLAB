@@ -2,7 +2,6 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
-
 ?>
 
 <!-- 메인영역 -->
@@ -39,42 +38,43 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-      $no=$_GET['no'];
+        $no=$_GET['no'];
 
-        if($no == 1){
-          $sql = "select * from userregistration where user_level = 1 order by number desc";
-        }else if($no == 2){
-          $sql = "select * from userregistration where user_level = 2 order by number desc";
-        }else if($no == 3){
-          $sql = "select * from userregistration order by number desc";
-        }
-        
-        $result = mysqli_query($con, $sql);
-
-        $num = mysqli_num_rows($result);
-
-        $list_num = 10;
-        $page_num = 5;
-        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $total_page = ceil($num / $list_num);
-        $total_block = ceil($total_page / $page_num);
-        $now_block = ceil($page / $page_num);
-        $s_pageNum = ($now_block - 1) * $page_num + 1;
-        $s_oageNum = ($now_block -1) * $page_num +1;
-        if($s_pageNum <= 0){$s_pageNum = 1;};
-        $e_pageNum = $now_block * $page_num;
-        if($e_pageNum > $total_page){$e_pageNum = $total_page;};
-
-        $start = ($page - 1) * $list_num;
           if($no == 1){
-            $sql2 = "select * from userregistration where user_level = 1 order by number desc limit $start, $list_num;";
+            $sql = "select * from userregistration where user_level = 1 order by number desc";
           }else if($no == 2){
-            $sql2 = "select * from userregistration where user_level = 2 order by number desc limit $start, $list_num;";
+            $sql = "select * from userregistration where user_level = 2 order by number desc";
           }else if($no == 3){
-            $sql2 = "select * from userregistration order by number desc limit $start, $list_num;";
+            $sql = "select * from userregistration order by number desc";
           }
-        $result = mysqli_query($con, $sql2);
-        $cnt = $start + 1;
+          
+          $result = mysqli_query($con, $sql);
+          $num = mysqli_num_rows($result);
+
+          $list_num = 10;
+          $page_num = 5;
+          $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+          $total_page = ceil($num / $list_num);
+          $total_block = ceil($total_page / $page_num);
+          $now_block = ceil($page / $page_num);
+          $s_pageNum = ($now_block - 1) * $page_num + 1;
+          $s_oageNum = ($now_block -1) * $page_num +1;
+          if($s_pageNum <= 0){$s_pageNum = 1;};
+          $e_pageNum = $now_block * $page_num;
+          if($e_pageNum > $total_page){$e_pageNum = $total_page;};
+
+          $start = ($page - 1) * $list_num;
+            if($no == 1){
+              $sql2 = "select * from userregistration where user_level = 1 order by number desc limit $start, $list_num;";
+            }else if($no == 2){
+              $sql2 = "select * from userregistration where user_level = 2 order by number desc limit $start, $list_num;";
+            }else if($no == 3){
+              $sql2 = "select * from userregistration order by number desc limit $start, $list_num;";
+            }
+          $result = mysqli_query($con, $sql2);
+          $cnt = $start + 1;
+
+          $i = 1;
       ?>
       
 
@@ -82,7 +82,14 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         <?php while ($row = mysqli_fetch_array($result)){?>
           
         <tr>
-          <td><?=$row['number']?></td>
+          <td><?php
+            if($page == 1){
+              echo $i;
+            } else{
+              echo(($page-1)*10) + $i;
+            }
+            $i++;
+          ?></td>
           <td><?=$row['number']?></td>
           <td><?php
             if ($row['user_level'] == 1) {
@@ -111,10 +118,10 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         /* paging : 이전 페이지 */ 
 
         if($page <= 1){ ?> 
-        <li><a href="adm_m_list.php?page=1">&#x003C;</a></li>
+        <li><a href="adm_m_list.php?no=<?=$no?>&page=1">&#x003C;</a></li>
         <?php } 
         else{ ?> 
-        <li><a href="adm_m_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
+        <li><a href="adm_m_list.php?no=<?=$no?>&page=<?php echo ($page-1); ?>">&#x003C;</a></li>
         <?php };
         ?> 
       
@@ -122,16 +129,16 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
         for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
         <li>
-          <a href="adm_m_list.php?page=<?php echo $print_page; ?>">
+          <a href="adm_m_list.php?no=<?=$no?>&page=<?php echo $print_page; ?>">
             <?php echo $print_page; ?>
           </a> 
         </li>
         <?php };?> 
         <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
 
-        <li><a href="adm_m_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
+        <li><a href="adm_m_list.php?no=<?=$no?>&page=<?php echo $total_page; ?>">&#x003E;</a></li>
         <?php } else{ ?>
-        <li><a href="adm_m_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
+        <li><a href="adm_m_list.php?no=<?=$no?>&page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
         <?php };
         ?>
     </ul>
@@ -142,23 +149,56 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
   </main>
 
   <script>
-    let url = window.location.href;
-    url = url.split('=');
-    console.log(url[1]);
-    let page_num = url - 1;
+    $(function(){
+      let page_num = <?=$page?>;
+      let no = <?=$no?>;
 
-    let pagination_item = document.querySelectorAll('#page_nv > li');
+      let tab_menu = document.querySelectorAll('#tab_mnu li');
 
-    console.log(pagination_item[4]);
+      //사용자가 선택한 탭메뉴의 n번째에 해당서식이 변경되게 한다.
+        if( no == 3 ){
+          tab_menu[0].classList.add('act01');
+        }else if( no == 2){
+          tab_menu[1].classList.add('act01');
+        }else if( no == 1){
+          tab_menu[2].classList.add('act01');
+        }
 
 
+      // 현재 페이지 번호
+      let currentPage = <?php echo $page; ?>;
 
-    if(page_num == 0){
-      pagination_item[4].addClass('active');
-    }else{
-      pagination_item[page_num].addClass('active');
-    }
+      // 페이지 번호를 감싸는 ul 태그
+      let pageNav = document.querySelector('#page_nv');
 
+      // 페이지 번호를 감싸는 li 태그들
+      let pageLinks = pageNav.querySelectorAll('li');
+
+      // 페이지 번호를 감싸는 a 태그들
+      let pageAnchors = pageNav.querySelectorAll('li a');
+
+      // 페이지 번호를 출력하는 for 문
+      for (let i = 0; i < pageLinks.length; i++) {
+        let link = pageLinks[i];
+        let anchor = pageAnchors[i];
+
+        // 현재 페이지인 경우
+        if (parseInt(anchor.innerText) === currentPage) {
+          anchor.style.color = '#333';
+        }
+      }
+
+
+      // function autoIncrement(startnum){
+      // let init = startnum;
+
+      // let td_list = document.getElementsByClassName("autoInc");
+      //   for(let i = 0; i < td_list.length; i++){
+      //     init++;
+      //     td_list[i].innerHTML = "&nbsp" + init;
+      //   }};
+      //   autoIncrement(0);
+    });
   </script>
 </body>
 </html>

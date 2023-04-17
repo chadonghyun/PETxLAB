@@ -125,13 +125,16 @@ select::-ms-expand{
   width: 200px;
   margin: 0px auto;
 }
-#page_nv > li{
+#page_nv > li > a{
   cursor: pointer;
   font-weight: 500;
   color: #aaa;
 }
-#page_nv > li:first-child, #page_nv > li:nth-child(2), #page_nv > li:last-child{
+#page_nv > li:first-child > a,  #page_nv > li:last-child > a{
   color:#333;
+}
+#page_nv li:visited a {
+  color: #333;
 }
 button{
   position: absolute;
@@ -152,6 +155,16 @@ button:last-of-type{
   right: 30px;
   border: 1px solid #8599B9;
   color: #8599B9;
+}
+/* 검색창 x번튼 없애기 */
+input::-ms-clear,
+input::-ms-reveal {display: none; width : 0; height: 0;}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration { display: none; }
+input[type="checkbox"]{
+  display: none;
 }
 input[type="checkbox"]{
   display: none;

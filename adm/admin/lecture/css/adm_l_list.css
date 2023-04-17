@@ -21,15 +21,18 @@ main{
   display: flex;
   justify-content:space-between;
 }
-#tab_mnu > li{
+#tab_mnu > li > a{
   font-size: var(--f-size24);
   font-family: var(--fm-title);
   color: rgba(102, 102, 102, 0.5);
 }
 #tab_mnu > li:first-child{
   color: var(--f-colorbr);
-  border-bottom: 2px solid var(--f-colorbr);
-  padding-bottom: 3px;
+}
+.act01 > a{
+  color: var(--f-colorbr) !important;
+  border-bottom: 2px solid var(--f-colorbr) !important;
+  padding-bottom: 3px !important;
 }
 select{
   -webkit-appearance:none; /*for chrome*/
@@ -126,8 +129,11 @@ select::-ms-expand{
   font-weight: 500;
   color: #aaa;
 }
-#page_nv > li:first-child, #page_nv > li:nth-child(2), #page_nv > li:last-child{
+#page_nv > li:first-child, #page_nv > li:last-child{
   color:#333;
+}
+#page_nv li:visited a {
+  color: #333;
 }
 button{
   position: absolute;
@@ -153,6 +159,17 @@ button:last-of-type{
   right: 30px;
   border: 1px solid #FF4E4E;
   color: #FF4E4E;
+}
+
+/* 검색창 x번튼 없애기 */
+input::-ms-clear,
+input::-ms-reveal {display: none; width : 0; height: 0;}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration { display: none; }
+input[type="checkbox"]{
+  display: none;
 }
 input[type="checkbox"]{
   display: none;

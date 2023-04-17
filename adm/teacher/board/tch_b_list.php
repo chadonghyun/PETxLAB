@@ -12,7 +12,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
   <article id="main_h">
     <ul id="tab_mnu">
-      <li>QnA 게시판</li>
+      <li><a href="tch_b_list.php">QnA 게시판</a></li>
     </ul>
     <select id="lecture_box">
         <option value="제목 + 내용">강의선택</option>
@@ -42,6 +42,15 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
+        $no=$_GET['no'];
+
+        if($no == 1){
+          $sql = "select * from boardnoticereg order by number desc";
+        }
+
+        $result = mysqli_query($con, $sql);
+        $num = mysqli_num_rows($result);
+
         $sql = "select * from boardnoticereg order by number desc";
         $result = mysqli_query($con, $sql);
 
@@ -69,6 +78,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           JOIN boardnoticereg ON userregistration.user_id = boardnoticereg.user_id
           WHERE userregistration.user_level = 2";
         $result3 = mysqli_query($con, $query);
+
+        $i = 1;
       ?>
 
       <tbody>
@@ -76,10 +87,17 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
         ?>
         <tr>
-          <td><?= $row['number'] ?></td>
+          <td><?php
+                if($page == 1){
+                  echo $i;
+                } else{
+                  echo(($page-1)*10) + $i;
+                }
+                $i++;
+              ?></td>
           <td><?= $row['Board_title'] ?></td>
           <td><?= $row['Board_content'] ?></td>
-          <td><?= $row2['user_name']; ?></td>
+          <td><?= $row['user_name']; ?></td>
           <td><?= $row['Board_date'] ? date('Y-m-d', strtotime($row['Board_date'])) : ''?></td>
           <td><?= $row['user_views'] ?></td>
           <td><input type="checkbox" id="<?= $row['number'] ?>"><label for="<?= $row['number'] ?>"></label></td>
@@ -90,8 +108,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
     <ul id="page_nv">
       <?php 
+      
         /* paging : 이전 페이지 */ 
-
         if($page <= 1){ ?> 
         <li><a href="adm_m_list.php?page=1">&#x003C;</a></li>
         <?php } 
@@ -123,5 +141,47 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
     <button>선택삭제</button>
   </article>
   </main>
+
+  <script>
+    $(function(){
+      let page_num = <?=$page?>;
+      let no = <?=$no?>;
+
+      let tab_menu = document.querySelectorAll('#tab_mnu li');
+
+      //사용자가 선택한 탭메뉴의 n번째에 해당서식이 변경되게 한다.
+        if( no == 3 ){
+          tab_menu[0].classList.add('act01');
+        }else if( no == 2){
+          tab_menu[1].classList.add('act01');
+        }else if( no == 1){
+          tab_menu[2].classList.add('act01');
+        }
+
+
+      // 현재 페이지 번호
+      let currentPage = <?php echo $page; ?>;
+
+      // 페이지 번호를 감싸는 ul 태그
+      let pageNav = document.querySelector('#page_nv');
+
+      // 페이지 번호를 감싸는 li 태그들
+      let pageLinks = pageNav.querySelectorAll('li');
+
+      // 페이지 번호를 감싸는 a 태그들
+      let pageAnchors = pageNav.querySelectorAll('li a');
+
+      // 페이지 번호를 출력하는 for 문
+      for (let i = 0; i < pageLinks.length; i++) {
+        let link = pageLinks[i];
+        let anchor = pageAnchors[i];
+
+        // 현재 페이지인 경우
+        if (parseInt(anchor.innerText) === currentPage) {
+          anchor.style.color = '#333';
+        }
+      }
+    });
+  </script>
 </body>
 </html>
