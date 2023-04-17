@@ -46,8 +46,8 @@ header #header-left .header-menu li{
 box-sizing: border-box;
 display:block;
 }
-header #header-left .header-menu li:first-child a{
-  background-color:#9DADC7 ;
+header #header-left .header-menu li.on a{
+  background-color: #9DADC7;
 }
 header #header-left .header-menu li a{
   padding:15px 0px 15px 40px;
