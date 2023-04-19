@@ -27,24 +27,19 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       <i class="bi bi-search"></i>
     </div>
   </article>
-
   <article id="main_b">
     <table id="c_list">
       <thead>
-        <tr>
-          <th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></label></th>
-        </tr>
-      </thead>
 
       <?php
-        $no=$_GET['no'];
-
-        if($no == 1){
-          $sql = "select * from boardnoticereg order by number desc";
-        }else if($no == 2){
-          $sql = "select * from boardqnareg order by number desc";
-        }
-
+          $no=$_GET['no'];
+          if($no == 1){
+            echo "<tr><th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th><th><input type='checkbox' id='check1' onclick='selectAll(this)'><label for='check1'></label></th></tr>  </thead>";
+            $sql = "select * from boardnoticereg order by number desc";
+          }else if($no == 2){
+            echo "<tr><th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>답변여부</th><th><input type='checkbox' id='check1' onclick='selectAll(this)'><label for='check1'></label></th></tr>       </thead>";
+            $sql = "select * from boardqnareg order by number desc";
+          }
         $result = mysqli_query($con, $sql);
         $num = mysqli_num_rows($result);
 
@@ -54,47 +49,51 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         $total_page = ceil($num / $list_num);
         $total_block = ceil($total_page / $page_num);
         $now_block = ceil($page / $page_num);
-        $s_pageNum = ($now_block - 1) * $page_num + 1;
-        $s_oageNum = ($now_block -1) * $page_num +1;
+        $s_pageNum = ($now_block -1) * $page_num +1;
         if($s_pageNum <= 0){$s_pageNum = 1;};
         $e_pageNum = $now_block * $page_num;
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-        $sql3 = "select * from boardnoticereg order by number desc limit $start, $list_num;";
-        $result3 = mysqli_query($con, $sql3);
         $cnt = $start + 1;
-
-        $query = "SELECT userregistration.user_name
-          FROM userregistration
-          JOIN boardnoticereg ON userregistration.user_id = boardnoticereg.user_id
-          WHERE userregistration.user_level = 2";
-        $result3 = mysqli_query($con, $query);
-
         $i = 1;
+        if($no == 1){
+          $query = "SELECT * FROM boardnoticereg ORDER BY number DESC LIMIT $start, $list_num";
+          $result3 = mysqli_query($con, $query);
+          while($row = mysqli_fetch_array($result3)) {
+            echo "<tbody>";
+            echo "<tr>";
+            echo "<td>".$row['number']."</td>";
+            echo "<td> 공지사항 </td>";
+            echo "<td><a href='adm_b_view.php?idx=".$row['number']."'>".$row['Board_title']."</a></td>";
+            echo "<td>".$row['user_name']."</td>";
+            echo "<td>".substr($row['Board_date'],0,10)."</td>";
+            echo "<td>".$row['user_views']."</td>";
+            echo "<td><input type='checkbox' id='".$row['number']."'><label for=". $row['number']."></label></td>";
+            echo "</tr>";
+          }
+        }else if($no == 2){
+          $sql4 = "SELECT course_id FROM coursereg";
+          $sql = "SELECT qna_title, Board_date, qna_category, number, qna_response, user_id FROM boardqnareg WHERE course_id IN ($sql4) ORDER BY number DESC LIMIT $start, $list_num";                  
+          $result3 = mysqli_query($con, $sql);
+            while ($row2 = mysqli_fetch_assoc($result3)) {
+              echo "<tr><td>" . sprintf("%03d", $row2['number']) . "</td>";
+              echo "<td>" . $row2['qna_category'] . "</td>";
+              echo "<td>" . $row2['qna_title'] . "</td>";
+              echo "<td>" . $row2['user_id'] . "</td>";
+              echo "<td>" . substr($row2['Board_date'], 0, 10) . "</td>";
+              if($row2['qna_response'] == '0') {
+                echo "<td>미답변</td>";
+              } else {
+                echo "<td>답변완료</td>";
+              }
+              echo "<td><input type='checkbox' id='".$row2['number']."'><label for=". $row2['number']."></label></td>";
+              echo "</tr>";
+            }
+        }
       ?>
 
-      <tbody>
-      <?php while ($row = mysqli_fetch_array($result)){
-        $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
-        ?>
-        <tr>
-          <td><?php
-              if($page == 1){
-                echo $i;
-              } else{
-                echo(($page-1)*10) + $i;
-              }
-              $i++;
-            ?></td>
-          <td><a href="adm_b_view.php?idx=<?= $row['number'] ?>"><?= $row['Board_title'] ?></a></td>
-          <td><?= $row['Board_content'] ?></td>
-          <td><?= $row['user_name']; ?></td>
-          <td><?= $row['Board_date'] ? date('Y-m-d', strtotime($row['Board_date'])) : ''?></td>
-          <td><?= $row['user_views'] ?></td>
-          <td><input type="checkbox" id="<?= $row['number'] ?>"><label for="<?= $row['number'] ?>"></label></td>
-        </tr>
-        <?php } ?>
+
       </tbody>
     </table>
 
@@ -103,32 +102,32 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         /* paging : 이전 페이지 */ 
 
         if($page <= 1){ ?> 
-        <li><a href="adm_m_list.php?page=1">&#x003C;</a></li>
-        <?php } 
-        else{ ?> 
-        <li><a href="adm_m_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
-        <?php };
-        ?> 
+          <li><a href="adm_b_list.php?no=<?=$no?>&page=1">&#x003C;</a></li>
+          <?php } 
+          else{ ?> 
+          <li><a href="adm_b_list.php?no=<?=$no?>&page=<?php echo ($page-1); ?>">&#x003C;</a></li>
+          <?php };
+          ?> 
       
-        <?php /* pager : 페이지 번호 출력 */ 
+      <?php /* pager : 페이지 번호 출력 */ 
 
-        for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
-        <li>
-          <a href="adm_m_list.php?page=<?php echo $print_page; ?>">
-            <?php echo $print_page; ?>
-          </a> 
-        </li>
-        <?php };?> 
-        <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
+      for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
+      <li>
+        <a href="adm_b_list.php?no=<?=$no?>&page=<?php echo $print_page; ?>">
+          <?php echo $print_page; ?>
+        </a> 
+      </li>
+      <?php };?> 
+      <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
 
-        <li><a href="adm_m_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
-        <?php } else{ ?>
-        <li><a href="adm_m_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
-        <?php };
-        ?>
+      <li><a href="adm_b_list.php?no=<?=$no?>&page=<?php echo $total_page; ?>">&#x003E;</a></li>
+      <?php } else{ ?>
+      <li><a href="adm_b_list.php?no=<?=$no?>&page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
+      <?php };
+      ?>
     </ul>
 
-    <button><a href="adm_b_write.php">게시글작성</a></button>
+    <button onclick="location.href='adm_b_write.php'";>게시글작성</button>
     <button>전체삭제</button>
     <button>선택삭제</button>
   </article>

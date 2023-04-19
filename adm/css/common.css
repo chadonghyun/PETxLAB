@@ -47,7 +47,7 @@ box-sizing: border-box;
 display:block;
 }
 header #header-left .header-menu li.on a{
-  background-color: #9DADC7;
+  background-color: rgba(255,255,255,0.2);
 }
 header #header-left .header-menu li a{
   padding:15px 0px 15px 40px;
@@ -77,7 +77,7 @@ header #header-left .header-footer ul li{
 }
 
 header #header-left .header-footer > a{
-  background-color:#9DADC7;
+  background-color: rgba(255,255,255,0.2);
   display:flex;
   padding:15px 0px 15px 30px;
   box-sizing: border-box;
@@ -121,7 +121,7 @@ header #header-right{
   width:calc(100% - 260px);
   min-width: 992px;
   height:150px;
-  position:fixed;
+  position:absolute;
   left:260px;
   background-color: var(--bg-colorwh);
   z-index: 10;

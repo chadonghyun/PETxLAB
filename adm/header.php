@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Header,Footer</title>
+  <title>PETxLAB</title>
     <!-- 부트스트랩 css연결 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!-- 부트스트랩 아이콘 연결 -->
@@ -68,7 +68,7 @@
           <?php if($userlevel == 3){
             echo '/PETxLAB/adm/admin/member/adm_m_list.php?no=3';
           }else if($userlevel == 2){
-            echo '/PETxLAB/adm/teacher/member/tch_m_list.php';
+            echo '/PETxLAB/adm/teacher/member/tch_m_list.php?no=3';
           }
           ?>" title="회원관리" class="aaaa">
             <i class="bi bi-person-circle"></i>
@@ -80,7 +80,7 @@
           <?php if($userlevel == 3){
               echo '/PETxLAB/adm/admin/lecture/adm_l_list.php?no=3';
             }else if($userlevel == 2){
-              echo '/PETxLAB/adm/teacher/lecture/tch_l_list.php';
+              echo '/PETxLAB/adm/teacher/lecture/tch_l_list.php?no=3';
             }
           ?>" title="강의관리" class="aaaa">
           <i class="bi bi-person-video3"></i>
@@ -92,7 +92,7 @@
           <?php if($userlevel == 3){
               echo '/PETxLAB/adm/admin/board/adm_b_list.php?no=1';
             }else if($userlevel == 2){
-              echo '/PETxLAB/adm/teacher/board/tch_b_list.php';
+              echo '/PETxLAB/adm/teacher/board/tch_b_list.php?no=1';
             }
           ?>" title="게시판관리" class="aaaa">
             <i class="bi bi-clipboard2"></i>

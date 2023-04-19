@@ -17,7 +17,7 @@ mysqli_query($con, $view_sql);
 
 <!-- 메인영역 -->
 <main>
-  <form method="post" action="adm_b_update.php?no=<?=$idx?>">
+  <form method="post" action="tch_b_update.php?idx=<?=$idx?>">
     <section class="board-view">
         <div class="wrap d-flex justify-content-between">
             <div class="profile">

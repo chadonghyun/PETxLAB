@@ -26,7 +26,7 @@ include_once '../config.php';
 <body>
   <header>
     <h1>
-      <a href="" title="">
+      <a href="./login.php" title="">
         <img src="./images/Logo.svg" alt="">
       </a>
     </h1>
@@ -55,17 +55,17 @@ include_once '../config.php';
         </div>
         <div class="con birth">
           <label for="birthday">생년월일</label>
-          <input type="number" name="user_birth_year" id="birthyear" placeholder="년(4자)" min="1900" maxlength="4">
-          <input type="number" name="user_birth_month" id="birthmonth" placeholder="월" min="1" maxlength="2">
-          <input type="number" name="user_birth_day" id="birthdate" placeholder="일" min="1" maxlength="2">
+          <input type="number" name="user_birth_year" id="birthyear" placeholder="년(4자)" min="1900" maxlength="4" oninput="maxLengthCheck(this)">
+          <input type="number" name="user_birth_month" id="birthmonth" placeholder="월" min="1" maxlength="2" oninput="maxLengthCheck(this)">
+          <input type="number" name="user_birth_day" id="birthdate" placeholder="일" min="1" maxlength="2" oninput="maxLengthCheck(this)">
         </div>
         <div class="con phone">
           <label for="phone">연락처</label>
-          <input type="text" name="phone_first" id="phone1" placeholder="010" maxlength="3">
+          <input type="text" name="phone_first" id="phone1" placeholder="010" maxlength="3" oninput="maxLengthCheck(this)">
           -
-          <input type="number" name="phone_mid" id="phone2" placeholder="0000" maxlength="4">
+          <input type="number" name="phone_mid" id="phone2" placeholder="0000" maxlength="4" oninput="maxLengthCheck(this)">
           -
-          <input type="number" name="phone_last" id="phone3" placeholder="0000" maxlength="4">
+          <input type="number" name="phone_last" id="phone3" placeholder="0000" maxlength="4" oninput="maxLengthCheck(this)">
         </div>
         <div class="con tell">
           <label for="telephone">전화번호</label>
@@ -90,9 +90,10 @@ include_once '../config.php';
             <option value="제주특별자치도">064</option>
           </select>
           -
-          <input type="number" name="telephone_mid" id="telephone_mid" placeholder="0000" min="0" maxlength="4">
+          <input type="number" name="telephone_mid" id="telephone_mid" placeholder="0000" min="0" maxlength="4" oninput="maxLengthCheck(this)">
           -
-          <input type="number" name="telephone_last" id="telephone_last" placeholder="0000" min="0" maxlength="4">
+          <input type="number" name="telephone_last" id="telephone_last" placeholder="0000" min="0" maxlength="4" oninput="maxLengthCheck(this)">
+
         </div>
         <div class="con email">
           <label for="email">이메일</label>
@@ -224,9 +225,9 @@ include_once '../config.php';
           $('#addr3').focus();
           return false
         }
-        if($('#pw').val()!=$('#pw2').val()){
+        if($('#password').val()!=$('#confirm_password').val()){
           alert('비밀번호가 일치하지 않습니다. \n다시 입력하여주세요.')
-          $('#pass').focus();
+          $('#password').focus();
           return false
         }
 
@@ -247,6 +248,13 @@ include_once '../config.php';
           passwordInput.setCustomValidity('');
         }
       });
+
+      // 생년월일 입력제한
+      function maxLengthCheck(object){
+        if (object.value.length > object.maxLength){
+          object.value = object.value.slice(0, object.maxLength);
+        }    
+      }
 
   </script>
 

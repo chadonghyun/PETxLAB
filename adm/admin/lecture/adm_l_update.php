@@ -3,10 +3,16 @@
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
 $no = $_GET['course_id'];
-$query = "SELECT * FROM CourseReg where course_id ='$no'";
+$query = "SELECT * FROM coursereg where course_id ='$no'";
 
 $result = mysqli_query($con, $query);
 $rows =mysqli_fetch_assoc($result);
+
+
+$user_query = "SELECT userregistration.user_name FROM userregistration JOIN coursereg ON userregistration.user_id = coursereg.user_id WHERE coursereg.course_id='$no'";
+
+$result2 = mysqli_query($con,$user_query);
+$row2 = mysqli_fetch_assoc($result2); 
 ?>
 
 <main>
@@ -28,9 +34,9 @@ $rows =mysqli_fetch_assoc($result);
               <img src= "<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/images/logo.png" alt="mainlogo">
             </div>
             <h4 class="title">작성자</h4>
-            <input type="text" value="<?php echo "$username"?>" name="user_name" class="writer" readonly>
+            <input type="text" value="<?=$row2['user_name']?>" name="user_name" class="writer" readonly>
             <h4 class="title">아이디</h4>
-            <input type="text" value="<?php echo "$userid"?>" name="user_id" class="id" readonly>
+            <input type="text" value="<?=$rows['user_id']?>" name="user_id" class="id" readonly>
 
             <!-- 삭제 버튼 -->
 

@@ -15,7 +15,7 @@ $sql = "SELECT COUNT(*) as count_response
         FROM boardqnareg
         WHERE qna_response = 0
         AND course_id IN (
-            SELECT course_id FROM coursereg WHERE user_id = '{$user_id}'
+            SELECT course_id FROM coursereg WHERE user_id = '{$userid}'
         )
         ";
 
@@ -50,17 +50,6 @@ $total_count = $row[0];
 $sql1 = "SELECT * FROM boardnoticereg ORDER BY Board_date DESC LIMIT 3";
 $result1 = mysqli_query($con, $sql1);
 
-
-//QnA게시판
-$sql = "SELECT course_id FROM coursereg WHERE user_id = '$userid'";
-$result = mysqli_query($con, $sql);
-
-// 코스 아이디를 이용하여 질문 가져오기
-while ($row = mysqli_fetch_assoc($result)) {
-  $course_id = $row['course_id'];
-  $sql = "SELECT qna_title, qna_date, qna_category, number FROM boardqnareg WHERE course_id = $course_id ORDER BY qna_date DESC LIMIT 3";
-  $result2 = mysqli_query($con, $sql); // 결과를 따로 저장
-  
 ?>
 <link rel="stylesheet" href="../css/index.css">
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
@@ -141,7 +130,7 @@ while ($row = mysqli_fetch_assoc($result)) {
       </div>
       <div class="item1 a_board">
         <h3>공지사항</h3>
-        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php?no=1" title="종합 게시판 바로가기">공지사항 바로가기</a>
         <table>
           <tbody>
             <?php
@@ -150,7 +139,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $type = $row['Board_content'];
                 $title = $row['Board_title'];
                 $date = substr($row['Board_date'],0,10);
-                echo "<tr><td>$num</td><td>$type</td><td class='b_title'>$title</td><td>$date</td></tr>";
+                echo "<tr><td>$num</td><td>$type</td><td class='b_title'><a href='board/tch_b_view.php?idx=".$row['number']."'>$title</a></td><td>$date</td></tr>";
               }
             ?>
           </tbody>
@@ -158,18 +147,24 @@ while ($row = mysqli_fetch_assoc($result)) {
       </div>
       <div class="item1 a_board">
         <h3>QnA 게시판</h3>
-        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php" title="종합 게시판 바로가기">QnA 게시판 바로가기</a>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/board/tch_b_list.php?no=1" title="종합 게시판 바로가기">QnA 게시판 바로가기</a>
         <table>
           <tbody>
             <?php
-              while ($row2 = mysqli_fetch_assoc($result2)) {
-                $number = $row2['number'];
-                $qna_title = $row2['qna_title'];
-                $qna_date = $row2['Board_date'];
-                $qna_category = $row2['qna_category'];
-                echo "<tr><td>$qna_title</td><td>$qna_date</td><td>$qna_category</td><td>$number</td></tr>";
+              $sql4 = "SELECT course_id FROM coursereg WHERE user_id = '$userid'";
+              $sql = "SELECT qna_title, Board_date, qna_category, number FROM boardqnareg WHERE course_id IN ($sql4) ORDER BY Board_date DESC LIMIT 3";
+              $result3 = mysqli_query($con, $sql);
+
+              if ($result3) {
+                while ($row2 = mysqli_fetch_assoc($result3)) {
+                  echo "<tr><td>" . sprintf("%03d", $row2['number']) . "</td>";
+                  echo "<td>" . $row2['qna_category'] . "</td>";
+                  echo "<td class='b_title'>" . $row2['qna_title'] . "</td>";
+                  echo "<td>" . substr($row2['Board_date'], 0, 10) . "</td></tr>";
                 }
-                }
+              } else {
+                echo "쿼리 실행 실패";
+              }
             ?>
           </tbody>
         </table>

@@ -59,9 +59,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
         $start = ($page - 1) * $list_num;
         if($no == 1){
-          $sql2 = "select * from coursereg where course_type = 'general' order by course_id desc limit $start, $list_num;";
+          $sql2 = "select * from coursereg where course_type = '일반취미과정' order by course_id desc limit $start, $list_num;";
         }else if($no == 2){
-          $sql2 = "select * from coursereg where course_type = 'professional' order by course_id desc limit $start, $list_num;";
+          $sql2 = "select * from coursereg where course_type = '전문교육과정' order by course_id desc limit $start, $list_num;";
         }else if($no == 3){
           $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
         }
@@ -71,8 +71,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
         $query = "SELECT userregistration.user_name
           FROM userregistration
-          JOIN coursereg ON userregistration.user_id = coursereg.user_id
-          WHERE userregistration.user_level = 2";
+          JOIN coursereg ON userregistration.user_id = coursereg.user_id";
         $result3 = mysqli_query($con, $query);
 
         $i = 1;
@@ -91,16 +90,55 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
               }
               $i++;
             ?></td>
-            <td><?= $row['course_id'] ?></td>
-            <td><?= $row['course_type'] ?></td>
-            <td><?= $row['course_category'] ?></td>
-            <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
-            <td><?= $row2['user_name']; ?></td>
-            <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
-            <td><?= $row['course_id'] ?></td>
-            <td><?= $row['course_id'] ?></td>
-            <td><?= $row['course_id'] ?></td>
-            <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+            <?php if($no == 1){?>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_type'] ?></td>
+              <td><?= $row['course_category'] ?></td>
+              <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
+              <?php
+                $user_query = "SELECT userregistration.user_name FROM userregistration WHERE userregistration.user_id = '{$row['user_id']}'";
+                $user_result = mysqli_query($con, $user_query);
+                $user_row = mysqli_fetch_assoc($user_result);
+                ?>
+                <td><?= $user_row['user_name']; ?></td>
+              <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+            <?php }else if($no == 2){?>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_type'] ?></td>
+              <td><?= $row['course_category']='전문교육과정' ?></td>
+              <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
+              <?php
+                $user_query = "SELECT userregistration.user_name FROM userregistration WHERE userregistration.user_id = '{$row['user_id']}'";
+                $user_result = mysqli_query($con, $user_query);
+                $user_row = mysqli_fetch_assoc($user_result);
+                ?>
+                <td><?= $user_row['user_name']; ?></td>
+              <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+          <?php }else if($no == 3){?>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_type']='일반취미과정' ?></td>
+              <td><?= $row['course_category'] ?></td>
+              <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
+              <?php
+                $user_query = "SELECT userregistration.user_name FROM userregistration WHERE userregistration.user_id = '{$row['user_id']}'";
+                $user_result = mysqli_query($con, $user_query);
+                $user_row = mysqli_fetch_assoc($user_result);
+                ?>
+                <td><?= $user_row['user_name']; ?></td>
+              <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><?= $row['course_id'] ?></td>
+              <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+          <?php } ?>
           </tr>
         <?php } ?>
       </tbody>

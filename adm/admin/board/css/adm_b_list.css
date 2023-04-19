@@ -26,6 +26,14 @@ main{
   font-family: var(--fm-title);
   color: rgba(102, 102, 102, 0.5);
 }
+#tab_mnu > li:first-child{
+  color: var(--f-colorbr);
+}
+.act01 > a{
+  color: var(--f-colorbr) !important;
+  border-bottom: 2px solid var(--f-colorbr) !important;
+  padding-bottom: 3px !important;
+}
 select{
   -webkit-appearance:none; /*for chrome*/
   -moz-appearance:none; /*for firefox*/
@@ -115,13 +123,16 @@ select::-ms-expand{
   width: 200px;
   margin: 0px auto;
 }
-#page_nv > li{
+#page_nv > li > a{
   cursor: pointer;
   font-weight: 500;
   color: #aaa;
 }
-#page_nv > li:first-child, #page_nv > li:nth-child(2), #page_nv > li:last-child{
+#page_nv > li:first-child > a, #page_nv > li:last-child > a{
   color:#333;
+}
+#page_nv > li:visited > a {
+  color: #333;
 }
 button{
   position: absolute;
@@ -136,6 +147,7 @@ button{
 button:first-of-type{
   right: 310px;
   background: #8599B9;
+  color: #fff;
 }
 button:first-of-type > a{
   color: #fff;

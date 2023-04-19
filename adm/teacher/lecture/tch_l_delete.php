@@ -2,11 +2,11 @@
 include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/db/db_con.php";
 
 $no = $_POST['course_id'];
-$sql = "SELECT * FROM CourseReg WHERE course_id = '$no'";
+$sql = "SELECT * FROM coursereg WHERE course_id = '$no'";
 $result = mysqli_query($con, $sql);
 $rows = mysqli_fetch_assoc($result);
 
-$sql_d = "DELETE FROM CourseReg WHERE  course_id = '$no'";
+$sql_d = "DELETE FROM coursereg WHERE  course_id = '$no'";
 $result_d = mysqli_query($con, $sql_d);
 
 echo (mysqli_error($con));
@@ -15,7 +15,7 @@ if($result_d){
     ?>  
     <script>
         alert('게시글이 삭제되었습니다.');
-        location.replace('./tch_l_list.php');
+        location.replace('./tch_l_list.php?no=3');
     </script>
     <?php
     } else {

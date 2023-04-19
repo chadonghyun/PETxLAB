@@ -159,7 +159,19 @@ $rows = mysqli_fetch_assoc($result);
                 <div class="contents__card card d-flex">
                   <h4 class="title">비고사항</h4>
                   <div class="data_wrap">
-                    <textarea name="board_contents" id="board_contents"></textarea>
+                    <textarea name="board_contents" id="board_contents">
+                      <?php 
+                          if($no==6) echo"
+                          나를 찾았군 후후후 
+                          나는야 이 회사의 CEO MR.차.동.현. 
+                          
+                          이 웹사이트의 에스터에그 4개를 찾았는가?
+                          그러면 자네는 우리 회사에 입사할 기회를 가졌어. 
+                          나에게 DM으로 연락해 
+                          DM은 우리 사원들에게 문의하도록. 
+                          ";
+                      ?>
+                    </textarea>
                   </div>
                   <button type="submit" class="btn btn-fill btn-w-128 ms-auto mt-0">게시글 등록</button>
                 </div>

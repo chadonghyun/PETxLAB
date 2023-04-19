@@ -17,7 +17,7 @@ if($result){
     ?>  
     <script>
             alert('게시글이 등록되었습니다.');
-            location.replace('./adm_b_list.php');
+            location.replace('./adm_b_list.php?no=1');
         </script>
     <?php
     } else {

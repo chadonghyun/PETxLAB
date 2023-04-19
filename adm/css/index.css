@@ -19,7 +19,7 @@ main{
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 580px);
-  grid-template-rows: repeat(4, 175px);
+  grid-template-rows: repeat(4, 150px);
   gap: 20px;
 }
 .a_container2_1{
@@ -119,21 +119,38 @@ main{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-content: space-between;
+  align-content: space-around;
   gap: 10px;
+  font-size: var(--f-size14);
 }
 .a_board > h3{
   color: #666;
 }
 .a_board > table{
-  width: 100%; height: calc(100% - 40px);
+  width: 100%;
   text-align: center;
-  border-top: 3px solid var(--f-colorlb);
+  border-top: 2px solid var(--f-colorlb);
+}
+.a_board > table > tbody{
+  width: 100%;
 }
 .a_board > table > tbody > tr > td{
-  vertical-align: middle;
-  border-bottom: 1px solid #ccc;
   padding: 10px 0px;
+  font-size: 14px;
+}
+.a_board > table > tbody > tr{
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #ccc;
+}
+.b_title{
+  width: 20% !important;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 20px;
+  white-space: nowrap;
+  padding-right: 20px;
 }
 .a_board > table >tbody  > tr > td:last-child{
   text-align: center;

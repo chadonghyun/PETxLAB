@@ -3,10 +3,15 @@
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
 $no = $_GET['course_id'];
-$query = "SELECT * FROM CourseReg where course_id ='$no'";
+$query = "SELECT * FROM coursereg where course_id ='$no'";
 
 $result = mysqli_query($con, $query);
 $rows =mysqli_fetch_assoc($result);
+
+$user_query = "SELECT userregistration.user_name FROM userregistration JOIN coursereg ON userregistration.user_id = coursereg.user_id WHERE coursereg.course_id='$no'";
+
+$result2 = mysqli_query($con,$user_query);
+$row2 = mysqli_fetch_assoc($result2); 
 
 
 ?>
@@ -27,9 +32,9 @@ $rows =mysqli_fetch_assoc($result);
               <img src= "<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/images/logo.png" alt="mainlogo">
             </div>
             <h4 class="title">작성자</h4>
-            <input type="text" value="<?php echo "$username"?>" name="user_name" class="writer" readonly>
+            <input type="text" value="<?=$row2['user_name']?>" name="user_name" class="writer" readonly>
             <h4 class="title">아이디</h4>
-            <input type="text" value="<?php echo "$userid"?>" name="user_id" class="id" readonly>
+            <input type="text" value="<?=$rows['user_id']?>" name="user_id" class="id" readonly>
 
             <!-- 삭제 버튼 -->
 
@@ -52,7 +57,7 @@ $rows =mysqli_fetch_assoc($result);
                 </div>
                 <div>
                 <label for="course_category">카테고리</label>
-                      <input type="text" name="course_caregory" id="course_caregory" class="form-control" 
+                      <input type="text" name="course_category" id="course_category" class="form-control" 
                       value="<?=$rows['course_category']?>" readonly>                  
                 </div>
                 <div class="titlebox">
@@ -86,7 +91,7 @@ $rows =mysqli_fetch_assoc($result);
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" id="course-image" name="course-image">
                     <div class="imagebox">
-                      <img src="./uploads/<?=$rows['course_image']?>" alt="upload_image">
+                      <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/lecture/uploads/<?=$rows['course_image']?>" alt="upload_image">
                     </div>
                   </div>                 
                 </div>

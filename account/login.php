@@ -26,6 +26,8 @@ include_once '../config.php';
   <!-- common.css(헤더&푸터) -->
   <link rel="stylesheet" href="../adm/css/common.css" type="text/css">
   <link rel="stylesheet" href="./css/login.css" type="text/css">
+  <script src="./script/login.js" defer></script>
+
 </head>
 <body>
   <main>
@@ -38,17 +40,17 @@ include_once '../config.php';
             </a>
           </h2>
           <form action="login_db.php" method="post" name="로그인">
-            <input type="text" placeholder="아이디" name="user_id">
-            <input type="password" placeholder="비밀번호" name="user_pass">
+            <input type="text" placeholder="아이디" name="user_id" class="login">
+            <input type="password" placeholder="비밀번호" name="user_pass" class="password">
             <div class="find">
               <div>
                 <input type="checkbox" class="checkbox" name="save_id">
                 <label for="id">아이디 저장</label>
               </div>
               <div>
-                <a href="#none" title="아이디찾기">아이디 찾기</a>
+                <a href="#none" title="아이디찾기" id="find_id">아이디 찾기</a>
                 <span>|</span>
-                <a href="#none" title="아이디찾기">비밀번호 찾기</a>
+                <a href="#none" title="아이디찾기" id="find_pass">비밀번호 찾기</a>
               </div>
             </div>
             <button type="submit" id="login">로그인</button>
@@ -57,7 +59,7 @@ include_once '../config.php';
         </div>
       </div>
       <div class="log_img">
-        <img src="./images/loginbg.jpg" alt="">
+        <img src="./images/loginbg.jpg" alt="로그인">
       </div>
     </div>
   </main>

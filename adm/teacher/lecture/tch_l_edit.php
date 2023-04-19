@@ -25,7 +25,7 @@ $course_longdesc = $_POST["course_longdesc"];
 $user_id = $_POST["user_id"];
 
 
-$sql = "UPDATE CourseReg SET course_type='$course_type', course_category='$course_category', course_title='$course_title', course_startday='$course_startday', course_endday='$course_endday',course_duration='$course_duration',course_price='$course_price', course_image='$course_image', course_shortdesc='$course_shortdesc',course_longdesc='$course_longdesc', user_id='$user_id' WHERE course_id = '$no'";
+$sql = "UPDATE coursereg SET course_type='$course_type', course_category='$course_category', course_title='$course_title', course_startday='$course_startday', course_endday='$course_endday',course_duration='$course_duration',course_price='$course_price', course_image='$course_image', course_shortdesc='$course_shortdesc',course_longdesc='$course_longdesc', user_id='$user_id' WHERE course_id = '$no'";
 
 
 $result = mysqli_query($con, $sql);

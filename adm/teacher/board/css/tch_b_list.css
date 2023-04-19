@@ -24,9 +24,9 @@ main{
 #tab_mnu > li > a{
   font-size: var(--f-size24);
   font-family: var(--fm-title);
-  color: var(--f-colorbr) !important;
-  border-bottom: 2px solid var(--f-colorbr) !important;
-  padding-bottom: 3px !important;
+  color: var(--f-colorbr);
+  border-bottom: 2px solid var(--f-colorbr);
+  padding-bottom: 3px;
 }
 select{
   -webkit-appearance:none; /*for chrome*/
@@ -148,6 +148,9 @@ button{
 button:first-of-type{
   right: 310px;
   background: #8599B9;
+  color: #fff;
+}
+button:first-of-type > a{
   color: #fff;
 }
 button:nth-of-type(2){

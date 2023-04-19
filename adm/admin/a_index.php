@@ -113,7 +113,7 @@ $result = mysqli_query($con, $sql);
       </div>
       <div class="item a_board">
         <h3>종합 게시판</h3>
-        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/board/adm_b_list.php" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/board/adm_b_list.php?no=1" title="종합 게시판 바로가기">종합 게시판 바로가기</a>
         <table>
           <tbody>
             <?php
@@ -122,7 +122,7 @@ $result = mysqli_query($con, $sql);
                 $type = $row['Board_content'];
                 $title = $row['Board_title'];
                 $date = substr($row['Board_date'],0,10);
-                echo "<tr><td>$num</td><td>$type</td><td class='b_title'>$title</td><td>$date</td></tr>";
+                echo "<tr><td>$num</td><td>$type</td><td class='b_title'><a href='board/adm_b_view.php?idx=".$row['number']."'>$title</a></td><td>$date</td></tr>";
               }
             ?>
           </tbody>

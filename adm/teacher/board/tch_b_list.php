@@ -7,13 +7,12 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 <!-- 메인영역 -->
 <main>
   <!-- adm_b_list.css -->
-  <link rel="stylesheet" type="text/css" href="./css/board_write.css">
   <link rel="stylesheet" type="text/css" href="./css/tch_b_list.css">
   <script src="./js/tch_b_list.js" defer></script>
 
   <article id="main_h">
     <ul id="tab_mnu">
-      <li><a href="tch_b_list.php">QnA 게시판</a></li>
+      <li><a href="tch_b_list.php?no=1">QnA 게시판</a></li>
     </ul>
     <select id="lecture_box">
         <option value="제목 + 내용">강의선택</option>
@@ -38,19 +37,12 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
     <table id="c_list">
       <thead>
         <tr>
-          <th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></th>
+          <th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>답변여부</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></th>
         </tr>
       </thead>
 
       <?php
-        $no=$_GET['no'];
-
-        if($no == 1){
-          $sql = "select * from boardnoticereg order by number desc";
-        }
-
-        $result = mysqli_query($con, $sql);
-        $num = mysqli_num_rows($result);
+        // $no=$_GET['no'];
 
         $sql = "select * from boardnoticereg order by number desc";
         $result = mysqli_query($con, $sql);
@@ -64,7 +56,6 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         $total_block = ceil($total_page / $page_num);
         $now_block = ceil($page / $page_num);
         $s_pageNum = ($now_block - 1) * $page_num + 1;
-        $s_oageNum = ($now_block -1) * $page_num +1;
         if($s_pageNum <= 0){$s_pageNum = 1;};
         $e_pageNum = $now_block * $page_num;
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
@@ -74,35 +65,35 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
 
-        $query = "SELECT userregistration.user_name
-          FROM userregistration
-          JOIN boardnoticereg ON userregistration.user_id = boardnoticereg.user_id
-          WHERE userregistration.user_level = 2";
-        $result3 = mysqli_query($con, $query);
+        $sql4 = "SELECT course_id FROM coursereg WHERE user_id = '$userid'";
+        $sql = "SELECT qna_title, Board_date, qna_category, number, qna_response, user_id FROM boardqnareg WHERE course_id IN ($sql4) ORDER BY number DESC LIMIT $start, $list_num";
+        $result3 = mysqli_query($con, $sql);
 
         $i = 1;
       ?>
 
       <tbody>
-        <?php while ($row = mysqli_fetch_array($result)){
-          $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
-        ?>
-        <tr>
-          <td><?php
-                if($page == 1){
-                  echo $i;
-                } else{
-                  echo(($page-1)*10) + $i;
-                }
-                $i++;
-              ?></td>
-          <td><a href="tch_b_view.php?idx=<?= $row['number'] ?>"><?= $row['Board_title'] ?></a></td>
-          <td><?= $row['Board_content'] ?></td>
-          <td><?= $row['user_name']; ?></td>
-          <td><?= $row['Board_date'] ? date('Y-m-d', strtotime($row['Board_date'])) : ''?></td>
-          <td><?= $row['user_views'] ?></td>
-          <td><input type="checkbox" id="<?= $row['number'] ?>"><label for="<?= $row['number'] ?>"></label></td>
-        </tr>
+        <?php while ($row2 = mysqli_fetch_assoc($result3)) { ?>
+          <tr>
+            <td><?php
+                  if($page == 1){
+                    echo $i;
+                  } else{
+                    echo(($page-1)*10) + $i;
+                  }
+                  $i++;
+                ?></td>
+            <td><?= $row2['qna_category'] ?></td>
+            <td><?= $row2['qna_title'] ?></td>
+            <td><?= $row2['user_id'] ?></td>
+            <td><?= substr($row2['Board_date'], 0, 10)?></td>
+            <?php if($row2['qna_response'] == '0') { ?>
+              <td>미답변</td>
+            <?php } else { ?>
+              <td>답변완료</td>
+            <?php } ?>
+            <td><input type="checkbox" id="<?= $row['number'] ?>"><label for="<?= $row['number'] ?>"></label></td>
+          </tr>
         <?php } ?>
       </tbody>
     </table>
@@ -112,29 +103,29 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       
         /* paging : 이전 페이지 */ 
         if($page <= 1){ ?> 
-        <li><a href="adm_m_list.php?page=1">&#x003C;</a></li>
-        <?php } 
-        else{ ?> 
-        <li><a href="adm_m_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
-        <?php };
-        ?> 
+          <li><a href="tch_b_list.php?page=1">&#x003C;</a></li>
+          <?php } 
+          else{ ?> 
+          <li><a href="tch_b_list.php?page=<?php echo ($page-1); ?>">&#x003C;</a></li>
+          <?php };
+          ?> 
       
-        <?php /* pager : 페이지 번호 출력 */ 
+      <?php /* pager : 페이지 번호 출력 */ 
 
-        for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
-        <li>
-          <a href="adm_m_list.php?page=<?php echo $print_page; ?>">
-            <?php echo $print_page; ?>
-          </a> 
-        </li>
-        <?php };?> 
-        <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
+      for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){ ?> 
+      <li>
+        <a href="tch_b_list.php?page=<?php echo $print_page; ?>">
+          <?php echo $print_page; ?>
+        </a> 
+      </li>
+      <?php };?> 
+      <?php /* paging : 다음 페이지 */ if($page >= $total_page){ ?> 
 
-        <li><a href="adm_m_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
-        <?php } else{ ?>
-        <li><a href="adm_m_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
-        <?php };
-        ?>
+      <li><a href="tch_b_list.php?page=<?php echo $total_page; ?>">&#x003E;</a></li>
+      <?php } else{ ?>
+      <li><a href="tch_b_list.php?page=<?php echo ($page+1); ?>">&#x003E;</a></li> 
+      <?php };
+      ?>
     </ul>
 
     <button onclick="location.href='tch_b_write.php'";>게시글작성</button>
@@ -147,18 +138,6 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
     $(function(){
       let page_num = <?=$page?>;
       let no = <?=$no?>;
-
-      let tab_menu = document.querySelectorAll('#tab_mnu li');
-
-      //사용자가 선택한 탭메뉴의 n번째에 해당서식이 변경되게 한다.
-        if( no == 3 ){
-          tab_menu[0].classList.add('act01');
-        }else if( no == 2){
-          tab_menu[1].classList.add('act01');
-        }else if( no == 1){
-          tab_menu[2].classList.add('act01');
-        }
-
 
       // 현재 페이지 번호
       let currentPage = <?php echo $page; ?>;

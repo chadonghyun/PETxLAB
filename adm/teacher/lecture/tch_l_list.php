@@ -38,72 +38,80 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-        $no=$_GET['no'];
+$no=$_GET['no'];
 
-        $sql = "select * from coursereg order by course_id desc";
-        $result = mysqli_query($con, $sql);
+$sql = "select * from coursereg order by course_id desc";
+$result = mysqli_query($con, $sql);
 
-        $num = mysqli_num_rows($result);
+$num = mysqli_num_rows($result);
 
-        $list_num = 10;
-        $page_num = 5;
-        $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $total_page = ceil($num / $list_num);
-        $total_block = ceil($total_page / $page_num);
-        $now_block = ceil($page / $page_num);
-        $s_pageNum = ($now_block - 1) * $page_num + 1;
-        $s_oageNum = ($now_block -1) * $page_num +1;
-        if($s_pageNum <= 0){$s_pageNum = 1;};
-        $e_pageNum = $now_block * $page_num;
-        if($e_pageNum > $total_page){$e_pageNum = $total_page;};
+$list_num = 10;
+$page_num = 5;
+$page = isset($_GET["page"]) ? $_GET["page"] : 1;
+$total_page = ceil($num / $list_num);
+$total_block = ceil($total_page / $page_num);
+$now_block = ceil($page / $page_num);
+$s_pageNum = ($now_block - 1) * $page_num + 1;
+$s_oageNum = ($now_block - 1) * $page_num + 1;
+if ($s_pageNum <= 0) {
+    $s_pageNum = 1;
+};
+$e_pageNum = $now_block * $page_num;
+if ($e_pageNum > $total_page) {
+    $e_pageNum = $total_page;
+};
 
-        $start = ($page - 1) * $list_num;
-        if($no == 1){
-          $sql2 = "select * from coursereg where course_type = 'general' order by course_id desc limit $start, $list_num;";
-        }else if($no == 2){
-          $sql2 = "select * from coursereg where course_type = 'professional' order by course_id desc limit $start, $list_num;";
-        }else if($no == 3){
-          $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
-        }
+$start = ($page - 1) * $list_num;
+if ($no == 1) {
+    $sql2 = "select * from coursereg where course_type = '일반취미과정' order by course_id desc limit $start, $list_num;";
+} else if ($no == 2) {
+    $sql2 = "select * from coursereg where course_type = '전문교육과정' order by course_id desc limit $start, $list_num;";
+} else if ($no == 3) {
+    $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
+}
 
-        $result = mysqli_query($con, $sql2);
-        $cnt = $start + 1;
+$result = mysqli_query($con, $sql2);
+$cnt = $start + 1;
 
-        $query = "SELECT userregistration.user_name
+$query = "SELECT userregistration.user_name
           FROM userregistration
-          JOIN coursereg ON userregistration.user_id = coursereg.user_id
-          WHERE userregistration.user_level = 2";
-        $result3 = mysqli_query($con, $query);
+          JOIN coursereg ON userregistration.user_id = coursereg.user_id";
+$result3 = mysqli_query($con, $query);
 
-        $i = 1;
-      ?>
+$i = 1;
+?>
 
-      <tbody>
-        <?php while ($row = mysqli_fetch_array($result)) {
-          $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
-          ?>
-          <tr>
-          <td><?php
-              if($page == 1){
-                echo $i;
-              } else{
-                echo(($page-1)*10) + $i;
-              }
-              $i++;
-            ?></td>
+<tbody>
+    <?php while ($row = mysqli_fetch_array($result)) {
+        $row2 = mysqli_fetch_assoc($result3);
+        ?>
+        <tr>
+            <td><?php
+                if ($page == 1) {
+                    echo $i;
+                } else {
+                    echo (($page - 1) * 10) + $i;
+                }
+                $i++;
+                ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_type'] ?></td>
             <td><?= $row['course_category'] ?></td>
             <td><a href="tch_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
-            <td><?= $row2['user_name']; ?></td>
+            <?php
+            $user_query = "SELECT userregistration.user_name FROM userregistration WHERE userregistration.user_id = '{$row['user_id']}'";
+            $user_result = mysqli_query($con, $user_query);
+            $user_row = mysqli_fetch_assoc($user_result);
+            ?>
+            <td><?= $user_row['user_name']; ?></td>
             <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
-          </tr>
-        <?php } ?>
-      </tbody>
+        </tr>
+    <?php } ?>
+</tbody>
     </table>
 
     <ul id="page_nv">
