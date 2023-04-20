@@ -2,6 +2,11 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
+
+$no=empty($_GET['no']) ? 1 : $_GET['no'];
+$find=empty($_GET['find']) ? '' : $_GET['find'];
+$catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
+
 ?>
 
 <!-- 메인영역 -->
@@ -22,14 +27,17 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </select>
 
     <div id="search_wrap">
-      <select id="search_box">
-        <option value="제목 + 내용">제목 + 내용</option>
-        <option value="아이디">아이디</option>
-        <option value="이름">이름</option>
-      </select>
+        <form action="tch_b_list.php" method="get" >
+          <input type="hidden" name="no" value="<?=$no?>">
+        <select id="search_box" name="catgo">
+          <option value="qna_title">제목 + 내용</option>
+          <option value="uesr_id">아이디</option>
+          <option value="qna_category">카테고리</option>
+        </select>
 
-      <input type="search" placeholder="여기에 입력하세요." id="text_box">
-      <i class="bi bi-search"></i>
+        <input type="search" placeholder="여기에 입력하세요." name="find" id="text_box" value="<?=$find?>">
+        <button class="b-search"><i class="bi bi-search"></i></button>
+      </form>
     </div>
   </article>
 
@@ -42,9 +50,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-        // $no=$_GET['no'];
 
-        $sql = "select * from boardnoticereg order by number desc";
+        $sql = "select * from boardqnareg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")." order by number desc";
         $result = mysqli_query($con, $sql);
 
         $num = mysqli_num_rows($result);
@@ -61,12 +68,13 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-        $sql2 = "select * from boardnoticereg order by number desc limit $start, $list_num;";
+        $sql2 = "select * from boardqnareg order by number desc limit $start, $list_num;";
         $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
 
         $sql4 = "SELECT course_id FROM coursereg WHERE user_id = '$userid'";
-        $sql = "SELECT qna_title, Board_date, qna_category, number, qna_response, user_id FROM boardqnareg WHERE course_id IN ($sql4) ORDER BY number DESC LIMIT $start, $list_num";
+
+        $sql = "SELECT qna_title, Board_date, qna_category, number, qna_response, user_id FROM boardqnareg WHERE course_id IN ($sql4) ".($find != "" ? " AND ".$catgo." LIKE '%".$find."%' " : "")." ORDER BY number DESC LIMIT $start, $list_num";
         $result3 = mysqli_query($con, $sql);
 
         $i = 1;
@@ -127,10 +135,11 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       <?php };
       ?>
     </ul>
-
-    <button onclick="location.href='tch_b_write.php'";>게시글작성</button>
+    <div class="btn_box">
+    <button onclick="location.href='tch_b_write.php'">게시글작성</button>
     <button>전체삭제</button>
     <button>선택삭제</button>
+    </div>
   </article>
   </main>
 

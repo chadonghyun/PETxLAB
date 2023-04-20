@@ -2,6 +2,10 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
+
+$no=empty($_GET['no']) ? 1 : $_GET['no'];
+$find=empty($_GET['find']) ? '' : $_GET['find'];
+$catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
 ?>
 
 <!-- 메인영역 -->
@@ -24,8 +28,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         <option value="이름">이름</option>
       </select>
 
-      <input type="search" placeholder="여기에 입력하세요." id="text_box">
-      <i class="bi bi-search"></i>
+      <input type="search" placeholder="여기에 입력하세요." id="text_box" name="find" value="<?=$find?>">
+      <button><i class="bi bi-search"></i></button>
     </div>
   </article>
 
@@ -35,14 +39,11 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         <tr>
           <th>No</th><th>과정ID</th><th>과정분류</th><th>카테고리</th><th>강의명</th><th>강사</th><th>강의기간</th><th>강의수</th><th>자료수</th><th>수강생수</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></label></th>
         </tr>
-      </thead>
+      </thead> 
 
-      <?php
-$no=$_GET['no'];
-
-$sql = "select * from coursereg order by course_id desc";
+<?php
+$sql = "select *from coursereg ".($find!= ""?"WHERE".$catgo." LIKE '%".$find."%'":"" ). " order by course_id desc";
 $result = mysqli_query($con, $sql);
-
 $num = mysqli_num_rows($result);
 
 $list_num = 10;
@@ -148,6 +149,7 @@ $i = 1;
     <button>전체삭제</button>
     <button>선택삭제</button>
   </article>
+  
   </main>
 
   <script>
