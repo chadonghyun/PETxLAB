@@ -55,11 +55,11 @@ select::-ms-expand{
 }
 #lecture_box{
   left: 540px;
-  text-indent: 20px !important;
+  padding-left: 35px;
 }
 #search_box{
   right: 405px;
-  text-align: center;
+  padding-left: 25px; 
 }
 #text_box{
   box-sizing: border-box;
@@ -160,6 +160,7 @@ select::-ms-expand{
   right: 310px;
   background: #8599B9;
   color: #fff;
+  display: none;
 }
 .btn_box button:first-of-type > a{
   color: #fff;

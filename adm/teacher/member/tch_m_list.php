@@ -2,6 +2,10 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
+
+$no=empty($_GET['no']) ? 1 : $_GET['no'];
+$find=empty($_GET['find']) ? '' : $_GET['find'];
+$catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
 ?>
 
 <!-- 메인영역 -->
@@ -23,14 +27,16 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
 
     <div id="search_wrap">
-      <select id="search_box">
-        <option value="제목 + 내용">제목 + 내용</option>
-        <option value="아이디">아이디</option>
-        <option value="이름">이름</option>
+    <form action="tch_m_list.php" method="get" >
+    <input type="hidden" name="no" value="<?=$no?>">
+      <select id="search_box"  name="catgo">
+        <option value="user_name">이름</option>
+        <option value="user_email">이메일</option>
       </select>
 
-      <input type="search" placeholder="여기에 입력하세요." id="text_box">
-      <i class="bi bi-search"></i>
+      <input type="search" placeholder="여기에 입력하세요." id="text_box" name="find"  value="<?=$find?>">
+      <button class="b-search"><i class="bi bi-search"></i></button>
+    </form>
     </div>
   </article>
 
@@ -43,7 +49,13 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-        $sql = "select * from userregistration where user_level = 1 order by number desc";
+        $sql = "SELECT u.*, cr.course_title 
+        FROM userregistration u 
+        JOIN coursereg c ON u.course_id = c.course_id 
+        JOIN coursereg cr ON cr.course_id = u.course_id
+        WHERE c.user_id = '$userid' AND u.user_level = 1
+        ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")."  
+        ORDER BY u.number DESC";
         $result = mysqli_query($con, $sql);
 
         $num = mysqli_num_rows($result);
@@ -61,45 +73,38 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-        $sql2 = "select * from userregistration where user_level = 1 order by number desc limit $start, $list_num;";
+        $sql2 = "SELECT u.*, cr.course_title
+        FROM userregistration u 
+        JOIN coursereg c ON u.course_id = c.course_id 
+        JOIN coursereg cr ON cr.course_id = u.course_id
+        WHERE c.user_id = '$userid' AND u.user_level = 1
+        ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")."  
+        ORDER BY u.number DESC LIMIT $start, $list_num";
         $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
 
-        $query = "SELECT coursereg.course_title
-          FROM coursereg
-          JOIN userregistration ON coursereg.user_id = userregistration.user_id
-          WHERE userregistration.user_level = 2";
-        $result2 = mysqli_query($con, $query);
-
-        $i = 1;
-      ?>
+        $i =  $num - (($page-1)*10);
+      ?> 
       
 
       <tbody>
-        <?php while ($row = mysqli_fetch_array($result)){
-          $row2 = mysqli_fetch_assoc($result2); // while문 안에서 한번씩만 실행되도록 변경
-          ?>
-          
-        <tr>
-        <td><?php
-              if($page == 1){
+        <?php while ($row = mysqli_fetch_array($result)) { ?>
+          <tr>
+            <td><?php
                 echo $i;
-              } else{
-                echo(($page-1)*10) + $i;
-              }
-              $i++;
-            ?></td>
-          <td><?=$row['number']?></td>
-          <td><?= $row2['course_title']; ?></td>
-          <td><a href="adm_m_view.php?no=<?= $row['number'] ?>"><?=$row['user_name']?></a></td>
-          <td><?=$row['user_phone']?></td>
-          <td><?=$row['user_email']?></td>
-          <td>2</td>
-          <td>20</td>
-          <td><?=$row['reg_date'] ? date('Y-m-d', strtotime($row['reg_date'])) : ''?></td>
-          <td><i class="bi bi-envelope"></i></td>
-          <td><input type="checkbox" id="<?=$row['number']?>"><label for="<?=$row['number']?>"></label></td>
-        </tr>
+                $i--;
+              ?></td>
+            <td><?= $row['number'] ?></td>
+            <td><?= $row['course_title'] ?></td>
+            <td><a href="adm_m_view.php?no=<?= $row['number'] ?>"><?= $row['user_name'] ?></a></td>
+            <td><?= $row['user_phone'] ?></td>
+            <td><?= $row['user_email'] ?></td>
+            <td>2</td>
+            <td>20</td>
+            <td><?= $row['reg_date'] ? date('Y-m-d', strtotime($row['reg_date'])) : '' ?></td>
+            <td><i class="bi bi-envelope"></i></td>
+            <td><input type="checkbox" id="<?= $row['number'] ?>"><label for="<?= $row['number'] ?>"></label></td>
+          </tr>
         <?php } ?>
       </tbody>
     </table>

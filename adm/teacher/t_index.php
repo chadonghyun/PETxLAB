@@ -172,7 +172,7 @@ $result1 = mysqli_query($con, $sql1);
 
       <?php
       $sql = "SELECT course_startday, course_endday FROM coursereg";
-      $result = $con->query($sql);
+      $result = mysqli_query($con, $sql);
 
       echo '<div class="item1 a_callender">';
       echo '<div class="sec_cal">';
@@ -183,32 +183,32 @@ $result1 = mysqli_query($con, $sql1);
       echo '</div>';
       echo '<div class="cal_wrap">';
       echo '<div class="days">';
-      echo '<div class="day">MON</div>';
-      echo '<div class="day">TUE</div>';
-      echo '<div class="day">WED</div>';
-      echo '<div class="day">THU</div>';
-      echo '<div class="day">FRI</div>';
-      echo '<div class="day">SAT</div>';
-      echo '<div class="day">SUN</div>';
+      echo '<div class="day">월</div>';
+      echo '<div class="day">화</div>';
+      echo '<div class="day">수</div>';
+      echo '<div class="day">목</div>';
+      echo '<div class="day">금</div>';
+      echo '<div class="day">토</div>';
+      echo '<div class="day">일</div>';
       echo '</div>';
       echo '<div class="dates">';
       
       // 달력의 각 날짜마다 강의 기간이 있는지 확인하여 출력
-      $current_date = date('Y-m-d');
-      while($row = $result->fetch_assoc()) {
-        $start_date = $row["course_startday"];
-        $end_date = $row["course_endday"];
+      // $current_date = date('Y-m-d');
+      // while($row = mysqli_fetch_assoc($result)) {
+      //   $start_date = $row["course_startday"];
+      //   $end_date = $row["course_endday"];
       
-        $current = strtotime($start_date);
-        $end = strtotime($end_date);
+      //   $current = strtotime($start_date);
+      //   $end = strtotime($end_date);
         
-        while ($current <= $end) {
-          $date = date('Y-m-d', $current);
-          $class = ($current_date == $date) ? 'today' : '';
-          echo '<div class="date ' . $class . '">' . date('d', $current) . '</div>';
-          $current = strtotime('+1 day', $current);
-        }
-      }
+      //   while ($current <= $end) {
+      //     $date = date('Y-m-d', $current);
+      //     $class = ($current_date == $date) ? 'today' : '';
+      //     echo '<div class="date ' . $class . '">' . date('d', $current) . '</div>';
+      //     $current = strtotime('+1 day', $current);
+      //   }
+      // }
       
       echo '</div>';
       echo '</div>';
@@ -220,6 +220,26 @@ $result1 = mysqli_query($con, $sql1);
     </div>  
   </section>
 </main>
+
+<script>
+  // events[
+  //         $.ajax({
+  //           type:"GET",
+  //           url: "./coursereg.php",
+  //           data: "{}",
+  //           success: function (response){
+  //             result = response.result
+  //             for (i = 0; i < result.length; i++){
+  //               calendar.addEventListener({
+  //                 title: result[i]['course_title'],
+  //                 start: result[i]['course_startday'],
+  //                 end: result[i]['course_endday']
+  //               })
+  //             }
+  //           }
+  //         })
+  //       ]
+</script>
 
 </body>
 </html>

@@ -161,6 +161,7 @@ main{
 
 .a_callender{
   width: 1180px;
+  height: 740px;
   padding: 40px;
 }
 /* section calendar */
@@ -184,6 +185,7 @@ main{
   width: 300px;
   text-align: center;
   line-height: 1;
+  color: #8599B9;
 }
 
 .sec_cal .cal_nav .nav {
@@ -209,7 +211,7 @@ main{
   display: block;
   width: 20px;
   height: 20px;
-  border: 3px solid #000;
+  border: 3px solid #8599B9;
   border-width: 3px 3px 0 0;
   transition: border 0.1s;
   box-sizing: border-box;
@@ -217,7 +219,7 @@ main{
 
 .sec_cal .cal_nav .go-prev:hover::before,
 .sec_cal .cal_nav .go-next:hover::before {
-  border-color: #ed2a61;
+  border-color: #333333;
 }
 
 .sec_cal .cal_nav .go-prev::before {
@@ -240,6 +242,9 @@ main{
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
 }
+.sec_cal .cal_wrap .days .day{
+  font-size: 16px;
+}
 
 .sec_cal .cal_wrap::after {
   top: 368px;
@@ -247,17 +252,19 @@ main{
 
 .sec_cal .cal_wrap .day {
   display:flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
   width: calc(100% / 7);
-  text-align: left;
-  color: #999;
-  font-size: 12px;
-  text-align: center;
-  border-radius:5px
 }
 
-.current.today {background: rgb(242 242 242);}
+.current {
+  cursor: pointer;
+}
+
+.current.today {
+  /* background: rgb(238, 238, 238); */
+  cursor: pointer;
+}
 
 .sec_cal .cal_wrap .dates {
   display: flex;
@@ -266,13 +273,51 @@ main{
 }
 
 .sec_cal .cal_wrap .day:nth-child(7n -1) {
-  color: #3c6ffa;
+  color: #8599B9;
 }
 
 .sec_cal .cal_wrap .day:nth-child(7n) {
-  color: #ed2a61;
+  color: #FF4E4E;
 }
 
 .sec_cal .cal_wrap .day.disable {
   color: #ddd;
+}
+
+.day.course:before {
+  content: attr(data-title);
+  display: block;
+  text-align: center;
+  font-size: 0.7em;
+  margin-top: -0.7em;
+  margin-bottom: 0.7em;
+  color: black;
+}
+/* .day:first-child {
+  height: 0px;
+}
+.day:nth-child(-n+8) {
+  height: 0px;
+}
+.day{
+  height: 100px;
+} */
+.dates > .day{
+  height: 100px;
+}
+.day .current .course{
+  font-size: 16px;
+}
+.txt01{
+  width: 100%;
+  display: inline-block;
+  color: #fff;
+  padding: 5px 10px 5px 10px;
+  font-size: 16px;
+  border-radius: 50px;
+  margin-top: 5px;
+  background: #8599B9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

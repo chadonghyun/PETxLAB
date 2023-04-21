@@ -75,13 +75,18 @@ select::-ms-expand{
   font-size: 14px;
   outline: none;
 }
-.bi-search{
-  color: #476088;
-  position: absolute;
+.b-search{
+  position:absolute;
   right: 126px;
   top: 239px;
+  border:none;
+  background-color: #F5F9FF;
+}
+.bi-search{
+  color: #476088;
   cursor: pointer;
 }
+
 
 #main_b{
   padding: 44px;
@@ -134,7 +139,7 @@ select::-ms-expand{
 #page_nv > li:visited > a {
   color: #333;
 }
-button{
+.btn_box button{
   position: absolute;
   bottom: 30px;
   background: none;
@@ -144,20 +149,20 @@ button{
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 }
-button:first-of-type{
+.btn_box button:first-of-type{
   right: 310px;
   background: #8599B9;
   color: #fff;
 }
-button:first-of-type > a{
+.btn_box button:first-of-type > a{
   color: #fff;
 }
-button:nth-of-type(2){
+.btn_box button:nth-of-type(2){
   right: 170px;
   background: #FF4E4E;
   color: #fff;
 }
-button:last-of-type{
+.btn_box button:last-of-type{
   right: 30px;
   border: 1px solid #FF4E4E;
   color: #FF4E4E;

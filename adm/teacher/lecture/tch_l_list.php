@@ -6,6 +6,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 $no=empty($_GET['no']) ? 1 : $_GET['no'];
 $find=empty($_GET['find']) ? '' : $_GET['find'];
 $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
+
+
+
 ?>
 
 <!-- 메인영역 -->
@@ -15,86 +18,87 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
   <script src="./js/tch_l_list.js" defer></script>
 
   <article id="main_h">
-    <ul id="tab_mnu">
-      <li><a href="tch_l_list.php?no=3">전체강의관리</a></li>
-      <li><a href="tch_l_list.php?no=2">전문교육과정</a></li>
-      <li><a href="tch_l_list.php?no=1">일반취미과정</a></li>
-    </ul>
-
-    <div id="search_wrap">
-      <select id="search_box">
-        <option value="제목 + 내용">제목 + 내용</option>
-        <option value="아이디">아이디</option>
-        <option value="이름">이름</option>
-      </select>
-
-      <input type="search" placeholder="여기에 입력하세요." id="text_box" name="find" value="<?=$find?>">
-      <button><i class="bi bi-search"></i></button>
-    </div>
+    <form action="tch_l_list.php" method="get" >
+      <ul id="tab_mnu">
+        <li><a href="tch_l_list.php?no=3">전체강의관리</a></li>
+        <li><a href="tch_l_list.php?no=2">전문교육과정</a></li>
+        <li><a href="tch_l_list.php?no=1">일반취미과정</a></li>
+      </ul>
+      <div id="search_wrap">
+        <input type="hidden" name="no" value="<?=$no?>">
+        <select id="search_box" name="catgo">
+          <option value="course_title">제목 + 내용</option>
+          <option value="course_category">카테고리</option>
+          <option value="course_type">코스타입</option>
+        </select>
+        <input type="search" placeholder="여기에 입력하세요." id="text_box" name="find"  value="<?=$find?>">
+        <button class="b-search"><i class="bi bi-search"></i></button>
+      </div>
+    </form>
   </article>
-
   <article id="main_b">
     <table id="c_list">
       <thead>
         <tr>
           <th>No</th><th>과정ID</th><th>과정분류</th><th>카테고리</th><th>강의명</th><th>강사</th><th>강의기간</th><th>강의수</th><th>자료수</th><th>수강생수</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></label></th>
         </tr>
-      </thead> 
+      </thead>
 
-<?php
-$sql = "select *from coursereg ".($find!= ""?"WHERE".$catgo." LIKE '%".$find."%'":"" ). " order by course_id desc";
+  <?php
+// 1. 전체 데이터 갯수 
+$sql = "SELECT COUNT(*) as total FROM coursereg";
+$sql .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
+$sql .=($find != "" ? "AND " . $catgo . " LIKE '%" . $find . "%'" : "");
+
 $result = mysqli_query($con, $sql);
-$num = mysqli_num_rows($result);
+$row = mysqli_fetch_assoc($result);
+$total_records = $row['total'];
 
+// Calculate pagination variables
 $list_num = 10;
 $page_num = 5;
 $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-$total_page = ceil($num / $list_num);
-$total_block = ceil($total_page / $page_num);
+$total_page = ceil($total_records / $list_num);
+$total_blocks = ceil($total_page / $page_num);
 $now_block = ceil($page / $page_num);
 $s_pageNum = ($now_block - 1) * $page_num + 1;
-$s_oageNum = ($now_block - 1) * $page_num + 1;
-if ($s_pageNum <= 0) {
-    $s_pageNum = 1;
-};
 $e_pageNum = $now_block * $page_num;
 if ($e_pageNum > $total_page) {
     $e_pageNum = $total_page;
-};
-
-$start = ($page - 1) * $list_num;
-if ($no == 1) {
-    $sql2 = "select * from coursereg where course_type = '일반취미과정' order by course_id desc limit $start, $list_num;";
-} else if ($no == 2) {
-    $sql2 = "select * from coursereg where course_type = '전문교육과정' order by course_id desc limit $start, $list_num;";
-} else if ($no == 3) {
-    $sql2 = "select * from coursereg order by course_id desc limit $start, $list_num;";
 }
 
-$result = mysqli_query($con, $sql2);
-$cnt = $start + 1;
+// Calculate start index for query
+$start = ($page - 1) * $list_num;
 
-$query = "SELECT userregistration.user_name
-          FROM userregistration
-          JOIN coursereg ON userregistration.user_id = coursereg.user_id";
-$result3 = mysqli_query($con, $query);
+// Build the query to fetch records with pagination
+$sql2 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id";
+$sql2 .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
+$sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
 
-$i = 1;
+// or 2. 
+$sql2 .= " ORDER BY coursereg.course_id DESC LIMIT " . $start . "," . $list_num;
+$result2 = mysqli_query($con, $sql2);
+
+
+
+// 전체값을 받아 오는 것
+$i =  $total_records - (($page-1)*10);
 ?>
 
 <tbody>
-    <?php while ($row = mysqli_fetch_array($result)) {
-        $row2 = mysqli_fetch_assoc($result3);
+    <?php while ($row = mysqli_fetch_assoc($result2)) {
+
+if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정";} else {$rows['course_type'] =  "일반교육과정";}
+
         ?>
         <tr>
-            <td><?php
-                if ($page == 1) {
-                    echo $i;
-                } else {
-                    echo (($page - 1) * 10) + $i;
-                }
-                $i++;
-                ?></td>
+            <td>
+              <!-- 1, PHP 숫자 정렬하기 -->
+              <?php
+                  echo $i;
+                  $i--;
+                ?>
+                </td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_type'] ?></td>
             <td><?= $row['course_category'] ?></td>
@@ -105,7 +109,7 @@ $i = 1;
             $user_row = mysqli_fetch_assoc($user_result);
             ?>
             <td><?= $user_row['user_name']; ?></td>
-            <td><?= $row['course_startday'] ?>~<?= $row['course_endday'] ?></td>
+            <td><?= $row['course_startday'] ?> ~ <?= $row['course_endday'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
@@ -144,12 +148,12 @@ $i = 1;
         <?php };
         ?>
     </ul>
-
-    <button onclick="location.href='tch_l_write.php'"; >강의생성</button>
-    <button>전체삭제</button>
-    <button>선택삭제</button>
+    <div class="btn_box">
+      <button onclick="location.href='tch_l_write.php'"; >강의생성</button>
+      <button>전체삭제</button>
+      <button>선택삭제</button>
+    </div>
   </article>
-  
   </main>
 
   <script>

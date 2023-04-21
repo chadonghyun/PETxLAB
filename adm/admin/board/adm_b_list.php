@@ -2,6 +2,10 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
+
+$no=empty($_GET['no']) ? 1 : $_GET['no'];
+$find=empty($_GET['find']) ? '' : $_GET['find'];
+$catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
 ?>
 
 <!-- 메인영역 -->
@@ -17,14 +21,29 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
     </ul>
 
     <div id="search_wrap">
-      <select id="search_box">
-        <option value="제목 + 내용">제목 + 내용</option>
-        <option value="아이디">아이디</option>
-        <option value="이름">이름</option>
-      </select>
+    <form action="adm_b_list.php" method="get" >
+          <input type="hidden" name="no" value="<?=$no?>">
+        <select id="search_box" name="catgo">
+      <?php
+        if($no == 1){
+            echo "
+            <option value='Board_title'>제목 + 내용</option>
+            <option value='uesr_id'>아이디</option>
+            <option value='Board_content'>컨텐츠</option>
+            ";
+          }else if ($no == 2) {
+            echo "
+            <option value='qna_title'>제목 + 내용</option>
+            <option value='uesr_id'>아이디</option>
+            <option value='qna_category'>카테고리</option>
+            ";
+          }
+          ?>
+        </select>
 
-      <input type="search" placeholder="여기에 입력하세요." id="text_box">
-      <i class="bi bi-search"></i>
+      <input type="search" placeholder="여기에 입력하세요." id="text_box" name="find" value="<?=$find?>">
+      <button class="b-search"><i class="bi bi-search"></i></button>
+      </form>
     </div>
   </article>
   <article id="main_b">
@@ -32,7 +51,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       <thead>
 
       <?php
-          $no=$_GET['no'];
+          $sql = "select * from boardqnareg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")." order by number desc";  
+
           if($no == 1){
             echo "<tr><th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th><th><input type='checkbox' id='check1' onclick='selectAll(this)'><label for='check1'></label></th></tr>  </thead>";
             $sql = "select * from boardnoticereg order by number desc";
@@ -40,6 +60,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
             echo "<tr><th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>답변여부</th><th><input type='checkbox' id='check1' onclick='selectAll(this)'><label for='check1'></label></th></tr>       </thead>";
             $sql = "select * from boardqnareg order by number desc";
           }
+
         $result = mysqli_query($con, $sql);
         $num = mysqli_num_rows($result);
 
@@ -58,7 +79,7 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
         $cnt = $start + 1;
         $i = 1;
         if($no == 1){
-          $query = "SELECT * FROM boardnoticereg ORDER BY number DESC LIMIT $start, $list_num";
+          $query = "SELECT * FROM boardnoticereg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")."  ORDER BY number DESC LIMIT $start, $list_num";
           $result3 = mysqli_query($con, $query);
           while($row = mysqli_fetch_array($result3)) {
             echo "<tbody>";
@@ -73,8 +94,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
             echo "</tr>";
           }
         }else if($no == 2){
-          $sql4 = "SELECT course_id FROM coursereg";
-          $sql = "SELECT qna_title, Board_date, qna_category, number, qna_response, user_id FROM boardqnareg WHERE course_id IN ($sql4) ORDER BY number DESC LIMIT $start, $list_num";                  
+
+          $sql = "SELECT * FROM boardqnareg WHERE course_id ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")." ORDER BY number DESC LIMIT $start, $list_num";                  
           $result3 = mysqli_query($con, $sql);
             while ($row2 = mysqli_fetch_assoc($result3)) {
               echo "<tr><td>" . sprintf("%03d", $row2['number']) . "</td>";
@@ -127,9 +148,11 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       ?>
     </ul>
 
-    <button onclick="location.href='adm_b_write.php'";>게시글작성</button>
-    <button>전체삭제</button>
-    <button>선택삭제</button>
+    <div class="btn_box">
+      <button onclick="location.href='adm_b_write.php'";>게시글작성</button>
+      <button>전체삭제</button>
+      <button>선택삭제</button>
+    </div>
   </article>
   </main>
 

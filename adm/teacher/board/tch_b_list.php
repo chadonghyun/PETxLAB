@@ -77,7 +77,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         $sql = "SELECT qna_title, Board_date, qna_category, number, qna_response, user_id FROM boardqnareg WHERE course_id IN ($sql4) ".($find != "" ? " AND ".$catgo." LIKE '%".$find."%' " : "")." ORDER BY number DESC LIMIT $start, $list_num";
         $result3 = mysqli_query($con, $sql);
 
-        $i = 1;
+        $i = (($page - 1) * 10) + $num;
       ?>
 
       <tbody>
@@ -89,7 +89,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
                   } else{
                     echo(($page-1)*10) + $i;
                   }
-                  $i++;
+                  $i--;
                 ?></td>
             <td><?= $row2['qna_category'] ?></td>
             <td><?= $row2['qna_title'] ?></td>
