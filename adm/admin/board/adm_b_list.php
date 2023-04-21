@@ -148,11 +148,11 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       ?>
     </ul>
 
-    <div class="btn_box">
-      <button onclick="location.href='adm_b_write.php'";>게시글작성</button>
-      <button>전체삭제</button>
-      <button>선택삭제</button>
-    </div>
+    <di class="btn_box">
+    <button onclick="location.href='adm_b_write.php'";>게시글작성</button>
+    <button>전체삭제</button>
+    <button>선택삭제</button>
+      </di>
   </article>
   </main>
 

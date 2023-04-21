@@ -2,6 +2,10 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/PETxLAB/config.php');
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
+
+$no=empty($_GET['no']) ? 1 : $_GET['no'];
+$find=empty($_GET['find']) ? '' : $_GET['find'];
+$catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
 ?>
 
 <!-- 메인영역 -->
@@ -18,14 +22,16 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
     </ul>
 
     <div id="search_wrap">
-      <select id="search_box">
-        <option value="제목 + 내용">제목 + 내용</option>
-        <option value="아이디">아이디</option>
-        <option value="이름">이름</option>
-      </select>
+      <form action="adm_m_list.php" method="get" >
+      <input type="hidden" name="no" value="<?=$no?>">
+        <select id="search_box"  name="catgo">
+          <option value="user_name">이름</option>
+          <option value="user_email">이메일</option>
+        </select>
 
-      <input type="search" placeholder="여기에 입력하세요." id="text_box">
-      <i class="bi bi-search"></i>
+      <input type="search" placeholder="여기에 입력하세요." id="text_box" name="find"  value="<?=$find?>">
+      <button class="b-search"><i class="bi bi-search"></i></button>
+      </form>
     </div>
   </article>
 
@@ -38,8 +44,6 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
       </thead>
 
       <?php
-        $no=$_GET['no'];
-
           if($no == 1){
             $sql = "select * from userregistration where user_level = 1 order by number desc";
           }else if($no == 2){
@@ -47,7 +51,6 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           }else if($no == 3){
             $sql = "select * from userregistration order by number desc";
           }
-          
           $result = mysqli_query($con, $sql);
           $num = mysqli_num_rows($result);
 
@@ -64,17 +67,19 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
           $start = ($page - 1) * $list_num;
+          
             if($no == 1){
-              $sql2 = "select * from userregistration where user_level = 1 order by number desc limit $start, $list_num;";
+              $sql2 = "select * from userregistration where user_level = 1 ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")." order by number desc limit $start, $list_num;";
             }else if($no == 2){
-              $sql2 = "select * from userregistration where user_level = 2 order by number desc limit $start, $list_num;";
+              $sql2 = "select * from userregistration where user_level = 2 ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")." order by number desc limit $start, $list_num;";
             }else if($no == 3){
-              $sql2 = "select * from userregistration order by number desc limit $start, $list_num;";
+              $sql2 = "select * from userregistration ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")." order by number desc limit $start, $list_num;";
             }
           $result = mysqli_query($con, $sql2);
           $cnt = $start + 1;
 
-          $i = 1;
+          
+          $i =  $num - (($page-1)*10);
       ?>
       
 
@@ -83,12 +88,8 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
           
         <tr>
           <td><?php
-            if($page == 1){
-              echo $i;
-            } else{
-              echo(($page-1)*10) + $i;
-            }
-            $i++;
+            echo $i;
+            $i--;
           ?></td>
           <td><?=$row['number']?></td>
           <td><?php

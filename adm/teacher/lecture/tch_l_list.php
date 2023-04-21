@@ -6,9 +6,6 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 $no=empty($_GET['no']) ? 1 : $_GET['no'];
 $find=empty($_GET['find']) ? '' : $_GET['find'];
 $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
-
-
-
 ?>
 
 <!-- 메인영역 -->
@@ -75,10 +72,10 @@ $sql2 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN user
 $sql2 .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
 $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
 
-// or 2. 
+
 $sql2 .= " ORDER BY coursereg.course_id DESC LIMIT " . $start . "," . $list_num;
 $result2 = mysqli_query($con, $sql2);
-
+$cnt = $start + 1;
 
 
 // 전체값을 받아 오는 것
@@ -88,7 +85,7 @@ $i =  $total_records - (($page-1)*10);
 <tbody>
     <?php while ($row = mysqli_fetch_assoc($result2)) {
 
-if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정";} else {$rows['course_type'] =  "일반교육과정";}
+if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정";} else {$row['course_type'] =  "일반교육과정";}
 
         ?>
         <tr>
