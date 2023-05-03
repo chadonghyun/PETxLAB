@@ -40,8 +40,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       </form>
     </div>
   </article>
-  <form action="" method="post">
-    <input type="hidden" name="no" value="$no">
+
   <article id="main_b">
     <table id="c_list">
       <thead>
@@ -90,8 +89,8 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         <?php while ($row2 = mysqli_fetch_assoc($result3)) { ?>
           <tr>
             <td><?php
-                  echo $i;
-                  $i--;
+                echo $i;
+                $i--;
                 ?></td>
             <td><?= $row2['qna_category'] ?></td>
             <td><?= $row2['qna_title'] ?></td>
@@ -102,7 +101,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
             <?php } else { ?>
               <td>답변완료</td>
             <?php } ?>
-            <td><input type="checkbox" id="<?= $row2['number'] ?>" value="<?= $row2['number'] ?>" name="checked[]"><label for="<?= $row2['number'] ?>"></label></td>
+            <td><input type="checkbox" id="<?= $row['number'] ?>"><label for="<?= $row['number'] ?>"></label></td>
           </tr>
         <?php } ?>
       </tbody>
@@ -140,10 +139,9 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     <div class="btn_box">
     <button onclick="location.href='tch_b_write.php'">게시글작성</button>
     <button>전체삭제</button>
-    <button type="submit" formaction="qna_delete.php" onclick="return post();">선택삭제</button>
+    <button>선택삭제</button>
     </div>
   </article>
-  </form>
   </main>
 
   <script>

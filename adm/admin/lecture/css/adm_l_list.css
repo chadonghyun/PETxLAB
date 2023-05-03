@@ -150,7 +150,7 @@ select::-ms-expand{
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 }
-.btn_box button:first-of-type{
+/* .btn_box button:first-of-type{
   right: 310px;
   background: #8599B9;
 }
@@ -161,7 +161,7 @@ select::-ms-expand{
   right: 170px;
   background: #FF4E4E;
   color: #fff;
-}
+} */
 .btn_box button:last-of-type{
   right: 30px;
   border: 1px solid #FF4E4E;

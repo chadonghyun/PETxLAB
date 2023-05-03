@@ -12,6 +12,11 @@ include_once '../config.php';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입</title>
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/favicon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/favicon/favicon.ico" type="image/x-icon">
+  
   <link rel="stylesheet" href="../adm/css/base.css">
   <link rel="stylesheet" href="../adm/css/reset.css">
   <link rel="stylesheet" href="./css/signin.css">

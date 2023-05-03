@@ -150,7 +150,7 @@ select::-ms-expand{
   border-radius: 20px;
 }
 .btn_box button:first-of-type{
-  right: 310px;
+  right: 170px;
   background: #8599B9;
   color: #fff;
 }
@@ -158,9 +158,9 @@ select::-ms-expand{
   color: #fff;
 }
 .btn_box button:nth-of-type(2){
-  right: 170px;
+  /* right: 170px;
   background: #FF4E4E;
-  color: #fff;
+  color: #fff; */
 }
 .btn_box button:last-of-type{
   right: 30px;

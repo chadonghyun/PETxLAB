@@ -15,3 +15,14 @@ textBox.addEventListener('keyup', function(event) {
     console.log('검색어:', searchTerm);
   }
 });
+
+function post(){
+  let checkbox_checked = document.querySelectorAll('input[type="checkbox"]:checked');
+
+  if(checkbox_checked.length == 0){
+    alert('1개 이상 선택해주세요');
+    return false;
+  }else{
+    return true;
+  }
+}

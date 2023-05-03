@@ -33,7 +33,9 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       </div>
     </form>
   </article>
-
+  
+  <form action="" method="post">
+  <input type="hidden" name="no" value="<?=$no?>">
   <article id="main_b">
     <table id="c_list">
       <thead>
@@ -43,7 +45,13 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       </thead>
 
       <?php
-        $sql = "select * from coursereg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")." order by course_id desc";
+        // $sql = "select * from coursereg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")." order by course_id desc";
+
+        $sql = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id";
+        $sql .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
+        $sql .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+
+
         $result = mysqli_query($con, $sql);
 
         $num = mysqli_num_rows($result);
@@ -65,8 +73,6 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         $sql2 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id";
         $sql2 .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
         $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
-        
-        
         $sql2 .= " ORDER BY coursereg.course_id DESC LIMIT " . $start . "," . $list_num;
         $result2 = mysqli_query($con, $sql2);
 
@@ -75,26 +81,33 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         $query = "SELECT userregistration.user_name
           FROM userregistration
           JOIN coursereg ON userregistration.user_id = coursereg.user_id";
-
-
         $result3 = mysqli_query($con, $query);
 
+        $sql3 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id";
+        $sql3 .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
+        $sql3 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+        $sql3 .= " ORDER BY coursereg.course_id DESC";
+        $result4 = mysqli_query($con, $sql3);
+        
+
         $num2 = mysqli_num_rows($result3);
-        $i =  $num2 - (($page-1)*10);
+        // $i =  $num2 - (($page-1)*10);
+        $i =  $num - (($page-1)*10);
       ?>
 
       <tbody>
-        <?php while ($row = mysqli_fetch_array($result)) {
+      <?php while ($row = mysqli_fetch_array($result2)) {
           $row2 = mysqli_fetch_assoc($result3); // while문 안에서 한번씩만 실행되도록 변경
+          if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정";} else {$row['course_type'] =  "일반교육과정";}
           ?>
           <tr>
             <td><?php
               echo $i;
                   $i--;
             ?></td>
-            <?php if($no == 1){?>
+            <?php if($no == 1 && $row['course_type'] = 'general' ){?>
               <td><?= $row['course_id'] ?></td>
-              <td><?= $row['course_type'] ?></td>
+              <td><?= $row['course_type'] = "일반교육과정" ?></td>
               <td><?= $row['course_category'] ?></td>
               <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
               <?php
@@ -107,11 +120,11 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
               <td><?= $row['course_id'] ?></td>
               <td><?= $row['course_id'] ?></td>
               <td><?= $row['course_id'] ?></td>
-              <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
-            <?php }else if($no == 2){?>
+              <td><input type="checkbox" id="<?= $row['course_id'] ?>" value="<?= $row['course_id'] ?>" name="checked[]"><label for="<?= $row['course_id'] ?>"></label></td>
+            <?php }else if($no == 2 && $row['course_type'] = 'professional'){?>
               <td><?= $row['course_id'] ?></td>
-              <td><?= $row['course_type'] ?></td>
-              <td><?= $row['course_category']='전문교육과정' ?></td>
+              <td><?= $row['course_type'] = "전문교육과정" ?></td>
+              <td><?= $row['course_category'] ?></td>
               <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
               <?php
                 $user_query = "SELECT userregistration.user_name FROM userregistration WHERE userregistration.user_id = '{$row['user_id']}'";
@@ -123,10 +136,10 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
               <td><?= $row['course_id'] ?></td>
               <td><?= $row['course_id'] ?></td>
               <td><?= $row['course_id'] ?></td>
-              <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+              <td><input type="checkbox" id="<?= $row['course_id'] ?>" value="<?= $row['course_id'] ?>" name="checked[]"><label for="<?= $row['course_id'] ?>"></label></td>
           <?php }else if($no == 3){?>
               <td><?= $row['course_id'] ?></td>
-              <td><?= $row['course_type']='일반취미과정' ?></td>
+              <td><?= $row['course_type'] ?></td>
               <td><?= $row['course_category'] ?></td>
               <td><a href="adm_l_print.php?course_id=<?= $row['course_id'] ?>"><?= $row['course_title'] ?></a></td>
               <?php
@@ -139,7 +152,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
               <td><?= $row['course_id'] ?></td>
               <td><?= $row['course_id'] ?></td>
               <td><?= $row['course_id'] ?></td>
-              <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+              <td><input type="checkbox" id="<?= $row['course_id'] ?>" value="<?= $row['course_id'] ?>" name="checked[]"><label for="<?= $row['course_id'] ?>"></label></td>
           <?php } ?>
           </tr>
         <?php } ?>
@@ -176,11 +189,12 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         ?>
     </ul>
     <div class="btn_box">
-      <button><a href="adm_l_write.php">강의생성</a></button>
-      <button>전체삭제</button>
-      <button>선택삭제</button>
+      <!-- <button><a href="adm_l_write.php">강의생성</a></button> -->
+      <!-- <button>전체삭제</button> -->
+      <button type="submit" formaction="delete.php" onclick="return post();">선택삭제</button>
     </div>
   </article>
+  </form>
   </main>
 
   <script>

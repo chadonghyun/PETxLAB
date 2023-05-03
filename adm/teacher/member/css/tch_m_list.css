@@ -76,11 +76,16 @@ select::-ms-expand{
   font-size: 14px;
   outline: none;
 }
-.bi-search{
-  color: #476088;
-  position: absolute;
+.b-search{
+  position:absolute;
   right: 126px;
   top: 239px;
+  border:none;
+  background-color: #F5F9FF;
+}
+
+.bi-search{
+  color: #476088;
   cursor: pointer;
 }
 
@@ -135,7 +140,7 @@ select::-ms-expand{
 #page_nv li:visited a {
   color: #333;
 }
-button{
+.btn_box button{
   position: absolute;
   bottom: 30px;
   background: none;
@@ -145,12 +150,12 @@ button{
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 }
-button:first-of-type{
+.btn_box button:first-of-type{
   right: 170px;
   background: #8599B9;
   color: #fff;
 }
-button:last-of-type{
+.btn_box button:last-of-type{
   right: 30px;
   border: 1px solid #8599B9;
   color: #8599B9;

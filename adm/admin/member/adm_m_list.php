@@ -34,7 +34,8 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       </form>
     </div>
   </article>
-
+  <form action="" method="post">
+  <input type="hidden" name="no" value="<?=$no?>">
   <article id="main_b">
     <table id="c_list">
       <thead>
@@ -108,7 +109,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
           <td>20</td>
           <td><?=$row['reg_date'] ? date('Y-m-d', strtotime($row['reg_date'])) : ''?></td>
           <td><i class="bi bi-envelope"></i></td>
-          <td><input type="checkbox" id="<?=$row['number']?>"><label for="<?=$row['number']?>"></label></td>
+          <td><input type="checkbox" id="<?=$row['number']?>" value="<?=$row['number']?>" name="checked[]"><label for="<?=$row['number']?>"></label></td>
         </tr>
         <?php } ?>
       </tbody>
@@ -144,9 +145,12 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         ?>
     </ul>
     
-    <button><i class="bi bi-envelope"></i> 전체발송</button>
-    <button><i class="bi bi-envelope"></i> 선택발송</button>
+    <div class="btn_box">
+      <button type="submit" formaction="mailto.php" onclick="return post();"><i class="bi bi-envelope"></i> 선택발송</button>
+      <button type="submit" formaction="delete.php" onclick="return post();">선택삭제</button>
+    </div>
   </article>
+  </form>
   </main>
 
   <script>

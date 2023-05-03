@@ -46,59 +46,85 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       </form>
     </div>
   </article>
+
+  <form action="" method="post">
+  <input type="hidden" value="<?=$no?>" name="no">
   <article id="main_b">
     <table id="c_list">
       <thead>
 
       <?php
-          $sql = "select * from boardqnareg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")." order by number desc";  
-
           if($no == 1){
             echo "<tr><th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th><th><input type='checkbox' id='check1' onclick='selectAll(this)'><label for='check1'></label></th></tr>  </thead>";
             $sql = "select * from boardnoticereg order by number desc";
+            $sql_count = "SELECT COUNT(*) AS count FROM boardnoticereg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "");
           }else if($no == 2){
             echo "<tr><th>No</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일</th><th>답변여부</th><th><input type='checkbox' id='check1' onclick='selectAll(this)'><label for='check1'></label></th></tr>       </thead>";
             $sql = "select * from boardqnareg order by number desc";
+            $sql_count = "SELECT COUNT(*) AS count FROM boardqnareg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : ""); 
           }
 
-        $result = mysqli_query($con, $sql);
-        $num = mysqli_num_rows($result);
+        $result_count = mysqli_query($con, $sql_count);
+        $row_count = mysqli_fetch_assoc($result_count);
+        $num = $row_count['count'];
 
         $list_num = 10;
         $page_num = 5;
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-        $total_page = ceil($num / $list_num);
-        $total_block = ceil($total_page / $page_num);
-        $now_block = ceil($page / $page_num);
-        $s_pageNum = ($now_block -1) * $page_num +1;
-        if($s_pageNum <= 0){$s_pageNum = 1;};
-        $e_pageNum = $now_block * $page_num;
-        if($e_pageNum > $total_page){$e_pageNum = $total_page;};
+
+        // 검색 결과에 따른 전체 페이지 수와 전체 블록 수 구하기
+        if ($num > 0) {
+          $total_page = ceil($num / $list_num);
+          $total_block = ceil($total_page / $page_num);
+          $now_block = ceil($page / $page_num);
+          $s_pageNum = ($now_block -1) * $page_num +1;
+          if($s_pageNum <= 0){$s_pageNum = 1;};
+          $e_pageNum = $now_block * $page_num;
+          if($e_pageNum > $total_page){$e_pageNum = $total_page;};
+        } else {
+          $total_page = 1;
+          $total_block = 1;
+          $now_block = 1;
+          $s_pageNum = 1;
+          $e_pageNum = 1;
+        }
 
         $start = ($page - 1) * $list_num;
         $cnt = $start + 1;
-        $i = 1;
+
+
         if($no == 1){
           $query = "SELECT * FROM boardnoticereg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")."  ORDER BY number DESC LIMIT $start, $list_num";
           $result3 = mysqli_query($con, $query);
+
+          $query2 ="SELECT * FROM boardnoticereg ".($find != "" ? "WHERE ".$catgo." LIKE '%".$find."%' " : "")."  ORDER BY number DESC";
+          $result4 = mysqli_query($con, $query2);
+          $num2 = mysqli_num_rows($result4);
+          $i =  $num2 - (($page-1)*10);
           while($row = mysqli_fetch_array($result3)) {
             echo "<tbody>";
             echo "<tr>";
-            echo "<td>".$row['number']."</td>";
+            echo "<td>".$i."</td>";
             echo "<td> 공지사항 </td>";
             echo "<td><a href='adm_b_view.php?idx=".$row['number']."'>".$row['Board_title']."</a></td>";
             echo "<td>".$row['user_name']."</td>";
             echo "<td>".substr($row['Board_date'],0,10)."</td>";
             echo "<td>".$row['user_views']."</td>";
-            echo "<td><input type='checkbox' id='".$row['number']."'><label for=". $row['number']."></label></td>";
+            echo "<td><input type='checkbox' id='".$row['number']."' value='".$row['number']."' name='checked[]'><label for=". $row['number']."></label></td>";
             echo "</tr>";
+            $i--;
           }
         }else if($no == 2){
 
           $sql = "SELECT * FROM boardqnareg WHERE course_id ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")." ORDER BY number DESC LIMIT $start, $list_num";                  
           $result3 = mysqli_query($con, $sql);
+
+          $sql2 = "SELECT * FROM boardqnareg WHERE course_id ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")." ORDER BY number DESC";
+          $result4 = mysqli_query($con,$sql2);
+          $num2 = mysqli_num_rows($result4);
+          $i =  $num2 - (($page-1)*10);
             while ($row2 = mysqli_fetch_assoc($result3)) {
-              echo "<tr><td>" . sprintf("%03d", $row2['number']) . "</td>";
+              echo "<tr><td>" . $i . "</td>";
               echo "<td>" . $row2['qna_category'] . "</td>";
               echo "<td>" . $row2['qna_title'] . "</td>";
               echo "<td>" . $row2['user_id'] . "</td>";
@@ -108,8 +134,9 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
               } else {
                 echo "<td>답변완료</td>";
               }
-              echo "<td><input type='checkbox' id='".$row2['number']."'><label for=". $row2['number']."></label></td>";
+              echo "<td><input type='checkbox' id='".$row2['number']."' value='".$row2['number']."' name='checked[]'><label for=". $row2['number']."></label></td>";
               echo "</tr>";
+              $i--;
             }
         }
       ?>
@@ -149,11 +176,16 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     </ul>
 
     <di class="btn_box">
-    <button onclick="location.href='adm_b_write.php'";>게시글작성</button>
-    <button>전체삭제</button>
-    <button>선택삭제</button>
-      </di>
+      <button onclick="location.href='adm_b_write.php'">게시글작성</button>
+      <!-- <button>전체삭제</button> -->
+      <?php if($no == 1){ ?>
+      <button type="submit" formaction="notice_delete.php" onclick="return post();">선택삭제</button>
+      <?php }else if($no == 2){ ?>
+      <button type="submit" formaction="qna_delete.php" onclick="return post();">선택삭제</button>
+      <?php } ?>
+    </di>
   </article>
+  </form>
   </main>
 
   <script>

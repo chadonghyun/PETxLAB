@@ -6,6 +6,9 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 $no=empty($_GET['no']) ? 1 : $_GET['no'];
 $find=empty($_GET['find']) ? '' : $_GET['find'];
 $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
+
+
+
 ?>
 
 <!-- 메인영역 -->
@@ -33,6 +36,9 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
       </div>
     </form>
   </article>
+
+  <form action="" method="post">
+  <input type="hidden" name="no" value="<?=$no?>">
   <article id="main_b">
     <table id="c_list">
       <thead>
@@ -44,12 +50,25 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
   <?php
 // 1. 전체 데이터 갯수 
 $sql = "SELECT COUNT(*) as total FROM coursereg";
-$sql .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
-$sql .=($find != "" ? "AND " . $catgo . " LIKE '%" . $find . "%'" : "");
-
+if ($no == 1) {
+  $sql .= " WHERE coursereg.course_type = 'general'";
+  $sql .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+} else if ($no == 2) {
+  $sql .= " WHERE coursereg.course_type = 'professional'";
+  $sql .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+}else{
+$sql .= ($find != "") ? " WHERE " . $catgo . " LIKE '%" . $find . "%'" : "";
+}
 $result = mysqli_query($con, $sql);
+if (!$result) {
+  die(mysqli_error($con));
+}
+
 $row = mysqli_fetch_assoc($result);
 $total_records = $row['total'];
+
+
+
 
 // Calculate pagination variables
 $list_num = 10;
@@ -70,12 +89,13 @@ $start = ($page - 1) * $list_num;
 // Build the query to fetch records with pagination
 $sql2 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id";
 $sql2 .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
+$sql2 .= ($no == 3) ? "" : "";
 $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
 
-
+// or 2. 
 $sql2 .= " ORDER BY coursereg.course_id DESC LIMIT " . $start . "," . $list_num;
 $result2 = mysqli_query($con, $sql2);
-$cnt = $start + 1;
+
 
 
 // 전체값을 받아 오는 것
@@ -110,7 +130,7 @@ if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
             <td><?= $row['course_id'] ?></td>
-            <td><input type="checkbox" id="<?= $row['course_id'] ?>"><label for="<?= $row['course_id'] ?>"></label></td>
+            <td><input type="checkbox" id="<?= $row['course_id'] ?>" value="<?= $row['course_id'] ?>" name="checked[]"><label for="<?= $row['course_id'] ?>"></label></td>
         </tr>
     <?php } ?>
 </tbody>
@@ -146,11 +166,11 @@ if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정
         ?>
     </ul>
     <div class="btn_box">
-      <button onclick="location.href='tch_l_write.php'"; >강의생성</button>
-      <button>전체삭제</button>
-      <button>선택삭제</button>
+      <button type="submit" formaction="tch_l_write.php" >강의생성</button>
+      <button type="submit" formaction="delete.php" onclick="return post();">선택삭제</button>
     </div>
   </article>
+  </form>
   </main>
 
   <script>
@@ -192,6 +212,7 @@ if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정
           anchor.style.color = '#333';
         }
       }
+
     });
   </script>
 </body>

@@ -13,6 +13,11 @@ include_once '../config.php';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/favicon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/favicon/favicon.ico" type="image/x-icon">
+  
   <!-- 부트스트랩 css연결 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <!-- 부트스트랩 아이콘 연결 -->
@@ -44,8 +49,8 @@ include_once '../config.php';
             <input type="password" placeholder="비밀번호" name="user_pass" class="password">
             <div class="find">
               <div>
-                <input type="checkbox" class="checkbox" name="save_id">
-                <label for="id">아이디 저장</label>
+                <input type="checkbox" class="checkbox" name="save_id" id="save_id">
+                <label for="save_id">아이디 저장</label>
               </div>
               <div>
                 <a href="#none" title="아이디찾기" id="find_id">아이디 찾기</a>

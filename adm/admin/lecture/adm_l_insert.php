@@ -30,7 +30,7 @@ $user_id = $_POST["user_id"];
 
 
 $sql = "INSERT INTO coursereg (course_type, course_category, course_title, course_startday, course_endday, course_duration, course_price, course_image, course_shortdesc, course_longdesc, user_id) 
-VALUES ('$course_type', '$course_category', '$course_title', '$course_startday', '$course_endday', '$course_duration', $course_price, '$course_image', '$course_shortdesc', '$course_longdesc', 'used_id')";
+VALUES ('$course_type', '$course_category', '$course_title', '$course_startday', '$course_endday', '$course_duration', $course_price, '$course_image', '$course_shortdesc', '$course_longdesc', '$user_id')";
 
 $result2 = mysqli_query($con, $sql);
 
