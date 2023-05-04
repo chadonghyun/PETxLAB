@@ -39,9 +39,74 @@
         <span>&nbsp;</span>
         <span>&nbsp;</span>
       </li>
-      <li><a href="index.php" title="메인페이지 바로가기"><img src="./images/logo_main.png" alt="메인로고"></a></li>
-      <li><img src="./images/logo_user.png" alt="user아이콘"></li>
+      <li><a href="index.php" title="메인페이지 바로가기"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo_main.png" alt="메인로고"></a></li>
+      <li class="user_bar"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo_user.png" alt="user아이콘"></li>
     </ul>
+
+    <article class="left_box">
+      <div class="gnb_hd">
+        <button>로그아웃</button>
+        <div class="close_btn">
+          <span>&nbsp;</span>
+          <span>&nbsp;</span>
+        </div>
+      </div>
+      <ul class="gnb">
+        <div class="cat_box">
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/cat.png" alt="">
+        </div>
+        <li class="act01">아카데미소개
+          <ul class="lnb">
+            <li><a href="#none" title="회사소개">회사소개</a></li>
+            <li><a href="#none" title="찾아오시는 길">찾아오시는 길</a></li>
+          </ul>
+        </li>
+        <li>전문교육과정
+          <ul class="lnb">
+            <li><a href="#none" title="반려동물 전문창업">반려동물 전문창업</a></li>
+            <li><a href="#none" title="반려동물 행동교정사">반려동물 행동교정사</a></li>
+            <li><a href="#none" title="반려동물 식품관리사">반려동물 식품관리사</a></li>
+            <li><a href="#none" title="펫 유치원 교원사">펫 유치원 교원사</a></li>
+            <li><a href="#none" title="펫 뷰티션">펫 뷰티션</a></li>
+            <li><a href="#none" title="펫 장례코디네이터">펫 장례코디네이터</a></li>
+            <li><a href="#none" title="반려동물 관리사">반려동물 관리사</a></li>
+            <li><a href="#none" title="동물병원 코디네이터">동물병원 코디네이터</a></li>
+            <li><a href="#none" title="펫시터">펫시터</a></li>
+          </ul>
+        </li>
+        <li>일반교육과정
+          <ul class="lnb">
+            <li><a href="#none" title="펫푸드">펫푸드</a></li>
+            <li><a href="#none" title="펫미용">펫미용</a></li>
+            <li><a href="#none" title="펫아이템">펫아이템</a></li>
+            <li><a href="#none" title="행동교정">행동교정</a></li>
+          </ul>
+        </li>
+        <li>수강후기
+          <ul class="lnb">
+            <li><a href="#none" title="동문현황">동문현황</a></li>
+            <li><a href="#none" title="영상후기">영상후기</a></li>
+            <li><a href="#none" title="자필후기">자필후기</a></li>
+          </ul>
+        </li>
+        <li>취창업정보
+          <ul class="lnb">
+            <li><a href="#none" title="구인정보">구인정보</a></li>
+            <li><a href="#none" title="인재등록">인재등록</a></li>
+            <li><a href="#none" title="자료실">자료실</a></li>
+          </ul>
+        </li>
+        <li>고객센터
+          <ul class="lnb">
+            <li><a href="#none" title="공지사항">공지사항</a></li>
+            <li><a href="#none" title="아카데미뉴스">아카데미뉴스</a></li>
+            <li><a href="#none" title="교육현장갤러리">교육현장갤러리</a></li>
+            <li><a href="#none" title="1:1문의">1:1문의</a></li>
+            <li><a href="#none" title="자주하는 질문">자주하는 질문</a></li>
+          </ul>
+        </li>
+      </ul>
+    </article>
 
     <article class="right_box">
       <div class="gnb_hd">
@@ -51,58 +116,54 @@
           <span>&nbsp;</span>
         </div>
       </div>
-      <ul class="gnb">
-        <li class="act01">아카데미소개
-          <ul class="lnb">
-            <li>회사소개</li>
-            <li>찾아오시는 길</li>
-          </ul>
-        </li>
-        <li>전문교육과정
-          <ul class="lnb">
-            <li>반려동물 전문창업</li>
-            <li>반려동물 행동교정사</li>
-            <li>반려동물 식품관리사</li>
-            <li>펫 유치원 교원사</li>
-            <li>펫 뷰티션</li>
-            <li>반려동물장례코디네이터</li>
-            <li>반려동물관리사</li>
-            <li>동물병원코디네이터</li>
-            <li>펫시터</li>
-          </ul>
-        </li>
-        <li>일반교육과정
-          <ul class="lnb">
-            <li>펫푸드</li>
-            <li>펫미용</li>
-            <li>펫아이템</li>
-            <li>행동교정</li>
-          </ul>
-        </li>
-        <li>수강후기
-          <ul class="lnb">
-            <li>동문현황</li>
-            <li>영상후기</li>
-            <li>자필후기</li>
-          </ul>
-        </li>
-        <li>취창업정보
-          <ul class="lnb">
-            <li>구인정보</li>
-            <li>인재등록</li>
-            <li>자료실</li>
-          </ul>
-        </li>
-        <li>고객센터
-          <ul class="lnb">
-            <li>공지사항</li>
-            <li>아카데미뉴스</li>
-            <li>교육현장갤러리</li>
-            <li>1:1문의</li>
-            <li>자주하는 질문</li>
-          </ul>
-        </li>
-      </ul>
+
+      <div class="user_info">
+        <div class="flex_box">
+          <div class="img_box">
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo.png" alt="user_img">
+          </div>
+          <div class="txt_box">
+            <p>안녕하세요</p>
+            <p><span>이름자리</span>님</p>
+          </div>
+        </div>
+        <div class="myPage">
+          <p><a href="#none" title="나의정보">나의정보</a></p>
+          <p><a href="#none" title="나의정보">1:1 상담</a></p>
+        </div>
+      </div>
+
+      <a href="#none" title="내강의실 바로가기" class="lecture_box">
+          <div>
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/icon01.png" alt="내강의실">
+          </div>
+          <p>내 강의실</p>
+          <span>&nbsp;</span>
+      </a>
+
+      <a href="#none" title=">학습중인수업 바로가기" class="lecture_box">
+          <div>
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/icon02.png" alt=">학습중인수업">
+          </div>
+          <p>학습중인 수업</p>
+          <span>0건</span>
+      </a>
+
+      <a href="#none" title="학습종료된 수업 바로가기" class="lecture_box">
+          <div>
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/icon03.png" alt="학습종료된 수업">
+          </div>
+          <p>학습종료된 수업</p>
+          <span>0건</span>
+      </a>
+
+      <a href="#none" title="수업신청내역 바로가기" class="lecture_box">
+          <div>
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/icon04.png" alt="수업신청내역">
+          </div>
+          <p>수업신청내역</p>
+          <span>0건</span>
+      </a>
     </article>
   </header>
 

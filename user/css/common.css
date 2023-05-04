@@ -7,6 +7,7 @@
     width: 100%;
     height: 80px;
     position: fixed;
+    z-index: 100;
   }
   .mnu_bar{
     cursor: pointer;
@@ -70,7 +71,7 @@
   }
 
   /* gnb서식 */
-  .right_box{
+  .left_box{
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -78,7 +79,7 @@
     left: -100%;
     background: #fff;
   }
-  .right_box::after{
+  .left_box::after{
     content: '';
     position: absolute;
     bottom: 0px;
@@ -130,6 +131,20 @@
     font-family: "yg-jalnan";
     z-index: 1;
   }
+  .gnb > .cat_box{
+    position: absolute;
+    top: 36px;
+    left: 181px;
+    overflow: hidden;
+    width: 50px;
+    height: 30px;
+  }
+  }
+  .gnb > .cat_box > img{
+    width: 50px;
+    position: absolute;
+    left: -60px;
+  }
   /* 선택된 li 서식 클래스 */
   .act01{
     color: var(--sub-colorbr) !important;
@@ -141,16 +156,121 @@
   }
   .lnb{
     display: none;
-    padding: 24px 0px 0px 17px;
+    padding: 24px 0px 0px 35px;
     position: absolute;
     top: 0px;
-    left: 50%;
+    left: -50%;
   }
-  .lnb > li{
+  .lnb > li > a{
     font-size: 16px;
     color: #666;
   }
-}
 
-
+  .right_box{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    right: -100%;
+    background: var(--sub-colorbl);
+  }
+  .user_info{
+    width: 380px;
+    height: 176px;
+    background: #fff;
+    margin: 0px auto;
+    margin-bottom: 25px;
+    border-radius: 20px;
+  }
+  .flex_box{
+    display: flex;
+    padding: 20px 0px 0px 20px;
+    align-items: center;
+    height: 125px;
+    border-bottom: 1px solid #E1E1E1;
+  }
+  .img_box{
+    width: 80px;
+    height: 80px;
+    background: var(--sub-colorbl);
+    border-radius: 50px;
+    position: relative;
+  }
+  .img_box > img{
+    width: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .txt_box{
+    padding-left: 20px;
+  }
+  .txt_box > p{
+    font-weight: 500;
+  }
+  .txt_box > p:first-child{
+    padding-bottom: 6px;
+  }
+  .txt_box > p > span{
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .myPage{
+    display: flex;
+    justify-content: space-around;
+  }
+  .myPage > p{
+    width: 185px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: 400;
+  }
+  .myPage > p:first-child{
+    border-right: 1px solid #E1E1E1;
+  }
+  a{
+    color: #333;
+  }
+  a:visited{
+    color: #333;
+  }
+  a:active{
+    color: #333;
+  }
+  .lecture_box{
+    display: block;
+    margin: 0px auto;
+    width: 380px;
+    height: 80px;
+    background: #fff;
+    border-radius: 20px;
+    margin-bottom: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .lecture_box > div{
+    width: 52px;
+    height: 52px;
+    background: var(--sub-colorbl);
+    border-radius: 50px;
+    position: relative;
+  }
+  .lecture_box > div > img{
+    width: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .lecture_box > p{
+    width: 150px;
+    text-align: left;
+    color: var(--f-colorbr);
+    font-family: "yg-jalnan";
+  }
+  .lecture_box > span{
+    width: 30px;
+  }
 
