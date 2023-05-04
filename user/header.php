@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/base.css" type="text/css">
   <!-- coom.css(헤더&푸터서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/common.css" type="text/css">
+  <!-- myclass.css(나의강의실서식) -->
+  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/css/myclass.css">
   <!-- 헤더.js -->
   <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/js/header.js"></script>
   <!-- myclass.js(나의강의실스크립트) -->
