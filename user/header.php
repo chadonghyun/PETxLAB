@@ -29,7 +29,10 @@
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/base.css" type="text/css">
   <!-- coom.css(헤더&푸터서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/common.css" type="text/css">
-  <script src="./js/header.js"></script>
+  <!-- 헤더.js -->
+  <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/js/header.js"></script>
+  <!-- myclass.js(나의강의실스크립트) -->
+  <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/js/myclass.js" defer></script>
 </head>
 <body>
   <header>
@@ -55,13 +58,14 @@
         <div class="cat_box">
           <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/cat.png" alt="">
         </div>
-        <li class="act01">아카데미소개
+        <li class="act01"><a href="#none" title="아카데미소개">아카데미소개</a>
           <ul class="lnb">
             <li><a href="#none" title="회사소개">회사소개</a></li>
             <li><a href="#none" title="찾아오시는 길">찾아오시는 길</a></li>
           </ul>
         </li>
-        <li>전문교육과정
+        
+        <li><a href="#none" title="전문교육과정">전문교육과정</a>
           <ul class="lnb">
             <li><a href="#none" title="반려동물 전문창업">반려동물 전문창업</a></li>
             <li><a href="#none" title="반려동물 행동교정사">반려동물 행동교정사</a></li>
@@ -74,7 +78,8 @@
             <li><a href="#none" title="펫시터">펫시터</a></li>
           </ul>
         </li>
-        <li>일반교육과정
+
+        <li><a href="#none" title="일반교육과정">일반교육과정</a>
           <ul class="lnb">
             <li><a href="#none" title="펫푸드">펫푸드</a></li>
             <li><a href="#none" title="펫미용">펫미용</a></li>
@@ -82,21 +87,24 @@
             <li><a href="#none" title="행동교정">행동교정</a></li>
           </ul>
         </li>
-        <li>수강후기
+
+        <li><a href="#none" title="수강후기">수강후기</a>
           <ul class="lnb">
             <li><a href="#none" title="동문현황">동문현황</a></li>
             <li><a href="#none" title="영상후기">영상후기</a></li>
             <li><a href="#none" title="자필후기">자필후기</a></li>
           </ul>
         </li>
-        <li>취창업정보
+
+        <li><a href="#none" title="취창업정보">취창업정보</a>
           <ul class="lnb">
             <li><a href="#none" title="구인정보">구인정보</a></li>
             <li><a href="#none" title="인재등록">인재등록</a></li>
             <li><a href="#none" title="자료실">자료실</a></li>
           </ul>
         </li>
-        <li>고객센터
+
+        <li><a href="#none" title="고객센터">고객센터</a>
           <ul class="lnb">
             <li><a href="#none" title="공지사항">공지사항</a></li>
             <li><a href="#none" title="아카데미뉴스">아카데미뉴스</a></li>
@@ -166,11 +174,6 @@
       </a>
     </article>
   </header>
-
-  <?php
-    include './footer.php';
-  ?>
-
   <!-- php작업시 아래 태그 기재하여 작업하기~ -->
   <!-- <main></main>
 </body>
