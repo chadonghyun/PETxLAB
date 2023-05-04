@@ -120,7 +120,7 @@
       <h2>수료증</h2>
       <a href="" title="전체보기">전체보기</a>
     </div>
-    <div class="cer_none">
+    <!-- <div class="cer_none">
       <div class="cer_img">
         <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/nocer.png" alt="">
       </div>
@@ -129,17 +129,17 @@
         <p>수료발급 가능 강의를 완강해보세요!</p>
         <?php?><a href="#none" title="강의보러가기">강의보러가기</a>
       </div>
-    </div>
-    <!-- <div class="cer_com">
-      <figure>
-        <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/exbg.png" alt="">
-        <figcaption><?php?>펫 베이커리 특화과정1</figcaption>
-      </figure>
-      <figure>
-        <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/exbg.png" alt="">
-        <figcaption><?php?>펫 베이커리 특화과정1</figcaption>
-      </figure>
     </div> -->
+    <div class="cer_com">
+      <figure>
+        <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/exbg.png" alt="">
+        <figcaption><?php?>펫 베이커리 특화과정1</figcaption>
+      </figure>
+      <figure>
+        <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/exbg.png" alt="">
+        <figcaption><?php?>펫 베이커리 특화과정1</figcaption>
+      </figure>
+    </div>
   </section>
 
 
@@ -158,10 +158,10 @@
         <li class="tab" data-tab="all">
           <div class="content">
             <p>
-              <?php?><span>펫 베이커리 특화과정1</span>
+              <span><?php?>펫 베이커리 특화과정1</span>
               <?php?><span class="sol">해결</span>
             </p>
-            <p><?php?>질문질문질문질문질문질문</p>
+            <p><?php?>질문질문질문질문질문질문질문</p>
             <span><?php?>2000.02.20</span>
           </div>
           <div class="content">
@@ -169,7 +169,7 @@
             <?php?><span>펫 베이커리 특화과정2</span>
             <?php?><span class="unsol">미해결</span>
             </p>
-            <p><?php?>질문질문질문질문질문질문</p>
+            <p><?php?>질문질문질문질문질문질문질문질문질문질문질문질문</p>
             <span><?php?>2000.02.20</span>
           </div>
         </li>
@@ -179,8 +179,8 @@
             <?php?><span>펫 베이커리 특화과정2</span>
             <?php?><span class="sol">해결</span>
           </p>
-            <p><?php?>질문질문질문질문질문질문</p>
-            <span><?php?>2000.02.20</span>
+          <p><?php?>질문질문질문질문질문질문질문질문질문질문질문질문</p>
+          <span><?php?>2000.02.20</span>
           </div>
         </li>
         <li class="tab" data-tab="solved">
@@ -189,8 +189,8 @@
             <?php?><span>펫 베이커리 특화과정3</span>
             <?php?><span class="sol">해결</span>
           </p>
-            <p><?php?>질문질문질문질문질문질문</p>
-            <span><?php?>2000.02.20</span>
+          <p><?php?>질문질문질문질문질문질문질문질문질문질문질문질문</p>
+          <span><?php?>2000.02.20</span>
           </div>
         </li>
       </ul>
