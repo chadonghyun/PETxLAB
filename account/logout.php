@@ -3,16 +3,27 @@
 session_start();
 
 //unset = 정보삭제
-unset($_SESSION['userid']);
-unset($_SESSION['username']);
+session_destroy();
 
 //echo ==  document.write
-echo("
-
-  <script>
-    location.href = './login.php';
-  </script>
-
-")
+if (isset($_SESSION['user_level']) && $_SESSION['user_level'] == '2') {
+  echo "
+    <script>
+      location.href = './login.php';
+    </script>
+  ";
+} else if (isset($_SESSION['user_level']) && $_SESSION['user_level'] == '3') {
+  echo "
+    <script>
+      location.href = './login.php';
+    </script>
+  ";
+} else {
+  echo "
+    <script>
+      location.href = '../user/header.php';
+    </script>
+  ";
+}
 
 ?>

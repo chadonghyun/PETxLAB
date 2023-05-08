@@ -29,12 +29,10 @@
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/base.css" type="text/css">
   <!-- coom.css(헤더&푸터서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/common.css" type="text/css">
-  <!-- myclass.css(나의강의실서식) -->
-  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/css/myclass.css">
   <!-- 헤더.js -->
   <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/js/header.js"></script>
   <!-- myclass.js(나의강의실스크립트) -->
-  <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/js/myclass.js" defer></script>
+  <!-- <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/js/myclass.js" defer></script> -->
 </head>
 <body>
   <header>
@@ -44,13 +42,39 @@
         <span>&nbsp;</span>
         <span>&nbsp;</span>
       </li>
-      <li><a href="index.php" title="메인페이지 바로가기"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo_main.png" alt="메인로고"></a></li>
-      <li class="user_bar"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo_user.png" alt="user아이콘"></li>
+
+      <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/index.php" title="메인페이지 바로가기"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo_main.png" alt="메인로고"></a></li>
+      
+      <?php 
+          if(!$userid){
+        ?>
+        <li class="user_bar"><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/login.php">LOGIN</a></li>
+        <?php
+          }else{
+            $logged = $userid;
+        ?>
+        <li class="user_bar"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo_user.png" alt="user아이콘"></li>
+        <?php
+          }
+        ?>
     </ul>
 
     <article class="left_box">
       <div class="gnb_hd">
-        <button>로그아웃</button>
+      <?php 
+          if(!$userid){
+        ?>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/login.php">
+        <button class="log_btn">로그인</button></a>
+        <?php
+          }else{
+            $logged = $userid;
+        ?>
+        <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/logout.php" title="로그아웃">
+        <button class="out_btn">로그아웃</button></a>
+        <?php
+          }
+        ?>
         <div class="close_btn">
           <span>&nbsp;</span>
           <span>&nbsp;</span>
@@ -60,7 +84,7 @@
         <div class="cat_box">
           <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/cat.png" alt="">
         </div>
-        <li class="act01"><a href="#none" title="아카데미소개">아카데미소개</a>
+        <li class="act01"><a href="#none" title="아카데미소개" class="act01">아카데미소개</a>
           <ul class="lnb">
             <li><a href="#none" title="회사소개">회사소개</a></li>
             <li><a href="#none" title="찾아오시는 길">찾아오시는 길</a></li>
@@ -120,7 +144,24 @@
 
     <article class="right_box">
       <div class="gnb_hd">
-        <button>로그아웃</button>
+        <?php 
+            if(!$userid){
+          ?>
+          <a href="$_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/login.php"><button class="log_btn">로그인</button></a>
+          <?php
+            }else{
+              $logged = $userid;
+          ?>
+          <ul>
+            <li class="mnu_bar">
+              <span>&nbsp;</span>
+              <span>&nbsp;</span>
+              <span>&nbsp;</span>
+            </li>
+          </ul>
+          <?php
+            }
+          ?>
         <div class="close_btn">
           <span>&nbsp;</span>
           <span>&nbsp;</span>

@@ -1,6 +1,6 @@
   <footer>
     <nav>
-    <a href="./index.php"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo.png" alt="logo"></a>
+    <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/index.php" title="메인페이지 바로가기">"><img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo.png" alt="logo"></a>
       <ul>
         <li>상호:펫츠랩 &#xFF5C; 대표자명:김조은</li>
         <li>사업자등록번호:00-000-0000</li>
