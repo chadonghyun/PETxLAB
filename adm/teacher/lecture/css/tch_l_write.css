@@ -212,4 +212,75 @@ box-sizing: border-box;
  .id{
     padding-bottom:30px;
 }
-  
+
+#lecreg .source{
+    display:flex;
+}
+#lecreg .source .card{
+    width:50%;
+    height:592px;
+    margin-top:50px;
+}
+#lecreg .source .paper{
+    margin-right:20px;
+}
+#lecreg .source .list_box{
+    width:100%;
+    height:425px;
+    padding:0px 40px;
+    border: 1px solid #8599B9;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.05));
+    border-radius: 20px;
+    margin-top:10px;
+    position:relative;
+}
+#lecreg .source .t_box{
+    display:flex;
+    justify-content: space-between;
+    height:30px;
+    margin-right:30px;
+}
+#lecreg .source .t_box li label{
+    position: absolute;
+    top: 38px; right: 90px;
+}
+#lecreg .source .button_box{
+    text-align:right;
+}
+#lecreg .source .button_box .button{
+    background: #8599B9;
+    border: 1px solid #8599B9;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    width: 128px;
+    height: 40px;
+    position:relative;
+    right:0px;
+    margin-top:10px;
+    margin-right:10px;
+    color:#fff;
+}
+
+.content_Box .number span{
+    padding-right:10px;
+}
+.content_Box .number{
+    line-height: 32px;
+}
+.content_Box .number button{
+    position: absolute;
+    right: 55px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    margin-top: 8px;
+    background: #FFFFFF;
+    border: 1px solid #E1E1E1;  
+}
+.content_Box .number button .x{
+    font-size: 6px;
+    position: absolute;
+    top: -8px;
+    right: -6.5px;
+    color: #616165;
+}

@@ -43,10 +43,6 @@ $row2 = mysqli_fetch_assoc($result2);
             
             <button type="submit" formaction="tch_l_edit.php" class="edit">수정완료</button>
 
-
-
-
-
             <!-- <input type="reset" class="delete_all" value="강의삭제"></input> -->
           </div>
         </div>

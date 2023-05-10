@@ -152,19 +152,16 @@ select::-ms-expand{
   border-radius: 20px;
 }
 .btn_box button:first-of-type{
-  right: 315px;
+  right: 174px;
   background: #8599B9;
   color: #fff;
 }
-.btn_box button:nth-of-type(2){
-  right: 170px;
-  background: #FF4E4E;
-  color: #fff;
-}
+
 .btn_box button:last-of-type{
   right: 30px;
   border: 1px solid #FF4E4E;
-  color: #FF4E4E;
+  background-color:#FF4E4E ;
+  color: #FFF;
 }
 /* 검색창 x번튼 없애기 */
 input::-ms-clear,

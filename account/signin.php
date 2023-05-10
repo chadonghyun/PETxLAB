@@ -26,6 +26,8 @@ include_once '../config.php';
   <script src="./script/addressapi.js"></script>
   <!-- 제이쿼리 CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!-- signin_print 서식 -->
+    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/css/signin_print.css" type="text/css">
     
 </head>
 <body>

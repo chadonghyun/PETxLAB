@@ -39,7 +39,7 @@ $num = sprintf("%04d", $user['number']);
 
         <!-- 콘텐츠 내용 -->
         <div class="lecreg-contents">
-          <div class="lecreg-detail card">
+          <div class="lecreg-detail card" style="margin-bottom: 100px;">
 
               <div class="row">
                   <div class="col-md-6 lecreg-leftbox">
@@ -104,14 +104,35 @@ $num = sprintf("%04d", $user['number']);
 
                     <textarea name="course_longdesc" id="course_longdesc"rows="10" class="course_longdesc"></textarea>
                   </div>
-              </div>    
+                  <!-- 자료업데이트 -->
+                  <div class="source">
+                    <div class="col-me-6 card paper">
+                        <h3>학습자료</h3>
 
-          </div>
-        </div>
-      </div>
-    </form>  
-    </section>  
+                        <div id="preview" class="list_box"></div>
 
-    </main>
-  </body>
-</html>
+                          <div class="button_box">
+                            <input type="file" id="file-input"  name="course-file[]" multiple style="display: none;" />
+                            <button id="upload-btn" class="button">업데이트하기</button>
+                          </div>
+                          
+                        </div>
+                        <div class="col-me-6 card video">   
+                          <h3>강의목록</h3>
+                            <div id="preview2" class="list_box"></div>
+                          <div class="button_box">
+                            <input type="file" id="file-input2" multiple style="display: none;" />
+                            <button id="upload-btn2" class="button">업데이트하기</button>
+                          </div>
+                      </div>
+                    </div>    
+                    
+                  </div>
+                </div>
+              </div>
+            </form>  
+            </section>  
+            
+          </main>
+        </body>
+        </html>

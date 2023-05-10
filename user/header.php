@@ -27,8 +27,7 @@
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/reset.css" type="text/css">
   <!-- base.css(공통서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/base.css" type="text/css">
-  <!-- signin_print 서식 -->
-  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/css/signin_print.css" type="text/css">
+
   <!-- coom.css(헤더&푸터서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/common.css" type="text/css">
   <!-- 헤더.js -->

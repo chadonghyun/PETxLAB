@@ -12,7 +12,8 @@
   $email_id = isset($email_parts[0]) ? $email_parts[0] : '';
   $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
 ?>
-
+  <!-- signin_print 서식 -->
+  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/css/signin_print.css" type="text/css">
 
   <main>
     <h2>내정보 수정</h2>

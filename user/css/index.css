@@ -1,0 +1,448 @@
+main{
+  padding-top:80px;
+  box-sizing: border-box;
+}
+
+h2{
+  font-family: 'yg-jalnan';
+  color:#71635c;
+  font-size:36px;
+}
+section{
+  padding:0px 20px;
+  box-sizing: border-box;
+}
+
+#mbanner,#network{
+  padding:0px;
+}
+
+/* 1.mbanner */
+#mbanner{
+  width:100%;
+  height:54vh;
+  background-image: url('../images/background.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+#mbanner .img_box{
+  background-image: url('../images/FlowerCircle.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width:100%; height:41vh;
+  position:relative;
+  top:12%;
+  z-index: 10;
+}
+
+#mbanner ul{
+  padding:0px;
+  position: absolute;
+  box-sizing: border-box;
+  width:100%; height:100%;
+  top:0px;
+}
+
+#mbanner ul li{
+  width:33vh; height:33vh;
+  border-radius: 50%;
+  left:50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top:19%;
+}
+#mbanner ul li:first-child{
+  z-index:1
+}
+
+#mbanner ul li img{
+  width:100%;
+}
+
+/* 2.slogan */
+
+#slogan h2{
+  text-align:center;
+  padding-top:40px;
+  box-sizing: border-box;
+}
+#slogan h2 img{
+  width:124px;
+}
+
+#slogan .txt_box p{
+  text-align:center;
+  color:#71635c;
+  font-family: 'yg-jalnan';
+}
+#slogan .txt_box p:first-child{
+  padding:25px 0px;
+  font-size:36px;
+  line-height: 56px;
+}
+#slogan .txt_box p:first-child span{
+  font-size:48px;
+}
+#slogan .txt_box p:last-child{
+  line-height: 30px;
+  padding-bottom:60px;
+}
+
+/* 3.강의소개(intro) */
+
+
+#intro::before{
+  content:url('../images/tri_blue.png');
+  float:center;
+  /* background-color: yellowgreen; */
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%);
+}
+#intro::after{
+  content:url('../images/tri-white.png');
+  float:center;
+  /* background-color: yellowgreen; */
+  position:absolute;
+  bottom:-2px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+
+#intro{
+  background-color: #E1EDFF;
+  box-sizing: border-box;
+  padding: 60px 20px;
+  position: relative;
+  background-image: url(../images/blob1.png),url(../images/blob2.png),url(../images/blob3.png);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position-x: 100%,0%,100%;
+  background-position-y: -90px,403px,880px;
+}
+
+
+#intro .lecture_box{
+  width:100%;
+}
+
+#intro .lecture_box h2{
+  padding-bottom:40px;
+}
+#intro .teacher_intro{
+    padding-top:60px;
+}
+
+    /* 탭메뉴 */
+    #intro .tabmenu{
+      display:flex;
+      background-color: #FFFDF7;
+      height:60px;
+      border-radius: 20px;
+      border:5px solid #71635c;
+      margin-bottom:20px;
+    }
+    #intro .tabmenu div{
+      cursor:pointer;
+    }
+    #intro .tabmenu div:first-child{
+      width:50%;
+    }
+    
+
+    #intro .tabmenu div:last-child{
+      width: 50%;
+    }
+    #intro .tabmenu div p{
+      font-family: 'yg-jalnan';
+      color:#71635c;
+      font-size:20px;
+      text-align:center;
+      line-height: 50px; 
+    }
+    .on{
+      background-color:#71635c;
+      border-radius: 14px;
+    }
+    .on2{color:#fff !important;}
+
+    .slide_box .swiper {
+      border-bottom:5px solid #71635c;
+    }
+
+      .slide_box .img_box {
+      width: calc(100% - 10px); /* 테두리의 크기(5px * 2)를 고려한 너비 */
+      border: 5px solid #71635c;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    
+      .slide_box .img_box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      padding-bottom: 0;
+    }
+
+  #intro .second_slide{
+    display:none;
+  } 
+  .slide_box .swiper p{
+    text-align:center;
+    color:#71635c;
+    padding-bottom:60px;
+  }
+  .slide_box .swiper p:first-of-type{
+    padding:20px 0px;
+    font-family: 'yg-jalnan';
+    font-size:24px;
+  }
+  .slide_box .swiper p:last-of-type{
+    line-height: 24px;
+  }
+  .slide_box .swiper .button{
+    color:#fff;
+    top:30%;
+  }
+  .slide_box .swiper .button:after{
+    font-size:18px;
+    font-weight: bold;
+  }
+  .swiper .fraction{
+    font-family: 'yg-jalnan';
+    color:#fff;
+    font-size:20px;
+    left:38%;
+    bottom:196px;
+  }
+  #intro .third_slide .swiper{
+    width:100%;
+    height:385px;
+    background-color:#FFFDF7; 
+    border:5px solid #71635c;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+  
+  #intro .third_slide .swiper .swiper-slide .img_box{
+    width: 130px;
+    height: 130px;
+    margin: 30px auto 0;
+
+  }
+  #intro .third_slide .swiper .swiper-slide .img_box img{
+    width:100%; height:100%;
+  }
+  #intro .third_slide .swiper .swiper-slide h3{
+    font-family: 'yg-jalnan';
+    color:#71635c;
+    font-size:24px;
+    text-align:center;
+    padding:20px 0px;
+  }
+  #intro .third_slide .swiper .swiper-slide ul li{
+    text-align:center;
+    color:#71635c;
+    line-height: 24px;
+  }
+  #intro .third_slide .button::after{
+    font-size:20px;
+    font-weight: 700;
+    color:#71635c;
+  }
+  #intro .third_slide .button{
+    top:30%;
+  }
+  #intro .third_slide .fraction{
+    font-family: 'yg-jalnan';
+    color: #71635c;
+    font-size: 20px;
+    bottom: 5%;
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  /* 4.job */
+
+#job h2{
+  padding-top:60px;
+}  
+
+#job dl{
+  margin-top:20px;
+  border-top:5px solid #71635c;
+  padding-bottom: 60px;
+}
+#job dt{
+  margin:20px 0px 10px 0px;
+}
+#job dt a{
+  font-family: 'yg-jalnan';
+  color:#71635c;
+  font-size:24px;
+}
+#job dd{
+  color:#71635c;
+  line-height: 24px;
+  padding-bottom: 20px;
+  border-bottom:1px solid #71635c;
+}
+
+/* 5.recommend */
+#recommand h2{
+  padding-bottom:20px;
+}
+#recommand .swiper{
+  border:none;
+}
+
+/* 5.recommand */
+#recommand{
+  width:100%;
+  background-color: #E1EDFF;
+}
+#recommand h2{
+  padding:60px 0px 20px 0px;
+}
+
+/* 6.network */
+#network{
+  position:relative;
+  height:760px;
+}
+#network h2{
+  padding-top:60px;
+  text-align: center;
+}
+
+#network .background .talk{
+  transform:translateY(-15%);
+  width:100%;
+  height:457px;
+}
+#network .background .talk img{
+  width:100%;
+  height:100%;
+}
+#network .background .talk ul{
+  width:260px;
+  /* background-color: yellowgreen; */
+  position:absolute;
+  left:50%;
+  transform: translateX(-42%);
+  top:200px;
+}
+#network .background .talk ul li{
+  margin:0px auto;
+  position:absolute;
+  width:200px;
+  text-align: center;
+  line-height: 10px;
+}
+#network .background .talk ul li a{
+  font-family: 'yg-jalnan';
+  color:#71635c;
+  font-size:24px;
+}
+#network .background .talk ul li a span{
+  font-size:18px;
+}
+#network .cloud{
+  font-size: 5em;
+  animation: motion 1.8s /* 속도 */
+  linear 0s   /* 처음부터 끝까지 일정 속도로 진행 */
+  infinite alternate; /* 무한 반복 */
+}
+@keyframes motion {
+0% {margin-top: -10px;} /* 처음 위치 */
+100% {margin-top: 10px;} /* 마지막 위치 */
+}
+#network .talking_box{
+  font-size: 5em;
+  animation: motion2 1.8s /* 속도 */
+  linear 0s   /* 처음부터 끝까지 일정 속도로 진행 */
+  infinite alternate; /* 무한 반복 */
+}
+@keyframes motion2 {
+0% {margin-top: -40px;} /* 처음 위치 */
+100% {margin-top: -20px;} /* 마지막 위치 */
+}
+#network .animal{
+  top:460px;
+  left:0px;
+  position:absolute;
+  width:100%;
+  height:300px;
+  background-image:url(../images/greenbg.png);
+  background-size: cover;
+}
+#network .animal .circle{
+  position:relative;
+  top:-54px;
+  padding:40px;
+  box-sizing: border-box;
+  height:300px;
+  width:100%;
+  overflow: hidden;
+  /* background-color: yellow; */
+}
+#network .animal .circle .imgbox{
+  position:absolute;
+  width:200%;
+  left:50%;
+  transform: translateX(-50%);
+}
+#network .animal .circle .imgbox img{
+  width:100%;
+}
+.img {animation: rotate_image 40s linear infinite;
+  transform-origin: 50% 50%;}
+
+@keyframes rotate_image{
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 7.faq */
+#faq{
+  padding-bottom:60px;
+}
+
+#faq h2{
+  padding:60px 0px 20px 0px;
+  border-bottom:5px solid #71635c;
+}
+#faq dl dt{
+  font-family: 'yg-jalnan';
+  font-size:24px;
+  padding-top:20px;
+}
+#faq dl dt,#faq dl dd{
+  color:#71635c;
+  display: flex;
+}
+#faq dl p{
+  padding-right:10px;
+}
+
+#faq dl dd p:first-of-type{
+  font-family: 'yg-jalnan';
+  font-size:24px;
+  padding-right:10px;
+}
+#faq dl dd p{
+  line-height:26px;
+  border-bottom: 1px solid #71635c;
+  padding:20px 0px;
+}
+#faq dl dd p:last-of-type{
+  width:100%;
+}
