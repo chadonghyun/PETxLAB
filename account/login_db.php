@@ -60,7 +60,7 @@ if (!$num_match) {
     } else if ($userlevel == 3) {
       header('Location: ../adm/admin/a_index.php');
     } else{
-      header ('Location: ../user/header.php');
+      header ('Location: ../user/index.php');
     }
       exit;
   }

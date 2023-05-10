@@ -268,7 +268,7 @@
 }
 .cer_com > figure > img{
   width: 100%; height: calc(100% - 50px);
-  object-fit: cover;
+  object-fit: fill;
   vertical-align: top;
 }
 .cer_com > figure> figcaption{

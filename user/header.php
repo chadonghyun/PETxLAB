@@ -208,7 +208,7 @@
         </div>
       </div>
 
-      <a href="#none" title="내강의실 바로가기" class="lecture_box">
+      <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/myclass.php" title="내강의실 바로가기" class="lecture_box">
           <div>
           <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/icon01.png" alt="내강의실">
           </div>

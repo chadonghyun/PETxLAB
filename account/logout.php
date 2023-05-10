@@ -21,7 +21,7 @@ if (isset($_SESSION['user_level']) && $_SESSION['user_level'] == '2') {
 } else {
   echo "
     <script>
-      location.href = '../user/header.php';
+      location.href = '../user/index.php';
     </script>
   ";
 }

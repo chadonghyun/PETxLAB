@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+main{
+  padding:100px 20px 60px;
+  background-color: #F5F9FF;
+  color: #666;
+}
+.wrap{
+  padding: 30px;
+  background: var(--bg-colorwh);
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E1E1E1;
+}
+.wrap > h3{
+  font-size: var(--f-size20);
+}
+#QnA_title{
+  height: 40px;
+  border-radius: 20px;
+  padding: 0 20px;
+  border: 1px solid var(--sub-colorbl);
+}
+#QnA_con{
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--sub-colorbl);
+}
+::placeholder{
+  font-weight: bold;
+}
+.list_view, .post{
+  font-weight: bold;
+  color: var(--f-colorwh) !important;
+  display: block;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--sub-colorbl);
+}
+.del_post{
+  margin-top: 10px;
+  height: 40px;
+  border: 2px solid #FF4E4E;
+  border-radius: 20px;
+  color: #FF4E4E;
+  background-color: var(--bg-colorwh);
+  font-weight: bold;
+}
