@@ -131,7 +131,7 @@
     width: 50px;
     height: 30px;
   }
-  }
+  
   .gnb > .cat_box > img{
     width: 50px;
     position: absolute;
@@ -144,7 +144,7 @@
     display: block;
     width: 30px;
     height: 2px;
-    border-radius: 50%;
+    border-radius: 20px;
     background: #fff;
     right: 17px;
   }
@@ -205,6 +205,14 @@
     margin: 0px auto;
     margin-bottom: 25px;
     border-radius: 20px;
+    position: relative;
+  }
+  .user_info > p > a{
+    color: #FF4E4E;
+    display: inline-block;
+    position: absolute;
+    top: 30px;
+    right: 30px;
   }
   .flex_box{
     display: flex;
@@ -213,7 +221,7 @@
     height: 125px;
     border-bottom: 1px solid #E1E1E1;
   }
-  .img_box{
+  header .img_box{
     width: 80px;
     height: 80px;
     background: var(--sub-colorbl);
@@ -221,23 +229,24 @@
     position: relative;
     z-index: 1;
   }
-  .img_box > img{
+  header .img_box > img{
     width: 60px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .txt_box{
+  header .txt_box{
     padding-left: 20px;
   }
-  .txt_box > p{
+  
+  header .txt_box > p{
     font-weight: 500;
   }
-  .txt_box > p:first-child{
+  header .txt_box > p:first-child{
     padding-bottom: 6px;
   }
-  .txt_box > p > span{
+  header .txt_box > p > span{
     font-size: 24px;
     font-weight: 700;
   }
@@ -254,16 +263,16 @@
   .myPage > p:first-child{
     border-right: 1px solid #E1E1E1;
   }
-  a{
+  .myPage > p > a{
     color: #333;
   }
-  a:visited{
+  .myPage > p > a:visited{
     color: #333;
   }
-  a:active{
+  .myPage > p > a:active{
     color: #333;
   }
-  .lecture_box{
+  header .lecture_box{
     display: block;
     margin: 0px auto;
     width: 380px;
@@ -275,27 +284,27 @@
     align-items: center;
     justify-content: space-around;
   }
-  .lecture_box > div{
+  header .lecture_box > div{
     width: 52px;
     height: 52px;
     background: var(--sub-colorbl);
     border-radius: 50px;
     position: relative;
   }
-  .lecture_box > div > img{
+  header .lecture_box > div > img{
     width: 24px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .lecture_box > p{
+  header .lecture_box > p{
     width: 150px;
     text-align: left;
     color: var(--f-colorbr);
     font-family: "yg-jalnan";
   }
-  .lecture_box > span{
+  header .lecture_box > span{
     width: 30px;
   }
 
@@ -322,5 +331,4 @@
   footer > address{
     line-height: 20px;
   }
-  
-
+}

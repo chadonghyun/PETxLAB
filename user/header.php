@@ -27,12 +27,18 @@
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/reset.css" type="text/css">
   <!-- base.css(공통서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/base.css" type="text/css">
+  <!-- signin_print 서식 -->
+  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/css/signin_print.css" type="text/css">
   <!-- coom.css(헤더&푸터서식) -->
   <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/css/common.css" type="text/css">
   <!-- 헤더.js -->
   <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/js/header.js"></script>
   <!-- myclass.js(나의강의실스크립트) -->
   <!-- <script src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/js/myclass.js" defer></script> -->
+
+  <!-- 다음 주소 api -->
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="./script/addressapi.js"></script>
 </head>
 <body>
   <header>
@@ -93,15 +99,24 @@
         
         <li><a href="#none" title="전문교육과정">전문교육과정</a>
           <ul class="lnb">
-            <li><a href="#none" title="반려동물 전문창업">반려동물 전문창업</a></li>
-            <li><a href="#none" title="반려동물 행동교정사">반려동물 행동교정사</a></li>
-            <li><a href="#none" title="반려동물 식품관리사">반려동물 식품관리사</a></li>
-            <li><a href="#none" title="펫 유치원 교원사">펫 유치원 교원사</a></li>
-            <li><a href="#none" title="펫 뷰티션">펫 뷰티션</a></li>
-            <li><a href="#none" title="펫 장례코디네이터">펫 장례코디네이터</a></li>
-            <li><a href="#none" title="반려동물 관리사">반려동물 관리사</a></li>
-            <li><a href="#none" title="동물병원 코디네이터">동물병원 코디네이터</a></li>
-            <li><a href="#none" title="펫시터">펫시터</a></li>
+            <li><a href="#none" title="반려동물 전문창업">반려동물 전문창업</a>
+          </li>
+            <li><a href="#none" title="반려동물 행동교정사">반려동물 행동교정사</a>
+          </li>
+            <li><a href="#none" title="반려동물 식품관리사">반려동물 식품관리사</a>
+          </li>
+            <li><a href="#none" title="펫 유치원 교원사">펫 유치원 교원사</a>
+          </li>
+            <li><a href="#none" title="펫 뷰티션">펫 뷰티션</a>
+          </li>
+            <li><a href="#none" title="펫 장례코디네이터">펫 장례코디네이터</a>
+          </li>
+            <li><a href="#none" title="반려동물 관리사">반려동물 관리사</a>
+          </li>
+            <li><a href="#none" title="동물병원 코디네이터">동물병원 코디네이터</a>
+          </li>
+            <li><a href="#none" title="펫시터">펫시터</a>
+          </li>
           </ul>
         </li>
 
@@ -169,17 +184,27 @@
       </div>
 
       <div class="user_info">
+        <p><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/logout.php" title="로그아웃">로그아웃</a></p>
         <div class="flex_box">
           <div class="img_box">
           <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo.png" alt="user_img">
-          </div>
-          <div class="txt_box">
+        </div>
+        <div class="txt_box">
             <p>안녕하세요</p>
-            <p><span>이름자리</span>님</p>
+
+            <?php
+            $user_id = $_SESSION['user_id'];
+
+            $sql = "SELECT user_name FROM userregistration WHERE user_id='$user_id'";
+            $result = mysqli_query($con, $sql);
+            $row = mysqli_fetch_array($result);
+
+            echo "<p><span>".$row['user_name']."</span>님</p>";
+            ?>
           </div>
         </div>
         <div class="myPage">
-          <p><a href="#none" title="나의정보">나의정보</a></p>
+          <p><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/signin_print.php" title="나의정보">나의정보</a></p>
           <p><a href="#none" title="나의정보">1:1 상담</a></p>
         </div>
       </div>

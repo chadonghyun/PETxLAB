@@ -76,23 +76,23 @@ include_once '../config.php';
           <label for="telephone">전화번호</label>
           <select name="telephone_first" id="telephone_first">
             <option value="지역번호">지역번호</option>
-            <option value="서울">02</option>
-            <option value="경기도">031</option>
-            <option value="인천광역시, 부천시">032</option>
-            <option value="강원도">033</option>
-            <option value="충청남도">041</option>
-            <option value="대전광역시">042</option>
-            <option value="충청북도">043</option>
-            <option value="세종특별자치시">044</option>
-            <option value="부산광역시">051</option>
-            <option value="울산광역시">052</option>
-            <option value="대구광역시">053</option>
-            <option value="경상북도">054</option>
-            <option value="경상남도">055</option>
-            <option value="전라남도">061</option>
-            <option value="광주광역시">062</option>
-            <option value="전라북도">063</option>
-            <option value="제주특별자치도">064</option>
+            <option value="02">02</option>
+            <option value="031">031</option>
+            <option value="032">032</option>
+            <option value="033">033</option>
+            <option value="041">041</option>
+            <option value="042">042</option>
+            <option value="043">043</option>
+            <option value="044">044</option>
+            <option value="051">051</option>
+            <option value="052">052</option>
+            <option value="053">053</option>
+            <option value="054">054</option>
+            <option value="055">055</option>
+            <option value="061">061</option>
+            <option value="062">062</option>
+            <option value="063">063</option>
+            <option value="064">064</option>
           </select>
           -
           <input type="number" name="telephone_mid" id="telephone_mid" placeholder="0000" min="0" maxlength="4" oninput="maxLengthCheck(this)">
@@ -125,9 +125,9 @@ include_once '../config.php';
         </div>
         <div class="con">
           <label for="interest">관심분야</label>
-          <select name="interest" id="interest">
-            <option value="전문과과정">전문가과정</option>
-            <option value="일반/취미과정">일반/취미과정</option>
+          <select name="extra2" id="interest">
+            <option value="전문과정" name="extra2" id="interest">전문과정</option>
+            <option value="일반/취미과정" name="extra2" id="interest">일반/취미과정</option>
           </select>
         </div>
         <div class="submit">
