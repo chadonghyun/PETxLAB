@@ -203,7 +203,7 @@
             <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/lecture/uploads/<?php echo $courseImg?>" alt="">
             <figcaption><?php echo $courseTitle ?></figcaption>
           </figure>
-          <?php
+    <?php
         }
       }
     } else {
@@ -223,15 +223,15 @@
     }
     ?>
   </div>
-  
-  
+
+
     </section>
-  
-  
+
+
     <section id="myqna">
       <div class="qna_top top">
         <h2>QnA</h2>
-        <?php?><a href="./class_QnA_list.php" title="">전체보기</a>
+        <?php?><a href="./class_QnA_list.php?no=1" title="">전체보기</a>
       </div>
       <ul class="qna_tab_list">
         <li class="active" data-tab="all">전체</li>
@@ -246,7 +246,7 @@
               FROM boardqnareg
               WHERE user_id = '$userid' LIMIT 5";
               $result = $con->query($sql);
-  
+
               while ($row = $result->fetch_assoc()) {
               if ($row['qna_response'] == 1) {
               $response_class = 'sol';
@@ -255,11 +255,11 @@
               $response_class = 'unsol';
               $response_text = '미해결';
               }
-  
+
               $category = $row['qna_category'];
               $title = $row['qna_title'];
               $date = $row['Board_date'];
-  
+
               echo '<div class="content">';
               echo '<p>';
               echo "<span>$category</span>";
