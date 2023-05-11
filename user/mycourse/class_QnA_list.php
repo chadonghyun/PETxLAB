@@ -5,7 +5,7 @@
 
   $no=empty($_GET['no']) ? 3 : $_GET['no'];
   $find=empty($_GET['find']) ? '' : $_GET['find'];
-  $catgo=empty($_GET['catgo']) ? 'qna_response' : $_GET['catgo'];
+  $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
   
   // 1. 전체 데이터 개수
   $sql = "SELECT COUNT(*) as total FROM boardqnareg";
@@ -44,6 +44,7 @@
       <span id="toggle"><i class="bi bi-caret-down-fill"></i></span>
     </h2>
     <div class="search_area d-flex">
+      <input type="hidden" name="no" value="<?=$no?>">
       <p>총 <?=$total_records ?>건</p>
       <button type="submit"><i class="bi bi-search"></i></button>
       <input type="search" name="find" id="find" value="<?=$find?>" placeholder="검색어 입력">
@@ -57,10 +58,13 @@
         $sql3 = "SELECT * FROM boardqnareg ";
         if ($no == 1) {
           $sql3 .= "WHERE user_id = '$userid'";
+          $sql3 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
         } elseif ($no == 2) {
           $sql3 .= "WHERE user_id = '$userid' AND qna_response = 1";
+          $sql3 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
         } elseif ($no == 3) {
           $sql3 .= "WHERE user_id = '$userid' AND qna_response = 0";
+          $sql3 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
         } else {
           // $no 값이 유효하지 않은 경우에 대한 처리
           echo "유효하지 않은 값입니다.";
@@ -107,7 +111,7 @@
           <span class="<?php echo $row2['qna_response'] == 1 ? 'com' : 'fal'; ?>">
             <?php echo $qnaStatus == 1 ? '해결' : '미해결'; ?>
           </span>
-          <a href="#" class="course_title"><?php echo $courseTitle; ?></a>
+          <a href="./class_QnA_view.php?number=<?php echo $number; ?>" class="course_title"><?php echo $courseTitle; ?></a>
           <p class="registration_date">등록일 : <?php echo date('Y-m-d', strtotime($registrationDate)); ?></p>
           <a href="./class_QnA_view.php?number=<?php echo $number; ?>" class="detail_btn">바로가기</a>
         </div>

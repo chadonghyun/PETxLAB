@@ -40,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h3 class="vw_title">제목</h3>
       <span class="regist_date">등록일 : <?=date('Y-m-d', strtotime($rows['Board_date'])); ?></span>
       <div class="vw_in">
-        <input type="text" placeholder="제목을 적어주세요." name="QnA_title" id="QnA_title" value="<?=$rows['qna_title']?>">
         <span class="<?=$rows['qna_response'] == 1 ? 'com' : 'fal'; ?>">
           <?=$rows['qna_response'] == 1 ? '해결' : '미해결'; ?>
         </span>
+        <input type="text" placeholder="제목을 적어주세요." name="QnA_title" id="QnA_title" value="<?=$rows['qna_title']?>">
       </div>
       <h3 class="wr_content">내용</h3>
       <textarea name="QnA_con" id="QnA_con" rows="20" placeholder="질문 내용을 적어주세요."><?=$rows['qna_question']?></textarea>

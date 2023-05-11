@@ -83,12 +83,13 @@ main {
   font-family: 'yg-jalnan';
 }
 .com, .fal{
+  font-size: 14px;
   position: absolute;
   right: 0px;
   background: var(--sub-colorbl);
   color: var(--f-colorwh);
   padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 .fal{
   background: #FF4E4E;
