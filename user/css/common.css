@@ -126,7 +126,7 @@
   .gnb > .cat_box{
     position: absolute;
     top: 36px;
-    left: 181px;
+    left: 44%;
     overflow: hidden;
     width: 50px;
     height: 30px;
@@ -197,9 +197,10 @@
     top: 0px;
     right: -100%;
     background: var(--sub-colorbl);
+    padding: 0px 17px;
   }
   .user_info{
-    width: 380px;
+    width: 100%;
     height: 176px;
     background: #fff;
     margin: 0px auto;
@@ -275,7 +276,7 @@
   header .lecture_box{
     display: block;
     margin: 0px auto;
-    width: 380px;
+    width: 100%;
     height: 80px;
     background: #fff;
     border-radius: 20px;

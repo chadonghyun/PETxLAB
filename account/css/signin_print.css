@@ -88,7 +88,7 @@
     margin-bottom: 10px;
   }
   .submit{
-    width: 100%;
+    /* width: 100%; */
     margin: 0px auto;
     text-align: center;
   }
@@ -99,7 +99,7 @@
     margin-bottom: 50px;
   }
   #edit_frm{
-    width: 280px;
+    width: 100%;
     height: 40px;
     border-radius: 20px;
     border: none;
@@ -112,7 +112,7 @@
     cursor:pointer;
   }
   #reset{
-    width: 280px;
+    width: 100%;
     height: 40px;
     border-radius: 20px;
     font-weight: bold;

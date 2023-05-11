@@ -79,7 +79,7 @@
           <label for="interest">관심분야</label>
           <input placeholder="<?=$row['extra2']?>" readonly>
         </div>
-        <div class="edit_frm">
+        <div id="edit_frm">
           <button type="submit" id="edit_frm">수정하기</button>
         </div>
       </form>
