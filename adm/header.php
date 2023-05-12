@@ -103,6 +103,14 @@
             <span>게시판관리</span>
           </a>
         </li>
+        <?php if($userlevel == 3){ ?>
+          <li>
+            <a href="/PETxLAB/adm/admin/confirm/adm_c_list.php?no=3" title="강의신청관리" class="aaaa">
+              <i class="bi bi-clipboard-check"></i>
+              <span>강의신청관리</span>
+            </a>
+          </li>
+        <?php } ?>
       </ul>
       <div class="header-footer">
         <ul>

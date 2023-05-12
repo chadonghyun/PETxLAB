@@ -1,0 +1,171 @@
+@charset "utf-8";
+
+main {
+    padding:140px 20px 60px;
+    background:#F5F9FF;
+}
+
+h2 {
+    font-size:36px;
+    color:#715647;
+    margin-bottom:20px;
+}
+
+h3 {
+    color:#666;
+    line-height: inherit;
+}
+
+.sub_title {
+    position:relative;
+    font-family: 'yg-jalnan';
+}
+
+.sub_title select {
+    width:100%;
+    outline: 1px solid #e1e1e1;
+    border:none;
+    line-height:40px;
+    height:40px;
+    border-radius: 20px;
+    padding:0 20px;
+    
+    color:#715647;
+
+    -webkit-appearance:none; /* for chrome */
+    -moz-appearance:none; /*for firefox*/
+    appearance:none;
+}
+
+.sub_title select::-ms-expand {
+    display: none;
+}
+
+.sub_title::after {
+    content:">";
+    position:absolute;
+    right:20px;
+    top:8px;
+    font-size:20px;
+    pointer-events: none;
+    transform: rotate(90deg);
+    color:#715647;
+}
+.sub_title select option {
+    border:20px;
+}
+
+.search_area {
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top:40px;
+    font-size:14px;
+}
+
+.search_box {
+    width:50%;
+    position:relative;
+}
+
+.search_box input {
+    display:block;
+    width:100%;
+    height:36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border:1px solid #476088;
+    outline: none;
+    padding:0 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search_box input::placeholder {
+    color:#aaa;
+}
+
+.search_box i {
+    position: absolute;
+    right:20px;
+    top:calc(50% - 8px);
+    color:#476088;
+    font-size: 16px;
+}
+
+.course_list {
+    padding-top:10px;
+}
+
+.card {
+    flex-direction: row;
+    width:100%;
+    padding:30px;
+    box-sizing: border-box;
+    margin-bottom:10px;
+
+    background: #FFFFFF;
+    border: 1px solid #E1E1E1;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+}
+
+.card:last-child {
+    margin-bottom:0;
+}
+
+.course_thumb {
+    width:100px;
+    height:100px;
+    background:#8599B9;
+    border-radius: 20px;
+    overflow:hidden
+}
+
+.course_thumb img {
+    object-fit: cover;
+    width:100%;
+    height:100%;
+}
+
+.course_desc {
+    width:calc(100% - 120px);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-weight:500;
+}
+
+.course_cate {
+    font-size:14px;
+}
+
+.course_title {
+    width:100%;
+    font-size:16px;
+}
+
+.progress_area {
+    position:relative;
+    width:100%;
+    height:10px;
+    border-radius: 5px;
+    background:#f1f1f1;
+}
+
+.progress_bar {
+    position:absolute;
+    height:100%;
+    left:0;
+    width:20%;
+    background:#8599B9;
+    border-radius: 5px;
+}
+
+.progress_txt,
+.detail_btn {
+    margin-top:auto;
+    color:#8599B9 !important;
+}
+
+.detail_btn {
+    font-family: 'yg-jalnan';
+}
