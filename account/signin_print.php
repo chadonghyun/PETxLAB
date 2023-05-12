@@ -28,14 +28,6 @@
           <input type="text" id="id" name="user_id" placeholder="<?=$row['user_id']?>" readonly>
           <span id="id_check_msg" data-check = "0"></span>
         </div>
-        <!-- <div class="con">
-          <label for="password">비밀번호</label>
-          <input type="password" id="password" name="user_pass" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;" readonly>
-        </div>
-        <div class="con">
-          <label for="confirm_password">비밀번호 확인</label>
-          <input type="password" id="confirm_password" name="confirm_password" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;" readonly>
-        </div> -->
         <div class="con birth">
           <label for="birthday">생년월일</label>
           <input type="number" name="user_birth_year" id="birthyear" min="1900" maxlength="4" oninput="maxLengthCheck(this)" placeholder="<?=$row['user_birth_year']?>" readonly>

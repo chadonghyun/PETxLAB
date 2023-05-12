@@ -183,7 +183,7 @@
       </div>
 
       <div class="user_info">
-        <p><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/account/logout.php" title="로그아웃">로그아웃</a></p>
+        <p><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/index.php" title="로그아웃">로그아웃</a></p>
         <div class="flex_box">
           <div class="img_box">
           <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/logo.png" alt="user_img">

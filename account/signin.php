@@ -31,7 +31,7 @@ include_once '../config.php';
 <body>
   <header>
     <h1>
-      <a href="./login.php" title="">
+      <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/index.php" title="메인페이지 바로가기">
         <img src="./images/Logo.svg" alt="">
       </a>
     </h1>

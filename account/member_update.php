@@ -25,7 +25,7 @@
   echo "
     <script>
       alert('회원정보가 수정되었습니다.');
-      location.href = '../user/header.php';
+      location.href = 'signin_print.php';
     </script>
   ";
 ?>

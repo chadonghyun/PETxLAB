@@ -22,7 +22,7 @@
   // 탈퇴 완료 메시지 출력 및 로그인페이지로 이동
   echo "<script>
     alert('회원탈퇴가 완료되었습니다.');
-    location.href='login.php';
+    location.href='./login.php';
   </script>";
   exit();
 ?>

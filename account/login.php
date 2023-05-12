@@ -40,7 +40,7 @@ include_once '../config.php';
       <div class="log_input">
         <div class="log_form">
           <h2>
-            <a href="" title="바로가기">
+          <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/index.php" title="메인페이지 바로가기">
               <img src="./images/color_logo.png" alt="">
             </a>
           </h2>

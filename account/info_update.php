@@ -164,7 +164,7 @@
     });
     
     function out_input(){
-      if (confirm("정말로 탈퇴하시겠습니까?")) {
+      if (confirm("PETxLAB을 탈퇴하시겠습니까?  \n탈퇴 후 회원가입을 새롭게 하셔야 합니다.")) {
         location.href = "delet.php";
         }
       }
