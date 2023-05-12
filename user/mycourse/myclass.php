@@ -79,6 +79,8 @@
         </div>
       </div>
     </section>
+
+
     <section id="mycourse">
       <div class="cr_top top">
         <h2>학습중인 강의</h2>
@@ -249,10 +251,10 @@
 
               while ($row = $result->fetch_assoc()) {
               if ($row['qna_response'] == 1) {
-              $response_class = 'sol';
+              $response_class = 'com';
               $response_text = '해결';
               } else {
-              $response_class = 'unsol';
+              $response_class = 'fal';
               $response_text = '미해결';
               }
 
@@ -282,10 +284,10 @@
   
               while ($row = $result->fetch_assoc()) {
               if ($row['qna_response'] == 1) {
-              $response_class = 'sol';
+              $response_class = 'com';
               $response_text = '해결';
               } else {
-              $response_class = 'unsol';
+              $response_class = 'fal';
               $response_text = '미해결';
               }
   
@@ -314,10 +316,10 @@
   
               while ($row = $result->fetch_assoc()) {
               if ($row['qna_response'] == 1) {
-              $response_class = 'sol';
+              $response_class = 'com';
               $response_text = '해결';
               } else {
-              $response_class = 'unsol';
+              $response_class = 'fal';
               $response_text = '미해결';
               }
   

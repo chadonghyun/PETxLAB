@@ -313,6 +313,7 @@
   text-decoration: underline;
 }
 .content > p:first-of-type > span:last-child{
+  font-size: 14px;
   border-radius: 20px;
   color: var(--f-colorwh);
   padding: 5px 10px;
@@ -331,10 +332,10 @@
   display: block;
   text-align: end;
 }
-.sol{
+.com{
   background: var(--sub-colorbl);
 }
-.unsol{
+.fal{
   background: #FF4E4E;
 }
 

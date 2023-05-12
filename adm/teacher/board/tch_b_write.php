@@ -1,10 +1,18 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
-// 회원번호
-$sql = "SELECT * FROM userregistration WHERE user_id = '$userid'";
-$result = mysqli_query($con, $sql);
-$user = mysqli_fetch_assoc($result);
+$no = $_GET['number'];
+
+//해당 qna테이블 데이터 가져오가
+$query = "SELECT * FROM boardqnareg where number ='$no'";
+$result = mysqli_query($con, $query);
+$rows = mysqli_fetch_assoc($result);
+
+//이름가져오기
+$userId  =$rows['user_id'];
+$sql2 = "SELECT user_name, user_email FROM userregistration WHERE user_id = '$userId'";
+$result2 = mysqli_query($con, $sql2);
+$rows2 = mysqli_fetch_assoc($result2);
 
 ?>
 
@@ -15,6 +23,7 @@ $user = mysqli_fetch_assoc($result);
 <!-- 메인영역 -->
 <main>
   <form action="write_post.php" method="post">
+    <input type="hidden" value="<?=$no?>" name="number">
     <section class="board-view">
         <div class="wrap d-flex justify-content-between">
             <div class="profile">
@@ -23,10 +32,10 @@ $user = mysqli_fetch_assoc($result);
                         <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/admin/images/logo.png" alt="프로필 사진">
                     </div>
                     <h4 class="title">작성자</h4>
-                    <input type="text" name="user_name" value="<?=$user['user_name']?>" readonly>
+                    <input type="text" name="user_name" value="<?=$rows2['user_name']?>" readonly>
                     <h4 class="title">아이디</h4>
-                    <input type="text" name="user_id" value="<?=$user['user_id']?>" readonly>
-                    <a href="mailto:<?=$user['user_email']?>" class="btn btn-100p btn-line">
+                    <input type="text" name="user_id" value="<?=$rows['user_id']?>" readonly>
+                    <a href="mailto:<?=$rows2['user_email']?>" class="btn btn-100p btn-line">
                         <i class="bi bi-envelope"></i>
                         메일발송
                     </a>
@@ -37,23 +46,24 @@ $user = mysqli_fetch_assoc($result);
             </div>
             <div class="contents">
                 <div class="contents__card card">
-                  <h4 class="title">게시판 카테고리</h4>
-                  <select name="" id="">
-                    <option value="1">게시판1</option>
-                    <option value="2">게시판2</option>
-                    <option value="3">게시판3</option>
-                    <option value="4">게시판4</option>
-                  </select>
-                  <h4 class="title">제목</h4>
-                  <input type="text" name="title">
+                  <!-- <input type="hidden" name="idx" value="<?=$no?>"> -->
+                  <h4 class="title d-flex justify-content-between">제목<span class="ms-2 font-normal">등록일 <?=substr($rows['Board_date'],0,10)?></span></h4>
+                  <input type="text" name="title" value="<?=$rows['qna_title']?>" readonly>
                   <h4 class="title">내용</h4>
-                  <div class="textarea_wrap">
-                    <textarea name="board_contents" id="board_contents" rows="9"></textarea>
+                  <div class="textarea_wrap disabled">
+                    <textarea name="board_contents" id="board_contents" rows="9" readonly><?=$rows['qna_question']?></textarea>
                   </div>
+                  <?php if ($rows['qna_response'] == 0): ?>
+                  <h4 class="title d-flex justy-content-between">답변 <span class="ms-2 font-normal">등록일 <?=substr($rows['reply_time'],0,10)?></span></h4>
+                  <div class="textarea_wrap disabled">
+                    <textarea name="board_reply" id="board_reply" rows="9"></textarea>
+                  </div>
+                  <?php endif; ?>
                   <div class="board-btn d-flex justify-content-end">
-                    <a href="javascript:history.back();" class="btn btn-fill btn-w-128">목록보기</a>
-                    <button type="submit" class="btn btn-fill btn-w-128">게시글 등록</button>
-                    <button type="reset" class="btn btn-line btn-w-128">작성 취소</button>
+                    <a href="./tch_b_list.php?no=<?=$no?>" class="btn btn-fill btn-w-128">목록보기</a>
+                    <button type="submit" class="btn btn-fill btn-w-128" <?= $rows['qna_response'] == 1 ? 'style="display: none;"' : '' ?>>답변 달기</button>
+                    <a href="./tch_b_update.php?number=<?=$rows['number']?>" class="btn btn-fill btn-w-128" <?= $rows['qna_response'] == 0 ? 'style="display: none;"' : '' ?>>답변 수정</a>
+                    <button type="submit" class="btn btn-line btn-w-128" formaction="delete.php">게시글 삭제</button>
                   </div>
                 </div>
             </div>

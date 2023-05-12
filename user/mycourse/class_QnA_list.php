@@ -7,7 +7,7 @@
   $find=empty($_GET['find']) ? '' : $_GET['find'];
   $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
   
-  // 1. 전체 데이터 개수
+  // 전체 데이터 개수
   $sql = "SELECT COUNT(*) as total FROM boardqnareg";
   if ($no == 2) {
     $sql .= " WHERE boardqnareg.qna_response = '1' AND boardqnareg.user_id = '$userid'";

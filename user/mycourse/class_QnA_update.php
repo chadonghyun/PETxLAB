@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $qna_title = $_POST["QnA_title"];
   $qna_question = $_POST["QnA_con"];
 
-  $sql = "UPDATE boardqnareg SET qna_title='$qna_title', qna_question='$qna_question' WHERE number = '$no'";
+  $sql = "UPDATE boardqnareg SET qna_title='$qna_title', qna_question='$qna_question', Board_date WHERE number = '$no'";
 
   $result = mysqli_query($con, $sql);
 

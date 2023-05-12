@@ -4,6 +4,20 @@ include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/db/db_con.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/adm/header.php";
 
+// 신규유저
+$sql_new_user = "SELECT *
+FROM user_course
+WHERE course_id IN (
+    SELECT course_id
+    FROM coursereg
+    WHERE user_id = '$userid'
+) AND created_at >= DATE_SUB(NOW(), INTERVAL 3 DAY)";
+
+$result_user = mysqli_query($con, $sql_new_user);
+$row_user = mysqli_fetch_assoc($result_user);
+$total_user = mysqli_num_rows($result_user);
+
+
 // 전체 회원 수
 $sql = "SELECT COUNT(*) as total FROM userregistration";
 $result = mysqli_query($con, $sql);
@@ -92,7 +106,11 @@ $result1 = mysqli_query($con, $sql1);
         <div>
           <p>신규수강생</p>
           <p>
-            <span>아직모름</span>
+            <span>
+              <?php
+                echo "$total_user"
+              ?>
+            </span>
             명
           </p>
         </div>

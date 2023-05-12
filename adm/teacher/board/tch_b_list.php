@@ -94,7 +94,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
                   $i--;
                 ?></td>
             <td><?= $row2['qna_category'] ?></td>
-            <td><?= $row2['qna_title'] ?></td>
+            <td><a href="./tch_b_view.php?number=<?=$row2['number']?>"><?= $row2['qna_title'] ?></a></td>
             <td><?= $row2['user_id'] ?></td>
             <td><?= substr($row2['Board_date'], 0, 10)?></td>
             <?php if($row2['qna_response'] == '0') { ?>

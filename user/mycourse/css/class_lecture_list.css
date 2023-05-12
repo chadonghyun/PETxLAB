@@ -1,0 +1,110 @@
+main {
+  padding:100px 20px 60px;
+  /* box-sizing: border-box; */
+}
+.active{
+  border-bottom: 2px solid#333;
+}
+.sub_title{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--sub-colorbl);
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+.sub_title > ul {
+  width:calc(100% - 50px);
+  line-height:40px;
+  height:40px;
+  padding:0 20px;
+  font-size: var(--f-size20);
+  overflow: hidden;
+}
+.sub_title > span{
+  padding: 10px 20px;
+}
+#cate > li > a{
+  color: var(--f-colorbr);
+}
+.course_list {
+  padding-top:10px;
+}
+#find{
+  border-radius: 20px;
+  border: 1px solid var(--sub-colorbl);
+  padding: 5px 20px;
+}
+.search_area{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 10px 0px 10px;
+  position: relative;
+}
+.search_area > p{
+  font-weight: bold;
+  color: #666;
+}
+.search_area > button{
+  position: absolute;
+  right: 20px;
+  background: var(--bg-colorwh);
+  border: none;
+}
+
+.lecture_list{
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.img_box{
+  border-radius: 20px;
+  background: var(--sub-colorbl);
+  width: 50%;
+}
+.img_box > img{
+  border-radius: 20px;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.lec_con{
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--sub-colorbl);
+}
+.content{
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
+} 
+.lec_cate{
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+}
+.lec_title{
+  font-family: var(--fm-title);
+  width: 100%;
+  font-size: var(--f-size16);
+  padding-bottom: 5px;
+}
+.progress_bar{
+  width: 100%;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.per{
+  color: var(--sub-colorbl);
+}
+.shortcut{
+  color: var(--sub-colorbl);
+  font-family: var(--fm-title);
+}
