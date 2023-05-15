@@ -121,7 +121,7 @@ $num = sprintf("%04d", $user['number']);
                           <h3>강의목록</h3>
                             <div id="preview2" class="list_box"></div>
                           <div class="button_box">
-                            <input type="file" id="file-input2" multiple style="display: none;" />
+                            <input type="file" id="file-input2" name='course-file2[]' multiple style="display: none;" />
                             <button id="upload-btn2" class="button">업데이트하기</button>
                           </div>
                       </div>
