@@ -1,30 +1,27 @@
 <?php
   include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
 
+  $course_id = $_GET['course_id'];
 
-  $sql = "select * from coursereg where course_id='$course_id'";
+  $sql = "SELECT course_id, course_title, course_shortdesc, course_type FROM coursereg WHERE course_id=$course_id";
   $result = mysqli_query($con, $sql);
   $row = mysqli_fetch_array($result);
+
+  $sql2 = "SELECT video_path FROM video WHERE course_id=$course_id";
+  $result2 = mysqli_query($con, $sql2);
+  $row2 = mysqli_fetch_array($result2);
 ?>
 
 <!-- class_video_view 서식 -->
 <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/css/class_video_view.css" type="text/css">
 <script src="./js/class_video_view.js"></script>
 
-<!-- <style>
-
-  img {
-    display:none;
-  }
-  img.on {
-    display:inline;
-  }
-</style> -->
-
 <main>
   <section class="class_box">
     <article class="video_box">
-      <video src="./video/videoplayback.mp4" id="class_video"></video>
+    <?php $videoPath = $row2['video_path'];?>
+    <video src="<?php echo '/PETxLAB/adm/teacher/lecture/videos/' . $videoPath ?>" id="class_video" ></video>
+
       <img src="./img/set.png" alt="설정버튼" id="btn05">
 
       <ul>
@@ -43,16 +40,32 @@
       </div>
 
       <img src="./img/screen.png" alt="전체화면" id="btn06">
+
+      <div class="speed_box">
+        <ul class="speed">
+          <li id="btn07">x1</li>
+          <li id="btn08">x1.5</li>
+          <li id="btn09">x2</li>
+        </ul>
+      </div>
     </article>
 
     <article class="des_box">
       <div class="top_box">
+      <?php
+      if ($row['course_type'] == 'professional') {
+        $row['course_type'] = "전문교육과정";
+      } else {
+        $row['course_type'] = "일반교육과정";
+      }
+      ?>
         <p><?=$row['course_type']?></p>
         <p><?=$row['course_title']?></p>
       </div>
 
+      <?php $videoPath = explode('.', $row2['video_path'])[0]; ?>
       <div class="bottom_box">
-        <p>강의 1번의 제목 //비디오 테이블로 이어지기</p>
+        <p><?= $videoPath ?></p>
         <p><?=$row['course_shortdesc']?></p>
         <button>수강완료</button>
       </div>

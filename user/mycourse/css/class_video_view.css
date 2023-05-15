@@ -11,12 +11,11 @@
 .video_box{
   overflow: hidden;
   position: relative;
-  height: 240px;
   background: #333;
   margin-bottom: 20px;
 }
 .video_box > video{
-  height: 240px;
+  width: 100%;
 }
 #btn05{
   position: absolute;
@@ -129,4 +128,33 @@
   color: #fff;
   border: none;
   border-radius: 20px;
+}
+.speed_box{
+  display:none;
+
+  background: rgba(255, 255, 255, .5);
+  width: 152px;
+  height: 45px;
+  border-radius: 20px;
+  position: absolute;
+  top: 37px;
+  right: 13px;
+  z-index: 999999;
+}
+.speed_box ul {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.speed_box li {
+  font-size: 16px;
+  font-family: 'yg-jalnan';
+  color: #333;
+  padding: 13px;
+}
+
+.speed_box.on {
+  display:block;
 }

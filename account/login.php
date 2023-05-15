@@ -70,5 +70,3 @@ include_once '../config.php';
   </main>
 </body>
 </html>
-
-<!--  -->
