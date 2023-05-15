@@ -80,7 +80,6 @@ if ($result2) {
     $course_id = mysqli_insert_id($con);
 
     // Video 테이블에 비디오 경로 저장
-    // $video_sql = "INSERT INTO video (course_id, video_path) VALUES ('$course_id', '$video_paths')";
     // 반복문으로 들어가기
 
     for($i = 0; $i<count($uploaded_files2); $i++){

@@ -88,7 +88,7 @@ function course(e){
 
 
    // HTML 요소가 로드된 후 실행되는 함수
-   window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('DOMContentLoaded', function() {
     // 버튼 클릭 시 input 태그 작동 및 보이지 않게 설정
     document.getElementById('upload-btn').addEventListener('click', function(event) {
       event.preventDefault(); // 폼 제출 기본 동작 막기
@@ -96,7 +96,6 @@ function course(e){
     });
   });
 
-  
 
 
   const handler = {

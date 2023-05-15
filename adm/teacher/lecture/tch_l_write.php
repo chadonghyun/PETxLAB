@@ -99,9 +99,12 @@ $num = sprintf("%04d", $user['number']);
                       <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" required>
                     </div>
                   </div>
+                </div>
+              </div>
+
+
                   <div class="col-md-12 lecreg-desc card">
                     <label for="course_longdesc">상세설명</label>
-
                     <textarea name="course_longdesc" id="course_longdesc"rows="10" class="course_longdesc"></textarea>
                   </div>
                   <!-- 자료업데이트 -->
@@ -128,8 +131,8 @@ $num = sprintf("%04d", $user['number']);
                     </div>    
                     
                   </div>
-                </div>
-              </div>
+              
+     
             </form>  
             </section>  
             

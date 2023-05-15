@@ -82,6 +82,9 @@ h4.title + p {
 #lecreg .profile .profile__card p:last-of-type{
     padding-bottom:40px;
 }
+#lecreg .lecreg-detail{
+    margin-bottom:20px !important;
+}
 
 
 #lecreg .save_frm{
@@ -219,10 +222,11 @@ box-sizing: border-box;
 #lecreg .source .card{
     width:50%;
     height:592px;
-    margin-top:50px;
+    margin-top:20px;
 }
 #lecreg .source .paper{
     margin-right:20px;
+    margin-bottom:170px;
 }
 #lecreg .source .list_box{
     width:100%;
@@ -266,6 +270,9 @@ box-sizing: border-box;
 }
 .content_Box .number{
     line-height: 32px;
+}
+.content_Box .number:first-child{
+    margin-top:10px;
 }
 .content_Box .number button{
     position: absolute;
