@@ -3,11 +3,12 @@
   include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
   include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
 
+
   //출석일 수
   $sql = "SELECT COUNT(DISTINCT DATE(login_time)) AS total_logins FROM loginlog GROUP BY user_id";
   $result = $con->query($sql);
 
-  // 학습중인 사용자 수 조회
+  // 학습중
   $sql_in_progress = "SELECT COUNT(*) AS count_in_progress FROM user_course WHERE user_id = '$userid' AND status = 'in_progress'";
   $result_in_progress = $con->query($sql_in_progress);
   $row_in_progress = $result_in_progress->fetch_assoc();
@@ -19,11 +20,28 @@
   $row_pending_approval = $result_pending_approval->fetch_assoc();
   $count_pending_approval = $row_pending_approval["count_pending_approval"];
 
-  // 학습완료한 사용자 수 조회
+  // 학습완료
   $sql_completed = "SELECT COUNT(*) AS count_completed FROM user_course WHERE user_id = '$userid' AND status = 'completed'";
   $result_completed = $con->query($sql_completed);
   $row_completed = $result_completed->fetch_assoc();
   $count_completed = $row_completed["count_completed"];
+
+  //최근 학습 중인 강의
+  $sql_recent = "SELECT user_course.course_id, coursereg.course_title, coursereg.course_type, coursereg.course_image, user_course.progress 
+  FROM coursereg
+  INNER JOIN user_course ON coursereg.course_id = user_course.course_id
+  WHERE user_course.user_id = '$userid' AND user_course.confirm = 1
+  ORDER BY user_course.user_course_id DESC LIMIT 1";
+  $result_recent = mysqli_query($con, $sql_recent);
+  if(!$result_recent){
+    die(mysqli_error($con));
+  }
+  $row_recent = mysqli_fetch_assoc($result_recent);
+  if($row_recent['course_type']=='professional'){$row_recent['course_type'] ="전문교육과정";} else {$row_recent['course_type'] =  "일반교육과정";}
+  $courseTitle = $row_recent['course_title'];
+  $courseType = $row_recent['course_type'];
+  $courseImg = $row_recent['course_image'];
+  $progress = $row_recent['progress'];
 
   //QnA데이터 출력
   $sql_QnA = "SELECT qna_category, qna_title, Board_date, qna_response
@@ -60,19 +78,19 @@
       </div>
       <div class="pf_class">
         <div class="pf_l ">
-          <a href="" title="" class="pf_case">
+          <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/class_lecture_list.php?no=1" title="" class="pf_case">
             <p class="case"><?php echo $count_in_progress?>건</p>
             <span>학습중</span>
           </a>
         </div>
         <div class="pf_c">
-          <a href="" title="" class="pf_case">
+          <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/class_lecture_list.php?no=2" title="" class="pf_case">
             <p class="case"><?php echo $count_completed?>건</p>
             <span>학습종료</span>
           </a>
         </div>
         <div class="pf_r">
-          <a href="" title="" class="pf_case">
+          <a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/class_lecture_list.php?no=3" title="" class="pf_case">
             <p class="case"><?php echo $count_pending_approval?>건</p>
             <span>신청내역</span>
           </a>
@@ -80,25 +98,24 @@
       </div>
     </section>
 
-
+    
     <section id="mycourse">
       <div class="cr_top top">
-        <h2>학습중인 강의</h2>
-        <a href="#none" title="">전체보기</a>
+        <h2>최근 학습중인 강의</h2>
       </div>
       <div class="cr_con">
         <div class="cr_img">
-          <img src="" alt="">
+          <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/adm/teacher/lecture/uploads/<?=$courseImg?>" alt="">
         </div>
         <div class="cr_sub">
-          <span><?php?>전문교육과정</span>
-          <h3><?php?>펫 베이커리 특화과정</h3>
+          <span><?php echo $courseType?></span>
+          <h3><?php echo $courseTitle?></h3>
           <div class="cr_gauge">
             <div class="cr_gauge_bar"></div>
           </div>
           <div class="cr_rate">
-            <span>진도율: 20%<?php?></span>
-            <a href="" title="">바로가기</a>
+            <span>진도율: <?php echo $progress?>%</span>
+            <a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/mycourse/class_lecture_view.php?no=<?=$row_recent['course_id']?>" title="">바로가기</a>
           </div>
         </div>
       </div>
@@ -163,16 +180,6 @@
         <h2>수료증</h2>
         <a href="" title="전체보기">전체보기</a>
       </div>
-      <!-- <div class="cer_none">
-        <div class="cer_img">
-          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/nocer.png" alt="">
-        </div>
-        <div class="cer_sub">
-          <p>보유중인 수료증이 없어요</p>
-          <p>수료발급 가능 강의를 완강해보세요!</p>
-          <?php?><a href="#none" title="강의보러가기">강의보러가기</a>
-        </div>
-      </div> -->
       <div class="cer_com">
     <?php
     $sql = "SELECT course_id
@@ -300,7 +307,7 @@
               echo "<span>$category</span>";
               echo "<span class='$response_class'>$response_text</span>";
               echo '</p>';
-              echo "<p>$title</p>";
+              echo "<a>$title</a>";
               echo "<span>$date</span>";
               echo '</div>';
               }
@@ -347,6 +354,11 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/footer.php";
 ?>
+
+<script>
+    let progress = document.querySelector('.cr_gauge_bar');
+    progress.style.width = "<?php echo $progress?>%";
+</script>
 
 </body>
 </html>

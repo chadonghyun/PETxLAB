@@ -139,6 +139,12 @@
   background-color: var(--sub-colorbl);
   border-radius: 20px;
 }
+.cr_img > img{
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .cr_sub{
   width: 70%; 
   display: flex;

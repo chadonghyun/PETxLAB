@@ -157,7 +157,6 @@ h4 {
 span.state {
     display: inline-block;
     padding:0px 8px 1px ;
-    background:#FF4E4E;
     color:#fff;
     font-size:14px;
     line-height:20px;
@@ -166,4 +165,14 @@ span.state {
 
 span.state.state_complete {
     background:#8599B9;
+}
+
+.com, .fal{
+  background: var(--sub-colorbl);
+  color: var(--f-colorwh);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+.fal{
+  background: #FF4E4E;
 }

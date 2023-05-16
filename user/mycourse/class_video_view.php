@@ -2,12 +2,16 @@
   include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
 
   $course_id = $_GET['course_id'];
+  $no = $_GET['no'];
 
-  $sql = "SELECT course_id, course_title, course_shortdesc, course_type FROM coursereg WHERE course_id=$course_id";
+  $sql = "SELECT course_id, course_title, course_shortdesc, course_type FROM coursereg WHERE course_id = $course_id";
   $result = mysqli_query($con, $sql);
+  if (!$result) {
+    die(mysqli_error($con));
+  }
   $row = mysqli_fetch_array($result);
 
-  $sql2 = "SELECT video_path FROM video WHERE course_id=$course_id";
+  $sql2 = "SELECT * FROM video WHERE video_id=$no";
   $result2 = mysqli_query($con, $sql2);
   $row2 = mysqli_fetch_array($result2);
 ?>
@@ -67,7 +71,7 @@
       <div class="bottom_box">
         <p><?= $videoPath ?></p>
         <p><?=$row['course_shortdesc']?></p>
-        <button>수강완료</button>
+        <button type="submit">수강완료</button>
       </div>
     </article>
   </section>
