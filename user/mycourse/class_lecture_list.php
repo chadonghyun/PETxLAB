@@ -5,19 +5,18 @@
 
   $no=empty($_GET['no']) ? 3 : $_GET['no'];
   $find=empty($_GET['find']) ? '' : $_GET['find'];
-  $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
 
   //전체 강의 리스트
-  $sql = "SELECT COUNT(*) as total FROM user_course";
+  $sql = "SELECT * FROM user_course";
   if ($no == 1) {
     $sql .= " WHERE user_course.status = 'in_progress' AND user_course.user_id = '$userid'";
-    $sql .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+    $sql .= ($find != "") ? " AND " . "user_course.course_title" . " LIKE '%" . $find . "%'" : "";
   } else if ($no == 2) {
     $sql .= " WHERE user_course.status = 'completed' AND user_course.user_id = '$userid'";
-    $sql .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+    $sql .= ($find != "") ? " AND " . "user_course.course_title" . " LIKE '%" . $find . "%'" : "";
   } else if ($no == 3) {
     $sql .= " WHERE user_course.status = 'pending_approval' AND user_course.user_id = '$userid'";
-    $sql .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+    $sql .= ($find != "") ? " AND " . "user_course.course_title" . " LIKE '%" . $find . "%'" : "";
   }
   $result = mysqli_query($con, $sql);
   if (!$result) {
@@ -25,9 +24,7 @@
   }
 
   $row = mysqli_fetch_assoc($result);
-  $total_records = $row['total'];
-
-  //
+  $row_total = mysqli_num_rows($result);
 
 ?>
 
@@ -46,7 +43,7 @@
     </h2>
     <div class="search_area d-flex">
       <input type="hidden" name="no" value="<?=$no?>">
-      <p>총 <?=$total_records?>건</p>
+      <p>총 <?=$row_total?>건</p>
       <button type="submit"><i class="bi bi-search"></i></button>
       <input type="search" name="find" id="find" value="<?=$find?>" placeholder="검색어 입력">
     </div>
@@ -61,13 +58,13 @@
                     WHERE user_course.user_id = '$userid'";
           if ($no == 1) {
             $sql2 .= " AND user_course.status = 'in_progress'";
-            $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+            $sql2 .= ($find != "") ? " AND " . "user_course.course_title" . " LIKE '%" . $find . "%'" : "";
           } else if ($no == 2) {
             $sql2 .= " AND user_course.status = 'completed'";
-            $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+            $sql2 .= ($find != "") ? " AND " . "user_course.course_title" . " LIKE '%" . $find . "%'" : "";
           } elseif ($no == 3) {
             $sql2 .= " AND user_course.status = 'pending_approval'";
-            $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
+            $sql2 .= ($find != "") ? " AND " . "user_course.course_title" . " LIKE '%" . $find . "%'" : "";
           } else {
             // $no 값이 유효하지 않은 경우에 대한 처리
             echo "유효하지 않은 값입니다.";
@@ -113,9 +110,9 @@
             <span class="lec_cate"><?=$courseType?></span>
             <p class="lec_title"><?=$courseTitle?></p>
             <div class="progress_bar">
-              <div class="progress_gauge"></div>
+              <div class="progress_gauge" style="width : <?=$row2['progress']?>%"></div>
             </div>
-            <span class="per">진도율 : %</span>
+            <span class="per">진도율 : <?=$row2['progress']?>%</span>
             <a href="./class_lecture_view.php?no=<?=$number?>" title="바로가기" class="shortcut">바로가기</a>
           </div>
         </li>
@@ -123,13 +120,13 @@
       </ul>
       <div class="pagination">
       <?php if ($s_pageNum > 1) { ?>
-          <a href="?no=<?=$no?>&page=<?php echo $s_pageNum - 1; ?>" class="page_link">&lt;</a>
+          <a href="?no=<?=$no?><?php if(isset($_GET["find"])) print ('&find='.$_GET["find"]); ?>&page=<?php echo $s_pageNum - 1; ?>" class="page_link">&lt;</a>
       <?php } ?>
       <?php for ($i = $s_pageNum; $i <= $e_pageNum; $i++) { ?>
-          <a href="?no=<?=$no?>&page=<?php echo $i; ?>" class="page_link <?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+          <a href="?no=<?=$no?><?php if(isset($_GET["find"])) print ('&find='.$_GET["find"]); ?>&page=<?php echo $i; ?>" class="page_link <?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
       <?php } ?>
       <?php if ($e_pageNum < $total_page) { ?>
-          <a href="?no=<?=$no?>&page=<?php echo $e_pageNum + 1; ?>" class="page_link">&gt;</a>
+          <a href="?no=<?=$no?><?php if(isset($_GET["find"])) print ('&find='.$_GET["find"]); ?>&page=<?php echo $e_pageNum + 1; ?>" class="page_link">&gt;</a>
       <?php } ?>
     </div>
   </form>

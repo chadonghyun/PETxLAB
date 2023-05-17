@@ -102,6 +102,11 @@ main {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+.progress_gauge{
+  height: 10px;
+  border-radius: 10px;
+  background-color:  var(--sub-colorbl);
+}
 .per{
   color: var(--sub-colorbl);
 }

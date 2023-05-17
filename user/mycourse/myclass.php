@@ -178,7 +178,6 @@
     <section id="mycer">
       <div class="cer_top top">
         <h2>수료증</h2>
-        <a href="" title="전체보기">전체보기</a>
       </div>
       <div class="cer_com">
     <?php
@@ -307,7 +306,7 @@
               echo "<span>$category</span>";
               echo "<span class='$response_class'>$response_text</span>";
               echo '</p>';
-              echo "<a>$title</a>";
+              echo "<p>$title</p>";
               echo "<span>$date</span>";
               echo '</div>';
               }
