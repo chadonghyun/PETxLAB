@@ -9,6 +9,7 @@ body {
     margin-left:260px;
     padding:0 20px;
     background:#F5F9FF;
+    margin-bottom: 60px;
 }
 
 #lecreg .wrap {
@@ -148,9 +149,6 @@ h4.title + p {
     height:40px;
     padding-left:10px;
 }
-.custom-file-input{
-    padding-left:10px;
-}
 #lecreg .flex i {
     position:absolute;
     top:37px;
@@ -219,7 +217,7 @@ box-sizing: border-box;
     width:156px; height:156px;
     background: #8599B9;
     border-radius: 20px;
-    
+    overflow: hidden;
   }
 
 #lecreg .imagebox{
@@ -230,6 +228,7 @@ box-sizing: border-box;
 #lecreg .imagebox img{
   width:100%;
   height:100%;
+  border-radius: 20px;
 }
 
 #lecreg .titlebox{
@@ -252,4 +251,7 @@ box-sizing: border-box;
 }
 #lecreg .id{
     padding-bottom:30px;
+}
+.indent{
+    text-indent: 10px;
 }

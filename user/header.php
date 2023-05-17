@@ -138,33 +138,33 @@
         
         <li><a href="#none" title="전문교육과정">전문교육과정</a>
           <ul class="lnb">
-            <li><a href="#none" title="반려동물 전문창업">반려동물 전문창업</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=반려동물 전문창업" title="반려동물 전문창업">반려동물 전문창업</a>
           </li>
-            <li><a href="#none" title="반려동물 행동교정사">반려동물 행동교정사</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?ate=반려동물 행동교정사" title="반려동물 행동교정사">반려동물 행동교정사</a>
           </li>
-            <li><a href="#none" title="반려동물 식품관리사">반려동물 식품관리사</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=반려동물 식품관리사" title="반려동물 식품관리사">반려동물 식품관리사</a>
           </li>
-            <li><a href="#none" title="펫 유치원 교원사">펫 유치원 교원사</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=펫 유치원 교원사" title="펫 유치원 교원사">펫 유치원 교원사</a>
           </li>
-            <li><a href="#none" title="펫 뷰티션">펫 뷰티션</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=펫 뷰티션" title="펫 뷰티션">펫 뷰티션</a>
           </li>
-            <li><a href="#none" title="펫 장례코디네이터">펫 장례코디네이터</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=반려동물장례코디네이터" title="펫 장례코디네이터">펫 장례코디네이터</a>
           </li>
-            <li><a href="#none" title="반려동물 관리사">반려동물 관리사</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=반려동물관리사" title="반려동물 관리사">반려동물 관리사</a>
           </li>
-            <li><a href="#none" title="동물병원 코디네이터">동물병원 코디네이터</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=동물병원코디네이터" title="동물병원 코디네이터">동물병원 코디네이터</a>
           </li>
-            <li><a href="#none" title="펫시터">펫시터</a>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_pro.php?cate=펫시터" title="펫시터">펫시터</a>
           </li>
           </ul>
         </li>
 
         <li><a href="#none" title="일반교육과정">일반교육과정</a>
           <ul class="lnb">
-            <li><a href="#none" title="펫푸드">펫푸드</a></li>
-            <li><a href="#none" title="펫미용">펫미용</a></li>
-            <li><a href="#none" title="펫아이템">펫아이템</a></li>
-            <li><a href="#none" title="행동교정">행동교정</a></li>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_general.php?cate=펫푸드" title="펫푸드">펫푸드</a></li>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_general.php?cate=펫미용" title="펫미용">펫미용</a></li>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_general.php?cate=펫아이템" title="펫아이템">펫아이템</a></li>
+            <li><a href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/course_list_general.php?cate=행동교정" title="행동교정">행동교정</a></li>
           </ul>
         </li>
 
