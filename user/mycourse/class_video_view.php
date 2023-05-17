@@ -10,28 +10,35 @@
     die(mysqli_error($con));
   }
   $row = mysqli_fetch_array($result);
+  
+  // 가져온 course_id 값을 변수에 저장합니다.
+  $courseId = $row['course_id'];
+  // course_id 값을 사용하여 class_lecture_view.php 주소를 생성합니다.
+  $url = "./class_lecture_view.php?no=" . $courseId;
 
   $sql2 = "SELECT * FROM video WHERE video_id=$no";
   $result2 = mysqli_query($con, $sql2);
   $row2 = mysqli_fetch_array($result2);
 
-  // Check if "수강완료" button is clicked
+  // 수강완료 버튼 클릭시
   if (isset($_POST['complete'])) {
-    // Update video_status in video_progress table
-    $sql_update_progress = "UPDATE video_progress SET video_status = 1 WHERE user_id = '$userid' AND course_id = $course_id";
+    // video_progress 테이블 status값 수정
+    $sql_update_progress = "UPDATE video_progress SET video_status = 1 WHERE user_id = '$userid' AND video_id = $no";
     $result_update_progress = mysqli_query($con, $sql_update_progress);
     if (!$result_update_progress) {
       die(mysqli_error($con));
     }
 
-    // Update video_status in video table
+    // video 테이블 status값 수정
     $sql_update_video = "UPDATE video SET video_status = 1 WHERE video_id = $no";
     $result_update_video = mysqli_query($con, $sql_update_video);
     if (!$result_update_video) {
       die(mysqli_error($con));
     }
-  }
-?>
+    echo '<script>location.replace("' . $url . '");</script>';
+      exit();
+    }
+  ?>
 
 <!-- class_video_view 서식 -->
 <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/css/class_video_view.css" type="text/css">
@@ -88,12 +95,15 @@
       <div class="bottom_box">
         <p><?= $videoPath ?></p>
         <p><?=$row['course_shortdesc']?></p>
-        <button type="submit" name="complete"><a href="">수강완료</a></button>
-        <button type="submit"><a href="">강의 목록보기</a></button>
+        <form method="POST">
+          <button type="submit" name="complete">수강완료</button>
+        </form>
+        <button type="submit" onclick="goBack()">강의 목록보기</button>
       </div>
     </article>
   </section>
 </main>
+
 <?php
   include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/footer.php";
 ?>

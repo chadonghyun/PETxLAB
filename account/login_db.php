@@ -50,8 +50,18 @@ if (!$num_match) {
 
     $userlevel = $_SESSION['user_level'];
 
-    $query = "INSERT INTO loginlog (user_num, user_id, login_time, login_status, login_IP) VALUES ('$number', '$user_id', '$login_time', '$login_status', '$login_IP')";
-    mysqli_query($con, $query) or die(mysqli_error($con));
+    // 기존에 로그인된 아이디가 있는지 확인
+    $sql_loginlog = "SELECT * FROM loginlog WHERE user_num = '$number'";
+    $result_loginlog = mysqli_query($con, $sql_loginlog);
+    $num_rows_loginlog = mysqli_num_rows($result_loginlog);
+
+    if ($num_rows_loginlog > 0) {
+      // 이미 로그인된 아이디가 있는 경우, 해당 아이디의 로그인 정보를 업데이트
+      $query = "UPDATE loginlog SET login_time = '$login_time', login_status = '$login_status', login_IP = '$login_IP' WHERE user_num = '$number'";
+    } else {
+      // 로그인된 아이디가 없는 경우, 새로운 로그인 정보를 추가
+      $query = "INSERT INTO loginlog (user_num, user_id, login_time, login_status, login_IP) VALUES ('$number', '$user_id', '$login_time', '$login_status', '$login_IP')";
+    }
       
     mysqli_close($con);
 

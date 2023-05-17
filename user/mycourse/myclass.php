@@ -239,7 +239,7 @@
     <section id="myqna">
       <div class="qna_top top">
         <h2>QnA</h2>
-        <?php?><a href="./class_QnA_list.php?no=1" title="">전체보기</a>
+        <a href="./class_QnA_list.php?no=1" title="">전체보기</a>
       </div>
       <ul class="qna_tab_list">
         <li class="active" data-tab="all">전체</li>

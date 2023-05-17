@@ -176,3 +176,16 @@ span.state.state_complete {
 .fal{
   background: #FF4E4E;
 }
+
+.qna{
+  display: block;
+  text-align: center;
+  line-height: 40px;
+  font-family: var(--fm-title);
+  color: var(--f-colorwh);
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  background-color: var(--sub-colorbl);
+  margin-top: 20px;
+}

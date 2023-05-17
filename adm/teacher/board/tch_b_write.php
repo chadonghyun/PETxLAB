@@ -54,7 +54,7 @@ $rows2 = mysqli_fetch_assoc($result2);
                     <textarea name="board_contents" id="board_contents" rows="9" readonly><?=$rows['qna_question']?></textarea>
                   </div>
                   <?php if ($rows['qna_response'] == 0): ?>
-                  <h4 class="title d-flex justy-content-between">답변 <span class="ms-2 font-normal">등록일 <?=substr($rows['reply_time'],0,10)?></span></h4>
+                  <h4 class="title d-flex justify-content-between">답변 <span class="ms-2 font-normal">등록일 <?=substr($rows['reply_time'],0,10)?></span></h4>
                   <div class="textarea_wrap disabled">
                     <textarea name="board_reply" id="board_reply" rows="9"></textarea>
                   </div>

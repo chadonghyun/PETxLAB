@@ -28,6 +28,7 @@
 <main>
   <form action="" method="post">
     <input type="hidden" name="no" value="<?=$no?>">  
+    <!-- <input type="hidden" name="qna_category" value="<?=$row['qna_category']?>">   -->
     <ul class="course_list">
       <li class="card">
           <div class="course_thumb ratio ratio-4x3">
@@ -117,6 +118,7 @@
       </li>
       <?php } ?>
     </ul>
+    <a href="./class_QnA_write.php?no=<?=$no?>&qna_category=<?=$row['course_type']?>" title="질문하기" class="qna">질문하기</a>
   </form>
 </main>
 
