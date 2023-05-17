@@ -11,7 +11,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
 <!-- 메인영역 -->
 <main>
   <!-- adm_m_list.css -->
-  <link rel="stylesheet" type="text/css" href="./css/adm_m_list.css">
+  <link rel="stylesheet" type="text/css" href="./css/adm_c_list.css">
   <script src="./js/adm_c_list.js" defer></script>
 
   <article id="main_h">
@@ -125,12 +125,11 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
             <?php
               if ($row['confirm'] == 1) {
             ?>
-                <span>승인완료</span>
+                <span class="confirm confirm_txt">승인완료</span>
             <?php
               }else{
             ?>    
-                <button type="submit" formaction="update_confirm.php">승인하기</button>
-                <input type="hidden" name="user_course_id[]" value="<?=$row['user_course_id']?>">
+                <button type="submit" formaction="update_confirm.php" name="user_course_id" value="<?=$row['user_course_id']?>" class="confirm confirm_btn">승인하기</button>
             <?php    
               }
             ?>
@@ -175,7 +174,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     </ul>
     
     <div class="btn_box">
-      <button type="submit" formaction="mailto.php" onclick="return post();"><i class="bi bi-envelope"></i> 선택발송</button>
+      <button type="submit" formaction="mailto.php" onclick="return post();">선택승인취소</button>
       <button type="submit" formaction="delete.php" onclick="return post();">선택삭제</button>
     </div>
   </article>

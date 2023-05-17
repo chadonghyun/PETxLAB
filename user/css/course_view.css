@@ -1,0 +1,205 @@
+@charset "utf-8";
+
+main {
+    padding:100px 20px 60px;
+}
+
+h2, h3 {
+    /* color:#666; */
+    line-height: inherit;
+}
+
+.card {
+    width:100%;
+    padding:30px;
+    box-sizing: border-box;
+    margin-bottom:20px;
+
+    background: #FFFFFF;
+    border: 1px solid #E1E1E1;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+}
+
+.card:last-child {
+    margin-bottom:0;
+}
+
+.course_thumb {
+    width:100%;
+    background:#8599B9;
+    border-radius: 20px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.course_thumb img {
+    object-fit: cover;
+    width:100%;
+    height:100%;
+}
+
+.course_desc {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-weight:500;
+}
+
+.course_cate {
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.course_title {
+    width:100%;
+    font-size:20px;
+    padding-bottom:16px;
+    margin-bottom:10px;
+    border-bottom:2px solid #666666;
+}
+
+.duration, 
+.date {
+    color:#8599B9;
+    margin-bottom:16px;
+}
+
+.desc_txt {
+    width:100%;
+    line-height:24px;
+    color:#666;
+    margin-bottom:24px;
+    letter-spacing: -0.04em;
+}
+
+.progress_area {
+    position:relative;
+    width:calc(100% - 120px);
+    height:16px;
+    border-radius: 8px;
+    background:#f1f1f1;
+}
+
+.progress_bar {
+    position:absolute;
+    height:100%;
+    left:0;
+    background:#8599B9;
+    border-radius: 8px;
+}
+
+.progress_txt,
+.detail_btn {
+    margin-top:auto;
+    color:#8599B9 !important;
+}
+
+.card_title {
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom:4px;
+    border-bottom:2px solid #666;
+    margin-bottom:16px;
+}
+
+h4 {
+    font-size:20px;
+    color:#666;
+}
+
+.card_title span {
+    font-size:14px;
+    color:#8599B9;
+}
+
+
+
+.inner_card {
+    padding:20px;
+    border:1px solid #8599B9;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.inner_card > a {
+    width:100%;
+}
+
+.inner_card h5 {
+    font-size:20px;
+    color:#333;
+}
+
+.inner_card i {
+    font-size:50px;
+    line-height: 0;
+    color:#8599B9;
+}
+
+.video_desc,
+.file_desc {
+    display: flex;
+    flex-direction: column;
+}
+
+.video_desc p,
+.file_desc p {
+    margin-top:auto;
+    line-height: 1;
+}
+
+.video_duration,
+.file_size {
+    color:#666;
+}
+
+span.state {
+    display: inline-block;
+    padding:0px 8px 1px ;
+    background:#FF4E4E;
+    color:#fff;
+    font-size:14px;
+    line-height:20px;
+    border-radius:10px;
+}
+
+span.state.state_complete {
+    background:#8599B9;
+}
+
+button.registration {
+    width:100%;
+    line-height:60px;
+    border-radius:20px;
+    background:#FF4E4E;
+    border:none;
+    font-family: 'yg-jalnan';
+    color:#fff;
+    font-size:20px;
+}
+
+.course_list > li.card:not(:first-child){
+    position:relative;
+    overflow: hidden;
+}
+
+.course_list > li.card:not(:first-child)::after {
+    content:'수강신청해주세요';
+
+    position:absolute;
+    left:0;
+    bottom:0;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    width:100%;
+    /* height:calc(100% - 178px); */
+    height:100%;
+    background:rgba(0, 0, 0, 0.8);
+    color:#fff;
+    font-family: 'yg-jalnan';
+    font-size:20px;
+}
