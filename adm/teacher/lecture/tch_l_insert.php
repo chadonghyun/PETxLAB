@@ -1,6 +1,6 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/db/db_con.php";
-include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/PETxLAB/db/db_con.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/PETxLAB/config.php";
 
 // 이미지 업로드 하기
 $uploaded_file_name_tmp = $_FILES['course-image']['tmp_name'];
@@ -8,7 +8,6 @@ $uploaded_file_name = $_FILES['course-image']['name'];
 $upload_folder = $_SERVER['DOCUMENT_ROOT'] . "/PETxLAB/adm/teacher/lecture/uploads/";
 
 move_uploaded_file($uploaded_file_name_tmp, $upload_folder . $uploaded_file_name);
-
 
 // 학습자료 업로드 하기
 $uploaded_file_name_tmp2 = isset($_FILES['course-file']['tmp_name']) ? $_FILES['course-file']['tmp_name'] : array();
@@ -38,6 +37,10 @@ $uploaded_files2 = array(); // 업로드된 비디오 파일 경로를 저장할
 $upload_folder3 = $_SERVER['DOCUMENT_ROOT'] . "/PETxLAB/adm/teacher/lecture/videos/";
 
 if (is_array($uploaded_file_name_tmp3)) {
+    
+    //getid3로 비디오 파일의 시간 정보 가져오기
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/PETxLAB/getid3/getid3/getid3.php";
+
     foreach ($uploaded_file_name_tmp3 as $key => $tmp_name) {
         $uploaded_file_name2 = isset($uploaded_file_names3[$key]) ? $uploaded_file_names3[$key] : '';
         $uploaded_file_name_tmp = isset($uploaded_file_name_tmp3[$key]) ? $uploaded_file_name_tmp3[$key] : '';
@@ -46,7 +49,18 @@ if (is_array($uploaded_file_name_tmp3)) {
             move_uploaded_file($uploaded_file_name_tmp, $upload_folder3 . $uploaded_file_name2);
 
             $uploaded_files2[] = $uploaded_file_name2; // 파일 경로를 배열에 추가
-            
+
+            $video_file = $upload_folder3 . $uploaded_file_name2;
+
+            $getID3 = new getID3();
+            $file_info = $getID3->analyze($video_file);
+            $video_duration = $file_info['playtime_string'];
+
+            $video_length = mysqli_real_escape_string($con, $video_duration);
+            $update_sql = "UPDATE video SET video_length = '$video_length' WHERE video_path = '$uploaded_file_name2'";
+            $result4 = mysqli_query($con, $update_sql);
+
+
         }
     }
 }
@@ -72,39 +86,49 @@ $result2 = mysqli_query($con, $sql);
 
 if ($result2) {
     // 강의 정보 등록 성공
+// video 테이블에 path 추가
+$video_paths = implode(",", $uploaded_files2); 
 
-    // video 테이블에 path 추가
-    $video_paths = implode(",", $uploaded_files2); // 업로드된 비디오 파일 경로들을 쉼표로 구분하여 문자열로 변환
+// 새로 추가한 강의의 course_id 가져오기
+$course_id = mysqli_insert_id($con);
 
-    // 새로 추가한 강의의 course_id 가져오기
-    $course_id = mysqli_insert_id($con);
+// Video 테이블에 비디오 경로 저장
+// 반복문으로 들어가기
+$result3 = true; 
+$video_ids = [];
 
-    // Video 테이블에 비디오 경로 저장
-    // 반복문으로 들어가기
+// Loop through the uploaded files
+foreach ($uploaded_files2 as $key => $uploaded_file) {
+    // Insert video path into video table
+    $insert_sql = "INSERT INTO video (course_id, video_length, video_status, video_path) VALUES ('$course_id', '', 0, '$uploaded_file')";
+    $result3 = mysqli_query($con, $insert_sql);
 
-    for($i = 0; $i<count($uploaded_files2); $i++){
-        $video_sql = "INSERT INTO video (course_id, video_path) VALUES ('$course_id', '$uploaded_files2[$i]' )";
-        $result = mysqli_query($con, $video_sql);
-    }
+    if ($result3) {
+        $video_id = mysqli_insert_id($con);
+        $video_ids[] = $video_id;
 
+        $video_file = $upload_folder3 . $uploaded_file;
 
-
-    if ($result) {
+        $getID3 = new getID3();
+        $file_info = $getID3->analyze($video_file);
+        $video_duration = $file_info['playtime_string'];
+        $video_length = mysqli_real_escape_string($con, $video_duration);
+        $update_sql = "UPDATE video SET video_length = '$video_length' WHERE video_id = '$video_id'";
+        $result4 = mysqli_query($con, $update_sql);
         ?>
         <script>
             alert('강의가 등록되었습니다.');
             location.replace('./tch_l_list.php?no=3');
         </script>
         <?php
-    } else {
-        echo (mysqli_error($con));
+        }else {
+            echo (mysqli_error($con));
     }
-} else {
-    // 강의 정보 등록 실패
-    echo (mysqli_error($con));
 }
+}
+    
+
+
 
 mysqli_close($con);
 ?>
-
-

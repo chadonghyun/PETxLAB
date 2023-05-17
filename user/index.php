@@ -50,26 +50,31 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
             <div class="swiper">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <div class="img_box">
-                    <img src="./images/class1.png" alt="class1">
-                  </div>
-                  <p>반려동물행동교정사</p>
-                  <p>반려인구 1,500만 시대의 만능 해결사<br>반려가구의 행복을 돕는 반려계 멀티 플레이어</p>
+                  <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                    <div class="img_box">
+                      <img src="./images/class1.png" alt="class1">
+                    </div>
+                    <p>반려동물행동교정사</p>
+                    <p>반려인구 1,500만 시대의 만능 해결사<br>반려가구의 행복을 돕는 반려계 멀티 플레이어</p>
+                  </a>
                 </div>
                 <div class="swiper-slide">
-                  
-                  <div class="img_box">
-                    <img src="./images/class2.png" alt="class1">
-                  </div>
-                  <p>건조간식 특화과정</p>
-                  <p>씹는 것을 좋아하는 강아지를 위한<br> 건조간식을 전문적으로 배우는 교육과정</p>
+                  <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                    <div class="img_box">
+                      <img src="./images/class2.png" alt="class1">
+                    </div>
+                    <p>건조간식 특화과정</p>
+                    <p>씹는 것을 좋아하는 강아지를 위한<br> 건조간식을 전문적으로 배우는 교육과정</p>
+                  </a>  
                 </div>
                 <div class="swiper-slide">
-                  <div class="img_box">
-                    <img src="./images/class3.png" alt="class1">
-                  </div>
-                  <p>펫 미용</p>
-                  <p>셀프미용의 달인,고수익 애견미용사<br>활용도 200% 자격증</p>
+                  <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                    <div class="img_box">
+                      <img src="./images/class3.png" alt="class1">
+                    </div>
+                    <p>펫 미용</p>
+                    <p>셀프미용의 달인,고수익 애견미용사<br>활용도 200% 자격증</p>
+                  </a>
                 </div>
               </div>
               <div class="swiper-pagination fraction"></div>
@@ -81,26 +86,33 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
             <div class="swiper">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <div class="img_box">
-                    <img src="./images/class4.png" alt="class1">
-                  </div>
-                  <p>나의 도마뱀을 알라</p>
-                  <p>애완 도마뱀의 A to Z 까지 파헤쳐보자</p>
+                  <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                    <div class="img_box">
+                      <img src="./images/class4.png" alt="class1">
+                    </div>
+                    <p>나의 도마뱀을 알라</p>
+                    <p>애완 도마뱀의 A to Z 까지 파헤쳐보자</p>
+                  </a>
                 </div>
+
                 <div class="swiper-slide">
-                  
-                  <div class="img_box">
-                    <img src="./images/class5.png" alt="class1">
-                  </div>
-                  <p>동물병원 코디네이터</p>
-                  <p>미용부터 수의테크니션 교육까지<br> 풀패키지 커리큘럼</p>
+                  <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                    <div class="img_box">
+                      <img src="./images/class5.png" alt="class1">
+                    </div>
+                    <p>동물병원 코디네이터</p>
+                    <p>미용부터 수의테크니션 교육까지<br> 풀패키지 커리큘럼</p>
+                  </a>
                 </div>
+
                 <div class="swiper-slide">
-                  <div class="img_box">
-                    <img src="./images/class6.png" alt="class1">
-                  </div>
-                  <p>반려동물장례코디네이터</p>
-                  <p>사명감 있는 특별한 직업<br>2023 유망직업 선정!</p>
+                  <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                    <div class="img_box">
+                      <img src="./images/class6.png" alt="class1">
+                    </div>
+                    <p>반려동물장례코디네이터</p>
+                    <p>사명감 있는 특별한 직업<br>2023 유망직업 선정!</p>
+                  </a>
                 </div>
               </div>
               <div class="swiper-button-prev button"></div>
@@ -160,19 +172,19 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
     <section id="job">
       <h2>취업정보포털</h2>
       <dl>
-        <dt><a href="#" title="title">마감 2023.08.31</a></dt>
+        <dt><a href="#" title="title" onclick="alert('채용정보 페이지는 준비중에 있습니다.');">마감 2023.08.31</a></dt>
         <dd>[서울] (서울 성동구)<br>
           펌킨펫하우스 / 훈련사 채용</dd>
-        <dt><a href="#" title="title">마감 2023.08.31</a></dt>
+        <dt><a href="#" title="title" onclick="alert('채용정보 페이지는 준비중에 있습니다.');">마감 2023.08.31</a></dt>
         <dd>[충북] (충북 청주시)<br>
           바우보우 / 훈련견습생 채용</dd>
-        <dt><a href="#" title="title">마감 2023.08.31</a></dt>
+        <dt><a href="#" title="title" onclick="alert('채용정보 페이지는 준비중에 있습니다.');" >마감 2023.08.31</a></dt>
         <dd>[경기] (경기 고양시)<br>
           일산클래식동물병원 / 수의테크니션 채용</dd>
-        <dt><a href="#" title="title">마감 2023.08.31</a></dt>
+        <dt><a href="#" title="title" onclick="alert('채용정보 페이지는 준비중에 있습니다.');">마감 2023.08.31</a></dt>
         <dd>[서울] (서울 강남구)<br>
           임재성동물의료센터 / 수의테크니션 채용</dd>
-        <dt><a href="#" title="title">마감 2023.08.31</a></dt>
+        <dt><a href="#" title="title" onclick="alert('채용정보 페이지는 준비중에 있습니다.');">마감 2023.08.31</a></dt>
         <dd>[경기] (경기 성남시)
           백현동물병원 / 수의테크니션 채용</dd>
       </dl>
@@ -184,33 +196,40 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
           <div class="swiper">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <div class="img_box">
-                  <img src="./images/class7.png" alt="class1">
-                </div>
-                <p>펫뷰티션</p>
-                <p>반려동물 위생&미용관리의 모든것<br>펫뷰티전문가 도전해보세요</p>
+                <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                  <div class="img_box">
+                    <img src="./images/class7.png" alt="class1">
+                  </div>
+                  <p>펫뷰티션</p>
+                  <p>반려동물 위생&미용관리의 모든것<br>펫뷰티전문가 도전해보세요</p>
+                </a>
               </div>
               <div class="swiper-slide">
-                
-                <div class="img_box">
-                  <img src="./images/class8.png" alt="class1">
-                </div>
-                <p>펫유치원교원사</p>
-                <p>잘나가는 '개치원'의 창업준비<br>창업시장,정보,필요한 정보가 다 있다!</p>
+                <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                  <div class="img_box">
+                    <img src="./images/class8.png" alt="class1">
+                  </div>
+                  <p>펫유치원교원사</p>
+                  <p>잘나가는 '개치원'의 창업준비<br>창업시장,정보,필요한 정보가 다 있다!</p>
+                </a>
               </div>
               <div class="swiper-slide">
-                <div class="img_box">
-                  <img src="./images/class9.png" alt="class1">
-                </div>
-                <p>펫 아이템</p>
-                <p>나의 펫을 위한 아이템 만들기<br>의류,악세서리 만드는 법 배우기</p>
+                <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                  <div class="img_box">
+                    <img src="./images/class9.png" alt="class1">
+                  </div>
+                  <p>펫 아이템</p>
+                  <p>나의 펫을 위한 아이템 만들기<br>의류,악세서리 만드는 법 배우기</p>
+                </a>
               </div>
               <div class="swiper-slide">
-                <div class="img_box">
-                  <img src="./images/class10.png" alt="class1">
-                </div>
-                <p>반려동물행동교정사</p>
-                <p>나의 펫의 마음알기, 행동 교정하기<br>제 2의 강형욱이 되어보세요</p>
+                <a href="#" title="recommand1" onclick="alert('해당페이지는 준비중에 있습니다.');" >
+                  <div class="img_box">
+                    <img src="./images/class10.png" alt="class1">
+                  </div>
+                  <p>반려동물행동교정사</p>
+                  <p>나의 펫의 마음알기, 행동 교정하기<br>제 2의 강형욱이 되어보세요</p>
+                </a>
               </div>
             </div>
             <div class="swiper-button-prev button"></div>
@@ -228,9 +247,10 @@ include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
         <div class="talk">
           <img src="./images/talking.png" alt="talking" class="cloud">
           <ul class="talking_box">
-            <li><a href="#" title="ment1">양꼬치엔 칭따오! 참 좋아요 <br><span>-조은님-</span></a></li>
-            <li><a href="#" title="ment1">유익한 강의네요,<br>또 듣고 싶어요 <br><span>-종현님-</span></a></li>
-            <li><a href="#" title="ment1">수업 강추합니다!<br>많이 배웠어요 <br><span>-동현님-</span></a></li>
+            <li><a href="#" title="ment1" onclick="alert('웃는게 예쁜 조은님 고생하셨습니다.');">양꼬치엔 칭따오! 참 좋아요 <br><span>-조은일만가득-</span></a></li>
+            <li><a href="#" title="ment1" onclick="alert('주무시는게 아름다운 종현님 고생하셨습니다.');">유익한 강의네요,<br>또 듣고 싶어요 <br><span>-잠자는종현-</span></a></li>
+            <li><a href="#" title="ment1" onclick="alert('눈빛카리스마 챠님 고생하셨습니다.');">수업 강추합니다!<br>많이 배웠어요 <br><span>-동현챠-</span></a></li>
+            <li><a href="#" title="ment1" onclick="alert('모두들 고생하셨습니다. 꼭 취뽀 성공해요~(윙크윙크하트하트쪽쭈욱쪽~)');">모두들<br> 고생하셨습니다.<br><span>-펭귄킴-</span></a></li>
           </ul>
         </div>
       </div>

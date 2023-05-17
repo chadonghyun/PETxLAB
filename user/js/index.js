@@ -1,3 +1,14 @@
+//모든 a링크 기능 막기
+$(document).ready(function(){
+  $('a[href="#"]').click(function(ignore){
+    ignore.preventDefault();
+  });
+});
+
+
+
+
+
 $('#slide > li:gt(0)').hide();
 
 setInterval(function(){
@@ -62,3 +73,5 @@ setInterval(function(){
         .end()
         .appendTo('#network ul');
 },2800);
+
+
