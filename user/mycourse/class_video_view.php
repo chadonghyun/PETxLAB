@@ -11,9 +11,9 @@
   }
   $row = mysqli_fetch_array($result);
   
-  // 가져온 course_id 값을 변수에 저장합니다.
+  // 가져온 course_id 값을 변수에 저장
   $courseId = $row['course_id'];
-  // course_id 값을 사용하여 class_lecture_view.php 주소를 생성합니다.
+  // course_id 값을 사용하여 class_lecture_view.php 주소생성
   $url = "./class_lecture_view.php?no=" . $courseId;
 
   $sql2 = "SELECT * FROM video WHERE video_id=$no";
@@ -28,13 +28,35 @@
     if (!$result_update_progress) {
       die(mysqli_error($con));
     }
-
-    // video 테이블 status값 수정
-    $sql_update_video = "UPDATE video SET video_status = 1 WHERE video_id = $no";
-    $result_update_video = mysqli_query($con, $sql_update_video);
-    if (!$result_update_video) {
+    
+    // video_progress 테이블에서 user_id에 해당하는 수강 완료한 동영상 수
+    $sql_completed_videos = "SELECT COUNT(*) AS completed_videos FROM video_progress WHERE user_id = '$userid' AND video_status = 1";
+    $result_completed_videos = mysqli_query($con, $sql_completed_videos);
+    if (!$result_completed_videos) {
       die(mysqli_error($con));
     }
+    $row_completed_videos = mysqli_fetch_array($result_completed_videos);
+    $completedVideos = $row_completed_videos['completed_videos'];
+
+    // video 테이블에서 전체 강의 수
+    $sql_total_videos = "SELECT COUNT(*) AS total_videos FROM video";
+    $result_total_videos = mysqli_query($con, $sql_total_videos);
+    if (!$result_total_videos) {
+      die(mysqli_error($con));
+    }
+    $row_total_videos = mysqli_fetch_array($result_total_videos);
+    $totalVideos = $row_total_videos['total_videos'];
+
+    // 수강 완료한 동영상의 백분율
+    $progressPercentage = ($completedVideos / $totalVideos) * 100;
+
+    // user_course 테이블의 progress 업데이트
+    $sql_update_user_course = "UPDATE user_course SET progress = $progressPercentage WHERE user_id = '$userid' AND course_id = $course_id";
+    $result_update_user_course = mysqli_query($con, $sql_update_user_course);
+    if (!$result_update_user_course) {
+      die(mysqli_error($con));
+    }
+
     echo '<script>location.replace("' . $url . '");</script>';
       exit();
     }

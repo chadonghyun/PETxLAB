@@ -53,4 +53,9 @@ const v = document.getElementById('class_video');
   $('#btn09').click(function(){
     v.playbackRate=2;
   });
+
 });
+
+function goBack() {
+  history.back();
+}
