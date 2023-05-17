@@ -93,7 +93,7 @@
   display: none;
 }
 .des_box{
-  height: 278px;
+  height: 328px;
   background: #fff;
   padding: 30px;
 }
@@ -124,14 +124,26 @@
 .bottom_box > button{
   width: 100%;
   height: 40px;
+}
+.bottom_box > button:first-of-type{
   background: #8599B9;
-  color: #fff;
   border: none;
   border-radius: 20px;
+  margin-bottom: 10px;
+}
+.bottom_box > button:last-of-type{
+  background: #fff;
+  border: 1px solid #FF4E4E;
+  border-radius: 20px;
+}
+.bottom_box > button:first-of-type > a{
+  color: #fff;
+}
+.bottom_box > button:last-of-type > a{
+  color: #FF4E4E;
 }
 .speed_box{
   display:none;
-
   background: rgba(255, 255, 255, .5);
   width: 152px;
   height: 45px;

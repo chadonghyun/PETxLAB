@@ -14,6 +14,23 @@
   $sql2 = "SELECT * FROM video WHERE video_id=$no";
   $result2 = mysqli_query($con, $sql2);
   $row2 = mysqli_fetch_array($result2);
+
+  // Check if "수강완료" button is clicked
+  if (isset($_POST['complete'])) {
+    // Update video_status in video_progress table
+    $sql_update_progress = "UPDATE video_progress SET video_status = 1 WHERE user_id = '$userid' AND course_id = $course_id";
+    $result_update_progress = mysqli_query($con, $sql_update_progress);
+    if (!$result_update_progress) {
+      die(mysqli_error($con));
+    }
+
+    // Update video_status in video table
+    $sql_update_video = "UPDATE video SET video_status = 1 WHERE video_id = $no";
+    $result_update_video = mysqli_query($con, $sql_update_video);
+    if (!$result_update_video) {
+      die(mysqli_error($con));
+    }
+  }
 ?>
 
 <!-- class_video_view 서식 -->
@@ -24,8 +41,8 @@
   <section class="class_box">
     <article class="video_box">
     <?php $videoPath = $row2['video_path'];?>
-    <video src="<?php echo '/PETxLAB/adm/teacher/lecture/videos/' . $videoPath ?>" id="class_video" ></video>
-
+    <video src="<?php echo '/PETxLAB/adm/teacher/lecture/videos/' . $videoPath ?>" id="class_video" controls></video>
+<!-- 
       <img src="./img/set.png" alt="설정버튼" id="btn05">
 
       <ul>
@@ -51,7 +68,7 @@
           <li id="btn08">x1.5</li>
           <li id="btn09">x2</li>
         </ul>
-      </div>
+      </div> -->
     </article>
 
     <article class="des_box">
@@ -71,7 +88,8 @@
       <div class="bottom_box">
         <p><?= $videoPath ?></p>
         <p><?=$row['course_shortdesc']?></p>
-        <button type="submit">수강완료</button>
+        <button type="submit" name="complete"><a href="">수강완료</a></button>
+        <button type="submit"><a href="">강의 목록보기</a></button>
       </div>
     </article>
   </section>
