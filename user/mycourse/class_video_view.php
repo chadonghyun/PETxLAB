@@ -39,7 +39,7 @@
     $completedVideos = $row_completed_videos['completed_videos'];
 
     // video 테이블에서 전체 강의 수
-    $sql_total_videos = "SELECT COUNT(*) AS total_videos FROM video";
+    $sql_total_videos = "SELECT COUNT(*) AS total_videos FROM video WHERE course_id = $course_id";
     $result_total_videos = mysqli_query($con, $sql_total_videos);
     if (!$result_total_videos) {
       die(mysqli_error($con));

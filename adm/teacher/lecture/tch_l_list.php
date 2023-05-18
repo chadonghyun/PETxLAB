@@ -127,9 +127,33 @@ if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정
             ?>
             <td><?= $user_row['user_name']; ?></td>
             <td><?= $row['course_startday'] ?> ~ <?= $row['course_endday'] ?></td>
-            <td><?= $row['course_id'] ?></td>
-            <td><?= $row['course_id'] ?></td>
-            <td><?= $row['course_id'] ?></td>
+            <td>
+              <?php
+                $courseId = $row['course_id'];
+                $sql = "SELECT COUNT(*) AS count FROM video WHERE course_id = '$courseId'";
+                $result = mysqli_query($con, $sql);
+                $countRow = mysqli_fetch_assoc($result);
+                $count = $countRow['count'];
+                echo $count;
+              ?>
+            </td>
+            <td>
+              <?php
+                $courseFiles = explode(',', $row['course_file']);
+                $fileCount = count($courseFiles);
+                echo $fileCount;
+              ?>
+            </td>
+            <td>
+            <?php
+                $courseId = $row['course_id'];
+                $sql = "SELECT COUNT(*) AS count FROM user_course WHERE course_id = '$courseId'";
+                $result = mysqli_query($con, $sql);
+                $countRow = mysqli_fetch_assoc($result);
+                $count = $countRow['count'];
+                echo $count;
+              ?>
+            </td>
             <td><input type="checkbox" id="<?= $row['course_id'] ?>" value="<?= $row['course_id'] ?>" name="checked[]"><label for="<?= $row['course_id'] ?>"></label></td>
         </tr>
     <?php } ?>
@@ -216,4 +240,3 @@ if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정
     });
   </script>
 </body>
-</html>
