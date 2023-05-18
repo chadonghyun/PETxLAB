@@ -106,16 +106,17 @@ $row2 = mysqli_fetch_assoc($result2);
                 <div>
                   <label for="course_shortdesc">짧은설명</label>
                   <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" value="<?=$rows['course_shortdesc']?>" >                  
+                  </div>
                 </div>
               </div>
+            </div>   
               <div class="col-md-12 lecreg-desc card">
                   <label for="course_longdesc">상세설명</label>
                   <textarea name="course_longdesc" id="course_longdesc" class="course_longdesc" rows="10"><?=$rows['course_longdesc']?></textarea>
                 </div>
             </div>
           </div>
-        </div>
-      </div>
+
     </form>
   </section>
 </main>

@@ -39,7 +39,7 @@ $row2 = mysqli_fetch_assoc($result2);
             <!-- 삭제 버튼 -->
 
             <input type="hidden" name="course_id" value="<?=$no?>">
-            <button type="submit" class="edit">강의수정</button>
+            <!-- <button type="submit" class="edit">강의수정</button> -->
             <button type="submit" formaction="adm_l_delete.php" class="delete">강의삭제</button>
           </div>
         </div>
@@ -89,7 +89,7 @@ $row2 = mysqli_fetch_assoc($result2);
                 <div class="form-group">
                   <label for="course-image">대표이미지</label>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="course-image" name="course-image">
+                  <input type="text" class="custom-file-input indent" id="course-image" name="course-image" value="파일명: <?=$rows['course_image']?>" readonly>
                     <div class="imagebox">
                       <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/adm/teacher/lecture/uploads/<?=$rows['course_image']?>" alt="upload_image">
                     </div>
@@ -100,14 +100,14 @@ $row2 = mysqli_fetch_assoc($result2);
                   <input type="text" name="course_shortdesc" id="course_shortdesc" class="form-control" value="<?=$rows['course_shortdesc']?>" readonly>                  
                 </div>
               </div>
+              </div>
+            </div>  
               <div class="col-md-12 lecreg-desc card">
                   <label for="course_longdesc">상세설명</label>
                   <textarea name="course_longdesc" id="course_longdesc" class="course_longdesc" rows="10" readonly><?=$rows['course_longdesc']?></textarea>
                 </div>
             </div>
           </div>
-        </div>
-      </div>
     </form>
   </section>
 </main>
