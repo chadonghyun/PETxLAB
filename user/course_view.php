@@ -27,11 +27,11 @@
         <ul class="course_list">
             <li class="card">
                 <div class="course_thumb ratio ratio-4x3">
-                    <img src="<?php $_SERVER['DOCUMENT_ROOT'].'/adm/teacher/uploads/'.$row['course_image'] ?>" alt="">
+                    <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/adm/teacher/lecture/uploads/<?=$row['course_image']?>" alt="<?=$row['course_title']?>">
                 </div>
                 <div class="course_desc d-flex">
                     <span class="course_cate" style="text-decoration:none;">
-                        전문교육과정
+                        <?=$row['course_type']?>
                     </span>
                     <h3 class="course_title text-truncate"><?=$row['course_title']?></h3>
                     <input type="hidden" name="course_title" value="<?=$row['course_title']?>">
@@ -124,7 +124,17 @@
                 <button type="submit" class="registration">수강신청</button>
             </li>
             <?php }else{ ?>
-                <button type="submit" class="registration" formmethod="get" formaction="" value="">강의실로 바로가기</button>
+                <li>
+                    <?php
+                        if($row2['progress'] == 0){
+                    ?>
+                        <p class="registration waiting">
+                            승인 대기중입니다.
+                        </p>
+                    <?php }else{ ?>
+                        <button type="submit" class="registration" formaction="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/mycourse/class_lecture_view.php?no=<?=$row['course_id']?>">강의실로 바로가기</button>
+                    <?php } ?>
+                </li>
             <?php } ?>
         </ul>
     </form>

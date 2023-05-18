@@ -3,7 +3,7 @@
     include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
     include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
 
-    $cate = empty($_GET['cate']) ? '반려동물 전문창업' : $_GET['cate'];
+    $cate = empty($_GET['cate']) ? '펫푸드' : $_GET['cate'];
     $find=empty($_GET['find']) ? '' : $_GET['find'];
 
     $list_sql = "SELECT * FROM coursereg WHERE course_category = '$cate'";
@@ -83,7 +83,7 @@
             ?>
             <li class="card d-flex justify-content-between">
                 <div class="course_thumb">
-                    <img src="" alt="">
+                    <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/adm/teacher/lecture/uploads/<?=$row['course_image']?>" alt="<?=$row['course_title']?>">
                 </div>
                 <div class="course_desc d-flex">
                     <span class="course_cate" style="text-decoration:none;">

@@ -168,7 +168,7 @@ span.state.state_complete {
     background:#8599B9;
 }
 
-button.registration {
+.registration {
     width:100%;
     line-height:60px;
     border-radius:20px;
@@ -177,6 +177,17 @@ button.registration {
     font-family: 'yg-jalnan';
     color:#fff;
     font-size:20px;
+}
+
+a.registration {
+    display:block;
+    text-align: center;
+    color:#fff;
+}
+
+.registration.waiting {
+    text-align: center;
+    background:#666;
 }
 
 .course_list > li.card:not(:first-child){

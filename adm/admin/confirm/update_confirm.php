@@ -4,7 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php';
 include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 
 $user_course_id = $_POST['user_course_id'];
-$sql = "UPDATE user_course SET confirm = 1 and status = 'in_progress' WHERE user_course_id = '$user_course_id'";
+$sql = "UPDATE user_course SET confirm = 1, status = 'in_progress' WHERE user_course_id = '$user_course_id'";
 $result = mysqli_query($con, $sql);
 
 $sql2 = "SELECT * FROM user_course 
@@ -16,8 +16,9 @@ $result2 = mysqli_query($con, $sql2);
 while($row = mysqli_fetch_array($result2)){
     $course_id = $row['course_id'];
     $video_id = $row['video_id'];
+    $user_id = $row['user_id'];
 
-    $video_insert = "INSERT INTO video_progress(course_id, video_id, user_id, video_status) VALUES('$course_id', '$video_id', '$userid', 0)";
+    $video_insert = "INSERT INTO video_progress(course_id, video_id, user_id, video_status) VALUES('$course_id', '$video_id', '$user_id', 0)";
     $insert_result = mysqli_query($con, $video_insert);
 };
 

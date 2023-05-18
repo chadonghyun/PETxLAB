@@ -98,7 +98,7 @@
             ?>
             <li class="card d-flex justify-content-between">
                 <div class="course_thumb">
-                    <img src="" alt="">
+                    <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/adm/teacher/lecture/uploads/<?=$row['course_image']?>" alt="<?=$row['course_title']?>">
                 </div>
                 <div class="course_desc d-flex">
                     <span class="course_cate" style="text-decoration:none;">
