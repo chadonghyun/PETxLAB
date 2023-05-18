@@ -202,3 +202,9 @@ h4.title + select option {
 .contents__card:last-of-type .data_wrap {
     height:100%;
 }
+
+.lecture_list ul {
+    max-height:300px;
+    overflow-y: auto;
+    height:100%;
+}
