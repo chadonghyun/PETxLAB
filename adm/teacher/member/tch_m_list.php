@@ -18,13 +18,6 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     <ul id="tab_mnu">
       <li>수강생관리</li>
     </ul>
-    <select id="lecture_box">
-        <option value="제목 + 내용">강의선택</option>
-        <option value="강의명1">강의명1</option>
-        <option value="강의명2">강의명2</option>
-        <option value="강의명3">강의명3</option>
-      </select>
-
 
     <div id="search_wrap">
     <form action="tch_m_list.php" method="get" >
@@ -45,17 +38,17 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     <table id="c_list">
       <thead>
         <tr>
-          <th>No</th><th>회원번호</th><th>수강중인 강의</th><th>이름(아이디)</th><th>휴대전화</th><th>이메일</th><th>수강</th><th>접속일</th><th>가입일</th><th>메일발송</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></label></th>
+          <th>No</th><th>회원번호</th><th>수강중인 강의</th><th>이름(아이디)</th><th>휴대전화</th><th>이메일</th><th>등록일</th><th>메일발송</th><th><input type="checkbox" id="check1" onclick='selectAll(this)'><label for="check1"></label></th>
         </tr>
       </thead>
 
       <?php
-        $sql = "SELECT u.*, cr.course_title 
-        FROM userregistration u 
-        JOIN coursereg c ON u.course_id = c.course_id 
-        JOIN coursereg cr ON cr.course_id = u.course_id
-        WHERE c.user_id = '$userid' AND u.user_level = 1
-        ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")."  
+        $sql = "SELECT u.*, c.course_title
+        FROM coursereg c
+        JOIN user_course uc ON uc.course_id = c.course_id
+        JOIN userregistration u ON u.user_id = uc.user_id
+        WHERE c.user_id = '$userid'
+        ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%'" : "")."  
         ORDER BY u.number DESC";
         $result = mysqli_query($con, $sql);
 
@@ -74,12 +67,12 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
         if($e_pageNum > $total_page){$e_pageNum = $total_page;};
 
         $start = ($page - 1) * $list_num;
-        $sql2 = "SELECT u.*, cr.course_title
-        FROM userregistration u 
-        JOIN coursereg c ON u.course_id = c.course_id 
-        JOIN coursereg cr ON cr.course_id = u.course_id
-        WHERE c.user_id = '$userid' AND u.user_level = 1
-        ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%' " : "")."  
+        $sql2 = "SELECT u.*, c.course_title, uc.created_at 
+        FROM coursereg c
+        JOIN user_course uc ON uc.course_id = c.course_id
+        JOIN userregistration u ON u.user_id = uc.user_id
+        WHERE c.user_id = '$userid'
+        ".($find != "" ? "AND ".$catgo." LIKE '%".$find."%'" : "")."  
         ORDER BY u.number DESC LIMIT $start, $list_num";
         $result = mysqli_query($con, $sql2);
         $cnt = $start + 1;
@@ -100,9 +93,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
             <td><a href="adm_m_view.php?no=<?= $row['number'] ?>"><?= $row['user_name'] ?></a></td>
             <td><?= $row['user_phone'] ?></td>
             <td><?= $row['user_email'] ?></td>
-            <td>2</td>
-            <td>20</td>
-            <td><?= $row['reg_date'] ? date('Y-m-d', strtotime($row['reg_date'])) : '' ?></td>
+            <td><?= $row['created_at'] ? date('Y-m-d', strtotime($row['created_at'])) : '' ?></td>
             <td><i class="bi bi-envelope"></i></td>
             <td><input type="checkbox" id="<?= $row['number'] ?>" value="<?= $row['number'] ?>" name="checked[]"><label for="<?= $row['number'] ?>"></label></td>
           </tr>

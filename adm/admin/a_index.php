@@ -119,10 +119,10 @@ $result = mysqli_query($con, $sql);
             <?php
               while($row = mysqli_fetch_assoc($result)) {
                 $num = sprintf("%03d", $row['number']);
-                $type = $row['Board_content'];
+                // $type = $row['Board_content'];
                 $title = $row['Board_title'];
                 $date = substr($row['Board_date'],0,10);
-                echo "<tr><td>$num</td><td>$type</td><td class='b_title'><a href='board/adm_b_view.php?idx=".$row['number']."'>$title</a></td><td>$date</td></tr>";
+                echo "<tr><td>$num</td><td class='b_title'><a href='board/adm_b_view.php?idx=".$row['number']."'>$title</a></td><td>$date</td></tr>";
               }
             ?>
           </tbody>

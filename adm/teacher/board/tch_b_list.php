@@ -19,13 +19,6 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     <ul id="tab_mnu">
       <li><a href="tch_b_list.php?no=1">QnA 게시판</a></li>
     </ul>
-    <select id="lecture_box">
-        <option value="제목 + 내용">강의선택</option>
-        <option value="강의명1">강의명1</option>
-        <option value="강의명2">강의명2</option>
-        <option value="강의명3">강의명3</option>
-      </select>
-
     <div id="search_wrap">
         <form action="tch_b_list.php" method="get" >
           <input type="hidden" name="no" value="<?=$no?>">

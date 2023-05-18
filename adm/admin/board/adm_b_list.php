@@ -176,7 +176,7 @@ $catgo=empty($_GET['catgo']) ? 'qna_title' : $_GET['catgo'];
     </ul>
 
     <di class="btn_box">
-      <button onclick="location.href='adm_b_write.php'">게시글작성</button>
+      <button type="submit" formaction="adm_b_write.php">게시글작성</button>
       <!-- <button>전체삭제</button> -->
       <?php if($no == 1){ ?>
       <button type="submit" formaction="notice_delete.php" onclick="return post();">선택삭제</button>
