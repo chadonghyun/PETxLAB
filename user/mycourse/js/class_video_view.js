@@ -59,3 +59,4 @@ const v = document.getElementById('class_video');
 function goBack() {
   history.back();
 }
+

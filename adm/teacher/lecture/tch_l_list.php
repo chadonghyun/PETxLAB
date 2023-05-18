@@ -87,7 +87,8 @@ if ($e_pageNum > $total_page) {
 $start = ($page - 1) * $list_num;
 
 // Build the query to fetch records with pagination
-$sql2 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id";
+$sql2 = "SELECT coursereg.*, userregistration.user_name FROM coursereg JOIN userregistration ON coursereg.user_id = userregistration.user_id  WHERE userregistration.user_id = '$userid'";
+
 $sql2 .= ($no == 1) ? " WHERE coursereg.course_type = 'general'" : (($no == 2) ? " WHERE coursereg.course_type = 'professional'" : "");
 $sql2 .= ($no == 3) ? "" : "";
 $sql2 .= ($find != "") ? " AND " . $catgo . " LIKE '%" . $find . "%'" : "";
@@ -141,7 +142,11 @@ if($row['course_type']=='professional'){$row['course_type'] ="전문교육과정
               <?php
                 $courseFiles = explode(',', $row['course_file']);
                 $fileCount = count($courseFiles);
-                echo $fileCount;
+                if($courseFiles[0]==''){
+                  echo '0';
+                }else{
+                  echo $fileCount;
+                }
               ?>
             </td>
             <td>

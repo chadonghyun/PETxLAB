@@ -57,6 +57,11 @@
       die(mysqli_error($con));
     }
 
+    //진도율 100%되면 completed로 바뀌게
+    $sql3 = "UPDATE user_course SET status = 'completed' WHERE progress = '100.00'";
+    $result3 = mysqli_query($con, $sql3);
+
+
     echo '<script>location.replace("' . $url . '");</script>';
       exit();
     }
