@@ -126,7 +126,7 @@
             <?php }else{ ?>
                 <li>
                     <?php
-                        if($row2['progress'] == 0){
+                        if($row2['confirm'] == 0){
                     ?>
                         <p class="registration waiting">
                             승인 대기중입니다.
