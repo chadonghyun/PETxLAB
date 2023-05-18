@@ -50,13 +50,15 @@ $result = mysqli_query($con, $sql);
 $lecture_count = mysqli_fetch_array($result)[0];
 
 //전체 수강생
-$sql = "SELECT COUNT(ur.course_id) 
-        FROM userregistration ur 
-        INNER JOIN coursereg cr ON ur.course_id = cr.course_id 
-        WHERE cr.user_id = '$userid'";
-$result = mysqli_query($con, $sql);
-$row = mysqli_fetch_array($result);
-$total_count = $row[0];
+$sql_count = "SELECT COUNT(*) AS course_count
+        FROM user_course
+        WHERE course_id IN (
+            SELECT course_id
+            FROM coursereg
+            WHERE user_id = '$userid'
+        )";
+$result_count = mysqli_query($con, $sql_count);
+$row_count = mysqli_fetch_array($result_count)[0];
 
 
 //공지사항
@@ -119,7 +121,7 @@ $result1 = mysqli_query($con, $sql1);
           <p>
             <span>
               <?php 
-                echo "$total_count"
+                echo "$row_count"
               ?>
             </span>
             명

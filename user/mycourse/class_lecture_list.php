@@ -113,10 +113,16 @@
               <div class="progress_gauge" style="width : <?=$row2['progress']?>%"></div>
             </div>
             <span class="per">진도율 : <?=$row2['progress']?>%</span>
-            <a href="./class_lecture_view.php?no=<?=$number?>" title="바로가기" class="shortcut">바로가기</a>
+            <?php
+            if($row2['confirm'] == '1'){
+              ?>
+            <a href="./class_lecture_view.php?no=<?=$number?>"class='shortcut'>바로가기</a> 
+            <?php } else if($row2['confirm'] == '0') { ?>
+            <a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/course_view.php?idx=<?=$number?>" title="바로가기" class="shortcut">바로가기</a>
+            <?php } ?>
+            <?php } ?>
           </div>
         </li>
-        <?php } ?>
       </ul>
       <div class="pagination">
       <?php if ($s_pageNum > 1) { ?>

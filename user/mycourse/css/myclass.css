@@ -175,8 +175,29 @@
   font-family: var(--fm-title);
   color: var(--sub-colorbl);
 } 
-
-
+.cr_no{
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.cr_no > p:first-of-type{
+  font-family: var(--fm-title);
+}
+.cr_no > p:nth-of-type(2){
+  font-size: 14px;
+}
+.cr_no > a{
+  display: inline-block;
+  color: var(--f-colorwh);
+  width: 140px; height: 40px;
+  line-height: 40px;
+  border-radius: 20px;
+  background-color: var(--sub-colorbl);
+  margin-top: 10px;
+  text-align: center;
+}
 /* 3번섹션(주간학습) */
 
 

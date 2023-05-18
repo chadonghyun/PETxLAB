@@ -26,22 +26,6 @@
   $row_completed = $result_completed->fetch_assoc();
   $count_completed = $row_completed["count_completed"];
 
-  //최근 학습 중인 강의
-  $sql_recent = "SELECT user_course.course_id, coursereg.course_title, coursereg.course_type, coursereg.course_image, user_course.progress 
-  FROM coursereg
-  INNER JOIN user_course ON coursereg.course_id = user_course.course_id
-  WHERE user_course.user_id = '$userid' AND user_course.confirm = 1
-  ORDER BY user_course.user_course_id DESC LIMIT 1";
-  $result_recent = mysqli_query($con, $sql_recent);
-  if(!$result_recent){
-    die(mysqli_error($con));
-  }
-  $row_recent = mysqli_fetch_assoc($result_recent);
-  if($row_recent['course_type']=='professional'){$row_recent['course_type'] ="전문교육과정";} else {$row_recent['course_type'] =  "일반교육과정";}
-  $courseTitle = $row_recent['course_title'];
-  $courseType = $row_recent['course_type'];
-  $courseImg = $row_recent['course_image'];
-  $progress = $row_recent['progress'];
 
   //QnA데이터 출력
   $sql_QnA = "SELECT qna_category, qna_title, Board_date, qna_response
@@ -101,9 +85,29 @@
     
     <section id="mycourse">
       <div class="cr_top top">
-        <h2>최근 학습중인 강의</h2>
+        <h2>최근 학습 중인 강의</h2>
       </div>
       <div class="cr_con">
+        <?php
+          //최근 학습 중인 강의
+          $sql_recent = "SELECT user_course.course_id, coursereg.course_title, coursereg.course_type, coursereg.course_image, user_course.progress 
+          FROM coursereg
+          INNER JOIN user_course ON coursereg.course_id = user_course.course_id
+          WHERE user_course.user_id = '$userid' AND user_course.confirm = 1
+          ORDER BY user_course.user_course_id DESC LIMIT 1";
+          $result_recent = mysqli_query($con, $sql_recent);
+          if(!$result_recent){
+            die(mysqli_error($con));
+          }
+          $row_recent = mysqli_fetch_assoc($result_recent);
+          if($row_recent['course_type']=='professional'){$row_recent['course_type'] ="전문교육과정";} else {$row_recent['course_type'] =  "일반교육과정";}
+          $courseTitle = $row_recent['course_title'];
+          $courseType = $row_recent['course_type'];
+          $courseImg = $row_recent['course_image'];
+          $progress = $row_recent['progress'];
+
+          if($result_recent->num_rows > 0){
+        ?>
         <div class="cr_img">
           <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/adm/teacher/lecture/uploads/<?=$courseImg?>" alt="">
         </div>
@@ -118,6 +122,14 @@
             <a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/mycourse/class_lecture_view.php?no=<?=$row_recent['course_id']?>" title="">바로가기</a>
           </div>
         </div>
+        <?php }else{ ?>
+          <div class="cr_no">
+            <p>학습중인 강의가 없어요</p>
+            <p>어떤 강의가 있는지 알아볼까요?</p>
+            <a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/course_list_pro.php" title="수강신청하러가기">전문교육과정</a>
+            <a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/course_list_general.php" title="수강신청하러가기">일반교육과정</a>
+          </div>
+        <?php }?>  
       </div>
     </section>
   
@@ -135,19 +147,19 @@
           <div class="day">
             <span>월</span>
             <div class="my_checked">
-              <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/stamp.png" alt="">
+              <!-- <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/img/foot_stamp.png" alt=""> -->
             </div>
           </div>
           <div class="day">
             <span>화</span>
             <div class="my_checked">
-              <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/stamp.png" alt="">
+              <!-- <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/img/foot_stamp.png" alt=""> -->
             </div>
           </div>
           <div class="day">
             <span>수</span>
             <div class="my_checked">
-              <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/stamp.png" alt="">
+              <!-- <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/img/foot_stamp.png" alt=""> -->
             </div>
           </div>
           <div class="day">
@@ -219,7 +231,7 @@
       ?>
       <div class="cer_none">
         <div class="cer_img">
-          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/images/nocer.png" alt="">
+          <img src="<?php $_SERVER['DOCUMENT_ROOT']?>/PETxLAB/user/mycourse/img/nocer.png" alt="">
         </div>
         <div class="cer_sub">
           <p>보유중인 수료증이 없어요</p>
@@ -228,18 +240,16 @@
         </div>
       </div>
       <?php
-    }
-    ?>
-  </div>
-
-
+        }
+      ?>
+      </div>
     </section>
 
 
     <section id="myqna">
       <div class="qna_top top">
         <h2>QnA</h2>
-        <a href="./class_QnA_list.php?no=1" title="">전체보기</a>
+        <a href="./class_QnA_list.php?no=1" title="전체보기">전체보기</a>
       </div>
       <ul class="qna_tab_list">
         <li class="active" data-tab="all">전체</li>
