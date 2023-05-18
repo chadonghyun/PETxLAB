@@ -30,7 +30,8 @@
 
 <main>
   <form action="" method="post">
-    <input type="hidden" name="no" value="<?= $no ?>">
+    <input type="hidden" name="no" value="<?=$no?>">
+    <input type="hidden" name="qna_category" value="<?=$row['course_type']?>">
     <ul class="course_list">
       <li class="card">
         <div class="course_thumb ratio ratio-4x3">
@@ -109,7 +110,7 @@
               foreach ($file_arr as $file) {
           ?>
           <li class="card inner_card d-flex">
-            <a href="" class="d-flex justify-content-between" title="">
+            <a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/adm/teacher/lecture/uploads/<?=$file?>" class="d-flex justify-content-between" title="">
               <div class="file_desc">
                 <h5 class="file_title">
                   <?php echo $file ?>
@@ -123,6 +124,7 @@
       </li>
       <?php } ?>
     </ul>
+    <a href="./class_QnA_write.php?no=<?=$no?>&qna_cate=<?=$row['course_type']?>" title="질문하기" class="gogo">질문하기</a>
   </form>
 </main>
 

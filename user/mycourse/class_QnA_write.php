@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
 
-$qna_category = $_GET['qna_category'];
+$qna_category = $_GET['qna_cate'];
 $course_id = $_GET['no'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
   <form action="" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="number" value="<?=$no?>">
     <div class="wrap">
       <h3 class="wr_title">제목</h3>
       <input type="text" placeholder="제목을 적어주세요." name="QnA_title" id="QnA_title">

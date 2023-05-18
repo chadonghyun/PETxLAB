@@ -1,10 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'].'/PETxLAB/db/db_con.php';
-include_once $_SERVER['DOCUMENT_ROOT']."/PETxLAB/config.php";
 include $_SERVER['DOCUMENT_ROOT']."/PETxLAB/user/header.php";
 
 $no = $_GET['number'];
-$query = "SELECT * FROM boardqnareg where number ='$no'";
+$query = "SELECT * FROM boardqnareg WHERE number ='$no'";
 
 $result = mysqli_query($con, $query);
 $rows = mysqli_fetch_assoc($result);
@@ -13,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $qna_title = $_POST["QnA_title"];
   $qna_question = $_POST["QnA_con"];
 
-  $sql = "UPDATE boardqnareg SET qna_title='$qna_title', qna_question='$qna_question', Board_date WHERE number = '$no'";
+  $sql = "UPDATE boardqnareg SET qna_title='$qna_title', qna_question='$qna_question', Board_date = CURRENT_TIMESTAMP WHERE number = '$no'";
 
   $result = mysqli_query($con, $sql);
 
@@ -31,11 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
+
 <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/PETxLAB/user/mycourse/css/class_QnA_update.css" type="text/css">
 
 <main>
   <form action="" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="no" value="<?=$no?>">
+    <input type="hidden" name="number" value="<?=$no?>">
     <div class="wrap">
       <h3 class="vw_title">제목</h3>
       <span class="regist_date">등록일 : <?=date('Y-m-d', strtotime($rows['Board_date'])); ?></span>

@@ -14,6 +14,7 @@
 
 <main>
   <form action="" method="post">
+  <input type="hidden" name="number" value="<?=$rows['number']?>">
     <div class="wrap">
       <h3 class="vw_title">제목</h3>
       <span class="regist_date">등록일 : <?=date('Y-m-d', strtotime($rows['Board_date'])); ?></span>

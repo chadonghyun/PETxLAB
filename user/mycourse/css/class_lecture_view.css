@@ -189,3 +189,15 @@ span.state.state_complete {
   background-color: var(--sub-colorbl);
   margin-top: 20px;
 }
+
+.gogo{
+  display: block;
+  margin-top: 20px;
+  font-family: var(--fm-title);
+  text-align: center;
+  background-color: var(--sub-colorbl);
+  width: 100%; height: 40px;
+  border-radius: 20px;
+  line-height: 40px;
+  color: var(--f-colorwh);
+}
